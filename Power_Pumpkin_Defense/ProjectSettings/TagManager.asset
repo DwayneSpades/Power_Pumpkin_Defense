@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Lane_2
+  - Lane_1
+  - Lane_3
+  - Great_Pumpkin
   layers:
   - Default
   - TransparentFX

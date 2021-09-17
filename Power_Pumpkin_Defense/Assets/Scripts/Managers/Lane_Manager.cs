@@ -1,0 +1,39 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Lane_Manager : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        //GetLanes();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public List<Transform> Lane_1_List;
+    public List<Transform> Lane_2_List;
+    public List<Transform> Lane_3_List;
+
+    public List<Transform> GetAPath()
+    {
+        return Lane_2_List;
+    }
+
+    void GetLanes()
+    {
+        Transform Lane2 = GameObject.Find("Lane2_Positions").GetComponent<Transform>();
+
+        for (int i = 0; i < Lane2.childCount; i++)
+        {
+            Lane_2_List.Add(Lane2.GetChild(i));
+        }
+
+        Debug.Log("Lane 2 list size: " + Lane_2_List.Count);
+    }
+}
