@@ -2173,6 +2173,15 @@ PrefabInstance:
       propertyPath: StartPos
       value: 
       objectReference: {fileID: 1624380293}
+    - target: {fileID: 2119704863, guid: 2b41613e85d412448af2cc2313085d52, type: 3}
+      propertyPath: EndPos
+      value: 
+      objectReference: {fileID: 1686284144}
+    - target: {fileID: 2119704863, guid: 2b41613e85d412448af2cc2313085d52, type: 3}
+      propertyPath: GreatPumpkin
+      value: 
+      objectReference: {fileID: 371525170719930918, guid: dd044a09817cbf04c89f4518bc1ae88b,
+        type: 3}
     - target: {fileID: 4437651590197923715, guid: 2b41613e85d412448af2cc2313085d52,
         type: 3}
       propertyPath: m_LocalPosition.x
