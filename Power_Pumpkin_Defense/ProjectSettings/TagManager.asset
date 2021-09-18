@@ -8,6 +8,7 @@ TagManager:
   - Lane_1
   - Lane_3
   - Great_Pumpkin
+  - Lane_Obj
   layers:
   - Default
   - TransparentFX

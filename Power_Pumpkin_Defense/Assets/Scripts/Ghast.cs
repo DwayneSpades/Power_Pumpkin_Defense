@@ -37,7 +37,7 @@ public class Ghast : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Lane_2")
+        if (other.tag == "Lane_Obj")
         {
             CurrentPoint++;
             UpdateTargetPos();
@@ -62,4 +62,5 @@ public class Ghast : MonoBehaviour
     // Ghast variables
     public float Ghast_Speed;
     public float Ghast_Health;
+    public float Ghast_Damage;
 }

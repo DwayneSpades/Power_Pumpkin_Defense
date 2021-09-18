@@ -20,5 +20,8 @@ public class Wave_Manager : MonoBehaviour
     }
 
     public GameObject Ghast;
+    public GameObject Polter;
+    public GameObject Hexer;
+
     public GameObject StartPos;
 }
