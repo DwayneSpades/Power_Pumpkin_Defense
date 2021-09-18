@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8581442926742817346}
-  - component: {fileID: 8581442926742817347}
+  - component: {fileID: 978838818}
   m_Layer: 0
   m_Name: Lane_Manager
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8581442926742817347
+--- !u!114 &978838818
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,12 +40,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 8581442926742817344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db17a948a396b2a43b89630d8bb2d429, type: 3}
+  m_Script: {fileID: 11500000, guid: e7b206f838f6c6d499bb1aed5c4e6a88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Lane_1: []
-  Lane_2:
+  Lane_1_List:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  Lane_3: []
+  - {fileID: 0}
+  Lane_2_List:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Lane_3_List:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

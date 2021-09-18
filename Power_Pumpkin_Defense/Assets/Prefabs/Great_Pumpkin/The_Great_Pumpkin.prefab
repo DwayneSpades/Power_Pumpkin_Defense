@@ -106,3 +106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a96e13ff3e8f3949a1f194cce40d4a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GreatPumpkin_Health: 10
+  Wave_Mngr: {fileID: 4437651590197923773, guid: 2b41613e85d412448af2cc2313085d52,
+    type: 3}

@@ -9,6 +9,7 @@ TagManager:
   - Lane_3
   - Great_Pumpkin
   - Lane_Obj
+  - Ghast
   layers:
   - Default
   - TransparentFX

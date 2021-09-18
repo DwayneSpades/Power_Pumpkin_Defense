@@ -9,6 +9,7 @@ public class Ghast : MonoBehaviour
     {
         CurrentPoint = 0;
         LnMngr = GameObject.Find("Lane_Manager");
+        Wave_Mngr = GameObject.Find("Wave_Manager");
         Path = LnMngr.GetComponent<Lane_Manager>().GetAPath();
 
         //Debug.Log("Path size: " + Path.Count);
@@ -24,7 +25,7 @@ public class Ghast : MonoBehaviour
         {
             transform.position += ToVector * Ghast_Speed * Time.deltaTime;
 
-            Debug.Log("Current point: " + CurrentPoint);
+            //Debug.Log("Current point: " + CurrentPoint);
         }
 
     }
@@ -46,12 +47,15 @@ public class Ghast : MonoBehaviour
         if (other.tag == "Great_Pumpkin")
         {
             Debug.Log("Ghast Reached Great Pumpkin");
+            other.gameObject.GetComponent<Great_Pumpkin>().TakeDamage(Ghast_Damage);
+            Wave_Mngr.gameObject.GetComponent<Wave_Manager>().Remove_ActiveMonster(this.gameObject);
             Destroy(this.gameObject);
         }
     }
 
     // Internal Functionality stuff
     private GameObject LnMngr;
+    private GameObject Wave_Mngr;
 
     private Vector3 ToVector;
     private Vector3 TargetPos;
