@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5521680506770235781
+--- !u!1 &2638506660399621504
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3887720156566461414}
-  - component: {fileID: 3294257401735061661}
-  - component: {fileID: 2296860243242824713}
-  - component: {fileID: 4683674605228231671}
-  - component: {fileID: 4215977271183402854}
+  - component: {fileID: 9121070157046058602}
+  - component: {fileID: 3507382174856788273}
+  - component: {fileID: 1569952395562650991}
+  - component: {fileID: 1620385634912525929}
+  - component: {fileID: 3747571026278774949}
   m_Layer: 0
-  m_Name: Fire_Flower_Level_1
-  m_TagString: Fire_Flower
+  m_Name: Plant_Pot
+  m_TagString: Plant_Pot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3887720156566461414
+--- !u!4 &9121070157046058602
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5521680506770235781}
+  m_GameObject: {fileID: 2638506660399621504}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.17005, y: 9.196579, z: -30.825228}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.18767513, y: 2.376, z: -6.594}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3294257401735061661
+--- !u!33 &3507382174856788273
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5521680506770235781}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &2296860243242824713
+  m_GameObject: {fileID: 2638506660399621504}
+  m_Mesh: {fileID: -5495902117074765545, guid: b74da061b41b9354fa7662bdf302bb06, type: 3}
+--- !u!23 &1569952395562650991
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5521680506770235781}
+  m_GameObject: {fileID: 2638506660399621504}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100006, guid: 461f0170c82b53340a9812199b63bbd4, type: 3}
+  - {fileID: 2100008, guid: 461f0170c82b53340a9812199b63bbd4, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,35 +81,34 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &4683674605228231671
-CapsuleCollider:
+--- !u!135 &1620385634912525929
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5521680506770235781}
+  m_GameObject: {fileID: 2638506660399621504}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &4215977271183402854
+  serializedVersion: 2
+  m_Radius: 3.9197898
+  m_Center: {x: 0, y: 2.830258, z: -0.109951496}
+--- !u!114 &3747571026278774949
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5521680506770235781}
+  m_GameObject: {fileID: 2638506660399621504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f1ad5b0940336b4ebc5b720d6cbe5fe, type: 3}
+  m_Script: {fileID: 11500000, guid: fe7c5722cc5703144bc6957f1f4f27bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Fire_Flower_Next_Lvl: {fileID: 5521680506770235781, guid: 8a251de067dac1641b9bd915c4676afe,
+  FireFlower: {fileID: 5521680506770235781, guid: 0ea80c2179d703249bd38595831b428b,
     type: 3}
-  Fire_Flower_Health: 10
-  Fire_Flower_Damage: 1
-  Fire_Flower_Attack_Cooldown: 3
-  Water_To_Upgrade_Level: 100
+  ShriekRoot: {fileID: 2525707053648864739, guid: b284b07bc50ce514aa177b1321e2dd03,
+    type: 3}
+  PunchCactus: {fileID: 5880386846402516068, guid: f321a53500664424f94795abe5c983e4,
+    type: 3}

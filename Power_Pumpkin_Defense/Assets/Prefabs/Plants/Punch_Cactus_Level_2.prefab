@@ -109,7 +109,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Punch_Cactus_Next_Lvl: {fileID: 5880386846402516068, guid: c75b8fa6c0d70f0498c503f4dbe19974,
     type: 3}
-  Punch_Cactus_Health: 0
-  Punch_Cactus_Damage: 0
-  Punch_Cactus_Attack_Cooldown: 0
-  Water_To_Upgrade_Level: 0
+  Punch_Cactus_Health: 15
+  Punch_Cactus_Damage: 3
+  Punch_Cactus_Attack_Cooldown: 1
+  Water_To_Upgrade_Level: 200
+  isMaxLevel: 0

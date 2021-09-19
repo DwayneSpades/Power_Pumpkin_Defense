@@ -11,6 +11,8 @@ public class Plant_Manager : MonoBehaviour
         Active_PunchCacti = new List<GameObject>();
         Active_ShriekRoots = new List<GameObject>();
         Active_FireFlowers = new List<GameObject>();
+
+        Instantiate(PlantPot, Pot_Spawn_Test.position, Pot_Spawn_Test.rotation);
     }
 
     // Update is called once per frame
@@ -19,24 +21,51 @@ public class Plant_Manager : MonoBehaviour
         
     }
 
-    public void Remove_ActivePlant(GameObject M)
+    public void All_Plants_Hexer_Curse(float attk_mult)
     {
-        Active_Plants.Remove(M);
+
     }
 
-    public void Remove_ActivePunchCactus(GameObject M)
+    // Add functions
+    public void Add_ActivePlant(GameObject P)
     {
-        Active_PunchCacti.Remove(M);
+        Active_Plants.Add(P);
     }
 
-    public void Remove_ActiveShriekRoot(GameObject M)
+    public void Add_ActivePunchCactus(GameObject P)
     {
-        Active_ShriekRoots.Remove(M);
+        Active_PunchCacti.Add(P);
     }
 
-    public void Remove_ActiveFireFlower(GameObject M)
+    public void Add_ActiveShriekRoot(GameObject P)
     {
-        Active_FireFlowers.Remove(M);
+        Active_ShriekRoots.Add(P);
+    }
+
+    public void Add_ActiveFireFlower(GameObject P)
+    {
+        Active_FireFlowers.Add(P);
+    }
+
+    // Remove functions
+    public void Remove_ActivePlant(GameObject P)
+    {
+        Active_Plants.Remove(P);
+    }
+
+    public void Remove_ActivePunchCactus(GameObject P)
+    {
+        Active_PunchCacti.Remove(P);
+    }
+
+    public void Remove_ActiveShriekRoot(GameObject P)
+    {
+        Active_ShriekRoots.Remove(P);
+    }
+
+    public void Remove_ActiveFireFlower(GameObject P)
+    {
+        Active_FireFlowers.Remove(P);
     }
 
     public List<GameObject> PlantPot_List;
@@ -59,4 +88,8 @@ public class Plant_Manager : MonoBehaviour
     public GameObject PunchCactus_Lvl3;
 
     public GameObject PlantPot;
+
+    public GameObject TestPlayer;
+
+    public Transform Pot_Spawn_Test;
 }

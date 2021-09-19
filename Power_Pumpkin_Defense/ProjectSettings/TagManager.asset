@@ -16,6 +16,7 @@ TagManager:
   - Punch_Cactus
   - Fire_Flower
   - Shriek_Root
+  - Plant_Pot
   layers:
   - Default
   - TransparentFX

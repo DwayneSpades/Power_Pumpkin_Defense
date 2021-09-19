@@ -24,13 +24,25 @@ public class Punch_Cactus : MonoBehaviour
 
     public void Water_Punch_Cactus(int Water_Amount)
     {
+        Debug.Log("Gave water to punch cactus: " + Water_Amount);
         Water_Level += Water_Amount;
 
-        if (Water_Level >= Water_To_Upgrade_Level)
+        if (isMaxLevel == false)
         {
-            // Instantiate the next level plant
-            // Delete this plant
+            if (Water_Level >= Water_To_Upgrade_Level)
+            {
+                // Instantiate the next level plant
+                // Set new plants plant pot - pass this one's plant pot gameobject
+
+                // Delete this plant
+                // Maybe stop coroutines
+            }
         }
+    }
+
+    public void Assign_Plant_Pot(GameObject P)
+    {
+        My_Plant_Pot = P;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -75,6 +87,8 @@ public class Punch_Cactus : MonoBehaviour
 
     public GameObject Punch_Cactus_Next_Lvl;
 
+    private GameObject My_Plant_Pot;
+
     // Punch Cactus variables
     public float Punch_Cactus_Health;
     private float Punch_Cactus_Health_Current;
@@ -90,4 +104,5 @@ public class Punch_Cactus : MonoBehaviour
     private int Water_Level;
 
     public int Water_To_Upgrade_Level;
+    public bool isMaxLevel;
 }

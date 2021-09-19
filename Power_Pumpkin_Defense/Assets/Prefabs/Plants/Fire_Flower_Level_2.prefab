@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3294257401735061661}
   - component: {fileID: 2296860243242824713}
   - component: {fileID: 4683674605228231671}
+  - component: {fileID: -7404687963962965592}
   m_Layer: 0
   m_Name: Fire_Flower_Level_2
   m_TagString: Fire_Flower
@@ -94,3 +95,21 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &-7404687963962965592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5521680506770235781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f1ad5b0940336b4ebc5b720d6cbe5fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Fire_Flower_Next_Lvl: {fileID: 5521680506770235781, guid: acf8fb612481ba44caedd640ed502ad4,
+    type: 3}
+  Fire_Flower_Health: 15
+  Fire_Flower_Damage: 2
+  Fire_Flower_Attack_Cooldown: 3
+  Water_To_Upgrade_Level: 200
