@@ -1,7 +1,10 @@
 fileFormatVersion: 2
 guid: cefcf3c37f6112747b8a2c9678a2340a
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -7604357331801074390
+    second: fire_flower_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -97,11 +100,32 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: fire_flower_0
+      rect:
+        serializedVersion: 2
+        x: 1022
+        y: 1261
+        width: 1713
+        height: 1847
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a251cdcdb45e77690800000000000000
+      internalID: -7604357331801074390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 3be0a89f179fda44d8ca78feca46631f
     internalID: 0
     vertices: []
     indices: 
