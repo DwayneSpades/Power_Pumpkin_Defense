@@ -16,7 +16,7 @@ public class Polter : MonoBehaviour
         CanAttack = true;
 
         LnMngr = GameObject.Find("Lane_Manager");
-        Wave_Mngr = GameObject.Find("Wave_Manager");
+        Monster_Mngr = GameObject.Find("Monster_Manager");
         Path = LnMngr.GetComponent<Lane_Manager>().GetAPath();
 
         //Debug.Log("Path size: " + Path.Count);
@@ -55,8 +55,8 @@ public class Polter : MonoBehaviour
         {
             //Debug.Log("Polter Reached Great Pumpkin");
             other.gameObject.GetComponent<Great_Pumpkin>().TakeDamage(Polter_Damage_Current);
-            Wave_Mngr.gameObject.GetComponent<Wave_Manager>().Remove_ActiveMonster(this.gameObject);
-            Wave_Mngr.gameObject.GetComponent<Wave_Manager>().Remove_ActivePolter(this.gameObject);
+            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject);
+            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActivePolter(this.gameObject);
             Destroy(this.gameObject);
         }
     }
@@ -70,7 +70,7 @@ public class Polter : MonoBehaviour
 
     // Internal Functionality stuff
     private GameObject LnMngr;
-    private GameObject Wave_Mngr;
+    private GameObject Monster_Mngr;
 
     private Vector3 ToVector;
     private Vector3 TargetPos;

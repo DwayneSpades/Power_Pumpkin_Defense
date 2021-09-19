@@ -16,15 +16,14 @@ public class Hexer : MonoBehaviour
         CanAttack = true;
 
         LnMngr = GameObject.Find("Lane_Manager");
-        Wave_Mngr = GameObject.Find("Wave_Manager");
-        Path = LnMngr.GetComponent<Lane_Manager>().GetHexerPath();
+        Monster_Mngr = GameObject.Find("Monster_Manager");
+        Plant_Mngr = GameObject.Find("Plant_Manager");
+        Path = LnMngr.GetComponent<Lane_Manager>().GetAPath();
 
         //Debug.Log("Path size: " + Path.Count);
 
         TargetPos = Path[CurrentPoint].position;
         ToVector = TargetPos - transform.position;
-
-        StartCoroutine(Hexer_DeathTimer());
     }
 
     // Update is called once per frame
@@ -39,8 +38,8 @@ public class Hexer : MonoBehaviour
 
         if (Hexer_Health_Current < 1)
         {
-            Wave_Mngr.gameObject.GetComponent<Wave_Manager>().Remove_ActiveMonster(this.gameObject);
-            Wave_Mngr.gameObject.GetComponent<Wave_Manager>().Remove_ActiveHexer(this.gameObject);
+            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject);
+            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveHexer(this.gameObject);
             Destroy(this.gameObject);
         }
 
@@ -54,7 +53,7 @@ public class Hexer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Hexer_Lane_Obj")
+        if (other.tag == "Lane_Obj")
         {
             CurrentPoint++;
 
@@ -66,6 +65,15 @@ public class Hexer : MonoBehaviour
             UpdateTargetPos();
         }
 
+        if (other.tag == "Great_Pumpkin")
+        {
+            //Debug.Log("Polter Reached Great Pumpkin");
+            other.gameObject.GetComponent<Great_Pumpkin>().TakeDamage(Hexer_Damage_Current);
+            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject);
+            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveHexer(this.gameObject);
+            Destroy(this.gameObject);
+        }
+
     }
 
     IEnumerator Attack_Cooldown()
@@ -75,19 +83,11 @@ public class Hexer : MonoBehaviour
         CanAttack = true;
     }
 
-    // For testing purposes to make sure waves keep going
-    IEnumerator Hexer_DeathTimer()
-    {
-        yield return new WaitForSeconds(10);
-
-        Wave_Mngr.gameObject.GetComponent<Wave_Manager>().Remove_ActiveMonster(this.gameObject);
-        Wave_Mngr.gameObject.GetComponent<Wave_Manager>().Remove_ActiveHexer(this.gameObject);
-        Destroy(this.gameObject);
-    }
 
     // Internal Functionality stuff
     private GameObject LnMngr;
-    private GameObject Wave_Mngr;
+    private GameObject Monster_Mngr;
+    private GameObject Plant_Mngr;
 
     private Vector3 ToVector;
     private Vector3 TargetPos;
