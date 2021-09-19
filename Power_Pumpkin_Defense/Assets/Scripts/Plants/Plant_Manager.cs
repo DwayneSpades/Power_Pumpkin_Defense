@@ -46,7 +46,17 @@ public class Plant_Manager : MonoBehaviour
     [SerializeField] private List<GameObject> Active_ShriekRoots;
     [SerializeField] private List<GameObject> Active_FireFlowers;
 
-    public GameObject FireFlower;
-    public GameObject ShriekRoot;
-    public GameObject PunchCactus;
+    public GameObject FireFlower_Lvl1;
+    public GameObject FireFlower_Lvl2;
+    public GameObject FireFlower_Lvl3;
+
+    public GameObject ShriekRoot_Lvl1;
+    public GameObject ShriekRoot_Lvl2;
+    public GameObject ShriekRoot_Lvl3;
+
+    public GameObject PunchCactus_Lvl1;
+    public GameObject PunchCactus_Lvl2;
+    public GameObject PunchCactus_Lvl3;
+
+    public GameObject PlantPot;
 }

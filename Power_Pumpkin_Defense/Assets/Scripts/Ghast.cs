@@ -59,6 +59,11 @@ public class Ghast : MonoBehaviour
             Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveGhast(this.gameObject);
             Destroy(this.gameObject);
         }
+
+        if (CanAttack)
+        {
+
+        }
     }
 
     IEnumerator Attack_Cooldown()

@@ -74,6 +74,11 @@ public class Hexer : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        if (CanAttack)
+        {
+
+        }
+
     }
 
     IEnumerator Attack_Cooldown()
@@ -95,7 +100,7 @@ public class Hexer : MonoBehaviour
     private List<Transform> Path;
     private int CurrentPoint;
 
-    // Polter variables
+    // Hexer variables
     public float Hexer_Speed;
     private float Hexer_Speed_Current;
 

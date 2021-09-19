@@ -59,6 +59,11 @@ public class Polter : MonoBehaviour
             Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActivePolter(this.gameObject);
             Destroy(this.gameObject);
         }
+
+        if (CanAttack)
+        {
+
+        }
     }
 
     IEnumerator Attack_Cooldown()

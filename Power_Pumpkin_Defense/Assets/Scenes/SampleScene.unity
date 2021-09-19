@@ -2539,6 +2539,60 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 739161817135183785, guid: 89ce393614511354b87967638ac342a8,
+        type: 3}
+      propertyPath: FireFlower_Lvl1
+      value: 
+      objectReference: {fileID: 5521680506770235781, guid: 0ea80c2179d703249bd38595831b428b,
+        type: 3}
+    - target: {fileID: 739161817135183785, guid: 89ce393614511354b87967638ac342a8,
+        type: 3}
+      propertyPath: FireFlower_Lvl2
+      value: 
+      objectReference: {fileID: 5521680506770235781, guid: 8a251de067dac1641b9bd915c4676afe,
+        type: 3}
+    - target: {fileID: 739161817135183785, guid: 89ce393614511354b87967638ac342a8,
+        type: 3}
+      propertyPath: FireFlower_Lvl3
+      value: 
+      objectReference: {fileID: 5521680506770235781, guid: acf8fb612481ba44caedd640ed502ad4,
+        type: 3}
+    - target: {fileID: 739161817135183785, guid: 89ce393614511354b87967638ac342a8,
+        type: 3}
+      propertyPath: PunchCactus_Lvl1
+      value: 
+      objectReference: {fileID: 5880386846402516068, guid: f321a53500664424f94795abe5c983e4,
+        type: 3}
+    - target: {fileID: 739161817135183785, guid: 89ce393614511354b87967638ac342a8,
+        type: 3}
+      propertyPath: PunchCactus_Lvl2
+      value: 
+      objectReference: {fileID: 5880386846402516068, guid: 99627dc7f01556548b79373b5e3a3e65,
+        type: 3}
+    - target: {fileID: 739161817135183785, guid: 89ce393614511354b87967638ac342a8,
+        type: 3}
+      propertyPath: PunchCactus_Lvl3
+      value: 
+      objectReference: {fileID: 5880386846402516068, guid: c75b8fa6c0d70f0498c503f4dbe19974,
+        type: 3}
+    - target: {fileID: 739161817135183785, guid: 89ce393614511354b87967638ac342a8,
+        type: 3}
+      propertyPath: ShriekRoot_Lvl1
+      value: 
+      objectReference: {fileID: 2525707053648864739, guid: b284b07bc50ce514aa177b1321e2dd03,
+        type: 3}
+    - target: {fileID: 739161817135183785, guid: 89ce393614511354b87967638ac342a8,
+        type: 3}
+      propertyPath: ShriekRoot_Lvl2
+      value: 
+      objectReference: {fileID: 2525707053648864739, guid: 9bdacc70170ae584587fbb83566f21d0,
+        type: 3}
+    - target: {fileID: 739161817135183785, guid: 89ce393614511354b87967638ac342a8,
+        type: 3}
+      propertyPath: ShriekRoot_Lvl3
+      value: 
+      objectReference: {fileID: 2525707053648864739, guid: 5c9806d96e52bb942a61f262ea362966,
+        type: 3}
     - target: {fileID: 1755438502287887219, guid: 89ce393614511354b87967638ac342a8,
         type: 3}
       propertyPath: m_Name
