@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ghast : MonoBehaviour
+public class Polter : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
         CurrentPoint = 0;
-        Ghast_Speed_Current = Ghast_Speed;
-        Ghast_Damage_Current = Ghast_Damage;
-        Ghast_Health_Current = Ghast_Health;
-        Ghast_Attack_Cooldown_Current = Ghast_Attack_Cooldown;
+        Polter_Speed_Current = Polter_Speed;
+        Polter_Damage_Current = Polter_Damage;
+        Polter_Health_Current = Polter_Health;
+        Polter_Attack_Cooldown_Current = Polter_Attack_Cooldown;
 
         CanAttack = true;
 
@@ -30,7 +30,7 @@ public class Ghast : MonoBehaviour
     {
         if (CurrentPoint < Path.Count)
         {
-            transform.position += ToVector * Ghast_Speed_Current * Time.deltaTime;
+            transform.position += ToVector * Polter_Speed_Current * Time.deltaTime;
 
             //Debug.Log("Current point: " + CurrentPoint);
         }
@@ -53,17 +53,17 @@ public class Ghast : MonoBehaviour
 
         if (other.tag == "Great_Pumpkin")
         {
-            //Debug.Log("Ghast Reached Great Pumpkin");
-            other.gameObject.GetComponent<Great_Pumpkin>().TakeDamage(Ghast_Damage_Current);
+            //Debug.Log("Polter Reached Great Pumpkin");
+            other.gameObject.GetComponent<Great_Pumpkin>().TakeDamage(Polter_Damage_Current);
             Wave_Mngr.gameObject.GetComponent<Wave_Manager>().Remove_ActiveMonster(this.gameObject);
-            Wave_Mngr.gameObject.GetComponent<Wave_Manager>().Remove_ActiveGhast(this.gameObject);
+            Wave_Mngr.gameObject.GetComponent<Wave_Manager>().Remove_ActivePolter(this.gameObject);
             Destroy(this.gameObject);
         }
     }
 
     IEnumerator Attack_Cooldown()
     {
-        yield return new WaitForSeconds(Ghast_Attack_Cooldown_Current);
+        yield return new WaitForSeconds(Polter_Attack_Cooldown_Current);
 
         CanAttack = true;
     }
@@ -78,18 +78,18 @@ public class Ghast : MonoBehaviour
     private List<Transform> Path;
     private int CurrentPoint;
 
-    // Ghast variables
-    public float Ghast_Speed;
-    private float Ghast_Speed_Current;
+    // Polter variables
+    public float Polter_Speed;
+    private float Polter_Speed_Current;
 
-    public float Ghast_Health;
-    private float Ghast_Health_Current;
+    public float Polter_Health;
+    private float Polter_Health_Current;
 
-    public float Ghast_Damage;
-    private float Ghast_Damage_Current;
+    public float Polter_Damage;
+    private float Polter_Damage_Current;
 
-    public float Ghast_Attack_Cooldown;
-    private float Ghast_Attack_Cooldown_Current;
+    public float Polter_Attack_Cooldown;
+    private float Polter_Attack_Cooldown_Current;
 
     private bool CanAttack;
 }

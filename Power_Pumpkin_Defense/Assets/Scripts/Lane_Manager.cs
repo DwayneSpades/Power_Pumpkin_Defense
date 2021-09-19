@@ -20,6 +20,8 @@ public class Lane_Manager : MonoBehaviour
     public List<Transform> Lane_2_List;
     public List<Transform> Lane_3_List;
 
+    public List<Transform> Hexer_Lane_List;
+
     public List<Transform> GetAPath()
     {
         List<Transform> ret;
@@ -40,6 +42,11 @@ public class Lane_Manager : MonoBehaviour
         }
 
         return ret;
+    }
+
+    public List<Transform> GetHexerPath()
+    {
+        return Hexer_Lane_List;
     }
 
     void GetLanes()

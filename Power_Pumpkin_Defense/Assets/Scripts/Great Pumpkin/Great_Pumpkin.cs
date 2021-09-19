@@ -22,11 +22,12 @@ public class Great_Pumpkin : MonoBehaviour
     {
         GreatPumpkin_CurrentHealth -= dmg;
 
-        Debug.Log("Great Pumpkin Health: " + GreatPumpkin_CurrentHealth);
+        //Debug.Log("Great Pumpkin Health: " + GreatPumpkin_CurrentHealth);
 
         if (GreatPumpkin_CurrentHealth <= 0)
         {
             Debug.Log("Great Pumpkin Destroyed. Game Over");
+            Wave_Mngr.GetComponent<Wave_Manager>().GreatPumpkin_Dead();
             Wave_Mngr.GetComponent<Wave_Manager>().Clean_Up_Wave();
 
             Destroy(gameObject);

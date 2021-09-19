@@ -10,6 +10,9 @@ TagManager:
   - Great_Pumpkin
   - Lane_Obj
   - Ghast
+  - Polter
+  - Hexer
+  - Hexer_Lane_Obj
   layers:
   - Default
   - TransparentFX

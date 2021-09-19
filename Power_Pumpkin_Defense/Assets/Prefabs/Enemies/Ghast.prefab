@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc610b68d009a1419615a00ef2548c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ghast_Speed: 0.5
+  Ghast_Speed: 0.4
   Ghast_Health: 1
   Ghast_Damage: 1
+  Ghast_Attack_Cooldown: 1
