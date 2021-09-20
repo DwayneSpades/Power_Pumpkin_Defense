@@ -26,22 +26,24 @@ public class Character_Controller : MonoBehaviour
         Vector3 Move_Dir = new Vector3(X_Direction, 0.0f, Z_Direction);
         Move_Dir.Normalize();
 
-        model.transform.forward = Move_Dir;
         if (Move_Dir.x != 0 || Move_Dir.z != 0)
         {
+            model.transform.forward = Move_Dir;
             animControl.Play("run");
         }
-        else
+        else if(!Input.GetKey(KeyCode.Z))
         {
             animControl.Play("idle");
         }
         transform.position += Move_Dir * Move_Speed * Time.deltaTime;
 
-
-        if (isFlowerNear && Nearby_Flower)
+         if (Input.GetKey(KeyCode.Z) )
         {
-            if (Input.GetKeyDown(KeyCode.Z) && CanWater)
+            animControl.Play("water");
+            if (isFlowerNear && Nearby_Flower&& CanWater)
             {
+           
+                
                 if (Nearby_Flower.tag == "Punch_Cactus")
                 {
                     if (Current_Water_Amount > 0)
