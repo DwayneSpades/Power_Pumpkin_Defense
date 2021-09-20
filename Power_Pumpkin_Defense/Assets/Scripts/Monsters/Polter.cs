@@ -53,6 +53,8 @@ public class Polter : MonoBehaviour
 
         if (other.tag == "Great_Pumpkin")
         {
+            StopAllCoroutines();
+
             //Debug.Log("Polter Reached Great Pumpkin");
             other.gameObject.GetComponent<Great_Pumpkin>().TakeDamage(Polter_Damage_Current);
             Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject);
@@ -62,7 +64,48 @@ public class Polter : MonoBehaviour
 
         if (CanAttack)
         {
+            if (other.tag == "Punch_Cactus")
+            {
+                CanAttack = false;
 
+                //Debug.Log("Polter Attacked Punch Cactus");
+                other.gameObject.GetComponent<Punch_Cactus>().Punch_Cactus_TakeDamage(Polter_Damage_Current);
+
+                StartCoroutine(Attack_Cooldown());
+            }
+            else if (other.tag == "Fire_Flower")
+            {
+                CanAttack = false;
+
+                //Debug.Log("Polter Attacked Fire Flower");
+                other.gameObject.GetComponent<Fire_Flower>().Fire_Flower_TakeDamage(Polter_Damage_Current);
+
+                StartCoroutine(Attack_Cooldown());
+            }
+            else if (other.tag == "Shriek_Root")
+            {
+                CanAttack = false;
+
+                //Debug.Log("Polter Attacked Shriek Root");
+                other.gameObject.GetComponent<Shriek_Root>().Shriek_Root_TakeDamage(Polter_Damage_Current);
+
+                StartCoroutine(Attack_Cooldown());
+            }
+        }
+    }
+
+    public void Polter_TakeDamage(float d)
+    {
+        Polter_Health_Current -= d;
+
+        if (Polter_Health_Current <= 0)
+        {
+            StopAllCoroutines();
+
+            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject);
+            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActivePolter(this.gameObject);
+
+            Destroy(this.gameObject);
         }
     }
 

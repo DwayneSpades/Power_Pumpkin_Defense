@@ -56,7 +56,7 @@ public class Character_Controller : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Not enough Water");
+                        //Debug.Log("Not enough Water");
                     }
                 }
 
@@ -74,7 +74,7 @@ public class Character_Controller : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Not enough Water");
+                        //Debug.Log("Not enough Water");
                     }
                 }
 
@@ -92,7 +92,7 @@ public class Character_Controller : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Not enough Water");
+                        //Debug.Log("Not enough Water");
                     }
                 }
             }
@@ -142,11 +142,11 @@ public class Character_Controller : MonoBehaviour
         if (Current_Water_Amount < Max_Water_Amount)
         {
             Current_Water_Amount = Max_Water_Amount;
-            Debug.Log("Watering can refilled: " + Current_Water_Amount);
+            //Debug.Log("Watering can refilled: " + Current_Water_Amount);
         }
         else
         {
-            Debug.Log("Watering can is full");
+            //Debug.Log("Watering can is full");
         }
     }
 
@@ -155,7 +155,7 @@ public class Character_Controller : MonoBehaviour
         if (Current_Water_Amount >= 0)
         {
             Current_Water_Amount -= w_amount;
-            Debug.Log("Used Water, Water Left: " + Current_Water_Amount);
+            //Debug.Log("Used Water, Water Left: " + Current_Water_Amount);
         }
     }
 

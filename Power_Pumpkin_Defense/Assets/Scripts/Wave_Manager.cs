@@ -117,7 +117,7 @@ public class Wave_Manager : MonoBehaviour
     {
         yield return new WaitForSeconds(Wave_Cooldown_Timer);
 
-        Debug.Log("Wave Cooldown Done");
+        //Debug.Log("Wave Cooldown Done");
         Num_Enemy_SpawnTypes_Done = 0;
         //IsWaveActive = true;
         ReadyForNewWave = true;

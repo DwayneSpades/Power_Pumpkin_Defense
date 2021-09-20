@@ -36,12 +36,12 @@ public class Hexer : MonoBehaviour
             //Debug.Log("Current point: " + CurrentPoint);
         }
 
-        if (Hexer_Health_Current < 1)
-        {
-            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject);
-            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveHexer(this.gameObject);
-            Destroy(this.gameObject);
-        }
+        //if (Hexer_Health_Current < 1)
+        //{
+        //    Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject);
+        //    Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveHexer(this.gameObject);
+        //    Destroy(this.gameObject);
+        //}
 
     }
 
@@ -67,6 +67,8 @@ public class Hexer : MonoBehaviour
 
         if (other.tag == "Great_Pumpkin")
         {
+            StopAllCoroutines();
+
             //Debug.Log("Polter Reached Great Pumpkin");
             other.gameObject.GetComponent<Great_Pumpkin>().TakeDamage(Hexer_Damage_Current);
             Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject);
@@ -76,9 +78,50 @@ public class Hexer : MonoBehaviour
 
         if (CanAttack)
         {
+            if (other.tag == "Punch_Cactus")
+            {
+                CanAttack = false;
 
+                //Debug.Log("Hexer Attacked Punch Cactus");
+                other.gameObject.GetComponent<Punch_Cactus>().Punch_Cactus_TakeDamage(Hexer_Damage_Current);
+
+                StartCoroutine(Attack_Cooldown());
+            }
+            else if (other.tag == "Fire_Flower")
+            {
+                CanAttack = false;
+
+                //Debug.Log("Hexer Attacked Fire Flower");
+                other.gameObject.GetComponent<Fire_Flower>().Fire_Flower_TakeDamage(Hexer_Damage_Current);
+
+                StartCoroutine(Attack_Cooldown());
+            }
+            else if (other.tag == "Shriek_Root")
+            {
+                CanAttack = false;
+
+                //Debug.Log("Hexer Attacked Shriek Root");
+                other.gameObject.GetComponent<Shriek_Root>().Shriek_Root_TakeDamage(Hexer_Damage_Current);
+
+                StartCoroutine(Attack_Cooldown());
+            }
         }
 
+    }
+
+    public void Hexer_TakeDamage(float d)
+    {
+        Hexer_Health_Current -= d;
+
+        if (Hexer_Health_Current <= 0)
+        {
+            StopAllCoroutines();
+
+            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject);
+            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveHexer(this.gameObject);
+
+            Destroy(this.gameObject);
+        }
     }
 
     IEnumerator Attack_Cooldown()

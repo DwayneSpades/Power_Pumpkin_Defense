@@ -71,7 +71,8 @@ public class Fire_Flower : MonoBehaviour
             {
                 CanAttack = false;
 
-
+                //Debug.Log("Fire Flower Attacked Ghast");
+                other.gameObject.GetComponent<Ghast>().Ghast_TakeDamage(Fire_Flower_Damage_Current);
 
                 StartCoroutine(Attack_Cooldown());
             }
@@ -79,7 +80,8 @@ public class Fire_Flower : MonoBehaviour
             {
                 CanAttack = false;
 
-
+                //Debug.Log("Fire Flower Attacked Polter");
+                other.gameObject.GetComponent<Polter>().Polter_TakeDamage(Fire_Flower_Damage_Current);
 
                 StartCoroutine(Attack_Cooldown());
             }
@@ -87,10 +89,27 @@ public class Fire_Flower : MonoBehaviour
             {
                 CanAttack = false;
 
-
+                //Debug.Log("Fire Flower Attacked Hexer");
+                other.gameObject.GetComponent<Hexer>().Hexer_TakeDamage(Fire_Flower_Damage_Current);
 
                 StartCoroutine(Attack_Cooldown());
             }
+        }
+    }
+
+    public void Fire_Flower_TakeDamage(float d)
+    {
+        Fire_Flower_Health_Current -= d;
+
+        if (Fire_Flower_Health_Current <= 0)
+        {
+            StopAllCoroutines();
+
+            My_Plant_Pot.GetComponent<Plant_Pot>().UpdatePlantStatus_Dead();
+            Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject);
+            Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActiveFireFlower(this.gameObject);
+
+            Destroy(this.gameObject);
         }
     }
 

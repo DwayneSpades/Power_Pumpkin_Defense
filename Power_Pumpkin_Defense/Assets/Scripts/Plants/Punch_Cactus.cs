@@ -70,7 +70,8 @@ public class Punch_Cactus : MonoBehaviour
             {
                 CanAttack = false;
 
-
+                //Debug.Log("Punch Cactus Attacked Ghast");
+                other.gameObject.GetComponent<Ghast>().Ghast_TakeDamage(Punch_Cactus_Damage_Current);
 
                 StartCoroutine(Attack_Cooldown());
             }
@@ -78,7 +79,8 @@ public class Punch_Cactus : MonoBehaviour
             {
                 CanAttack = false;
 
-
+                //Debug.Log("Punch Cactus Attacked Polter");
+                other.gameObject.GetComponent<Polter>().Polter_TakeDamage(Punch_Cactus_Damage_Current);
 
                 StartCoroutine(Attack_Cooldown());
             }
@@ -86,10 +88,27 @@ public class Punch_Cactus : MonoBehaviour
             {
                 CanAttack = false;
 
-
+                //Debug.Log("Punch Cactus Attacked Hexer");
+                other.gameObject.GetComponent<Hexer>().Hexer_TakeDamage(Punch_Cactus_Damage_Current);
 
                 StartCoroutine(Attack_Cooldown());
             }
+        }
+    }
+
+    public void Punch_Cactus_TakeDamage(float d)
+    {
+        Punch_Cactus_Health_Current -= d;
+
+        if (Punch_Cactus_Health_Current <= 0)
+        {
+            StopAllCoroutines();
+
+            My_Plant_Pot.GetComponent<Plant_Pot>().UpdatePlantStatus_Dead();
+            Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject);
+            Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePunchCactus(this.gameObject);
+
+            Destroy(this.gameObject);
         }
     }
 

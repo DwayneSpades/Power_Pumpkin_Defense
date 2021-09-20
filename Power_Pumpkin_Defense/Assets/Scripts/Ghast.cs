@@ -53,6 +53,8 @@ public class Ghast : MonoBehaviour
 
         if (other.tag == "Great_Pumpkin")
         {
+            StopAllCoroutines();
+
             //Debug.Log("Ghast Reached Great Pumpkin");
             other.gameObject.GetComponent<Great_Pumpkin>().TakeDamage(Ghast_Damage_Current);
             Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject);
@@ -62,7 +64,48 @@ public class Ghast : MonoBehaviour
 
         if (CanAttack)
         {
+            if (other.tag == "Punch_Cactus")
+            {
+                CanAttack = false;
 
+                //Debug.Log("Ghast Attacked Punch Cactus");
+                other.gameObject.GetComponent<Punch_Cactus>().Punch_Cactus_TakeDamage(Ghast_Damage_Current);
+
+                StartCoroutine(Attack_Cooldown());
+            }
+            else if (other.tag == "Fire_Flower")
+            {
+                CanAttack = false;
+
+                //Debug.Log("Ghast Attacked Fire Flower");
+                other.gameObject.GetComponent<Fire_Flower>().Fire_Flower_TakeDamage(Ghast_Damage_Current);
+
+                StartCoroutine(Attack_Cooldown());
+            }
+            else if (other.tag == "Shriek_Root")
+            {
+                CanAttack = false;
+
+                //Debug.Log("Ghast Attacked Shriek Root");
+                other.gameObject.GetComponent<Shriek_Root>().Shriek_Root_TakeDamage(Ghast_Damage_Current);
+
+                StartCoroutine(Attack_Cooldown());
+            }
+        }
+    }
+
+    public void Ghast_TakeDamage(float d)
+    {
+        Ghast_Health_Current -= d;
+
+        if (Ghast_Health_Current <= 0)
+        {
+            StopAllCoroutines();
+
+            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject);
+            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveGhast(this.gameObject);
+
+            Destroy(this.gameObject);
         }
     }
 

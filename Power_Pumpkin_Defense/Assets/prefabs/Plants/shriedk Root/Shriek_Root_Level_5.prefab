@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2525707053648864739}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.17005, y: 9.196579, z: -30.825228}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 816937084904477880}
   m_Father: {fileID: 0}
@@ -96,10 +96,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Shriek_Root_Next_Lvl: {fileID: 2525707053648864739, guid: 46ab3168410524c4383a9f43146d4925,
     type: 3}
-  Shriek_Root_Health: 15
+  Shriek_Root_Health: 10
   Shriek_Root_Damage: 2
   Shriek_Root_Attack_Cooldown: 4
-  Water_To_Upgrade_Level: 100
+  Water_To_Upgrade_Level: 40
   isMaxLevel: 0
   Flower_Level: 2
 --- !u!135 &7630030307683135557

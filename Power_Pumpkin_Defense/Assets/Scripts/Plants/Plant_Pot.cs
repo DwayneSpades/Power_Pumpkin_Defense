@@ -41,10 +41,13 @@ public class Plant_Pot : MonoBehaviour
     private void Spawn_Punch_Cactus()
     {
         Active_Plant = true;
-        Debug.Log("Spawned Punch Cactus");
+        //Debug.Log("Spawned Punch Cactus");
 
         // Instantiate plant
-        GameObject P = Instantiate(PunchCactus, transform.position, transform.rotation);
+        Vector3 tmp = transform.position;
+        tmp.y += 0.5f;
+        tmp.x -= 0.35f;
+        GameObject P = Instantiate(PunchCactus, tmp, transform.rotation);
 
         Current_Active_Plant = P;
         P.GetComponent<Punch_Cactus>().Assign_Plant_Pot(this.gameObject);
@@ -57,10 +60,13 @@ public class Plant_Pot : MonoBehaviour
     private void Spawn_Shriek_Root()
     {
         Active_Plant = true;
-        Debug.Log("Spawned Shriek Root");
+        //Debug.Log("Spawned Shriek Root");
 
         // Instantiate plant
-        GameObject P = Instantiate(ShriekRoot, transform.position, transform.rotation);
+        Vector3 tmp = transform.position;
+        tmp.y += 0.5f;
+        tmp.x -= 0.25f;
+        GameObject P = Instantiate(ShriekRoot, tmp, transform.rotation);
 
         Current_Active_Plant = P;
         P.GetComponent<Shriek_Root>().Assign_Plant_Pot(this.gameObject);
@@ -73,10 +79,13 @@ public class Plant_Pot : MonoBehaviour
     private void Spawn_Fire_Flower()
     {
         Active_Plant = true;
-        Debug.Log("Spawned Fire Flower");
+        //Debug.Log("Spawned Fire Flower");
 
         // Instantiate plant
-        GameObject P = Instantiate(FireFlower, transform.position, transform.rotation);
+        Vector3 tmp = transform.position;
+        tmp.y += 0.5f;
+        tmp.x -= 0.1f;
+        GameObject P = Instantiate(FireFlower, tmp, transform.rotation);
 
         Current_Active_Plant = P;
         P.GetComponent<Fire_Flower>().Assign_Plant_Pot(this.gameObject);

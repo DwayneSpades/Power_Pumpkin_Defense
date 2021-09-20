@@ -70,7 +70,8 @@ public class Shriek_Root : MonoBehaviour
             {
                 CanAttack = false;
 
-
+                //Debug.Log("Shriek Root Attacked Ghast");
+                other.gameObject.GetComponent<Ghast>().Ghast_TakeDamage(Shriek_Root_Damage_Current);
 
                 StartCoroutine(Attack_Cooldown());
             }
@@ -78,7 +79,8 @@ public class Shriek_Root : MonoBehaviour
             {
                 CanAttack = false;
 
-
+                //Debug.Log("Shriek Root Attacked Polter");
+                other.gameObject.GetComponent<Polter>().Polter_TakeDamage(Shriek_Root_Damage_Current);
 
                 StartCoroutine(Attack_Cooldown());
             }
@@ -86,10 +88,27 @@ public class Shriek_Root : MonoBehaviour
             {
                 CanAttack = false;
 
-
+                //Debug.Log("Shriek Root Attacked Hexer");
+                other.gameObject.GetComponent<Hexer>().Hexer_TakeDamage(Shriek_Root_Damage_Current);
 
                 StartCoroutine(Attack_Cooldown());
             }
+        }
+    }
+
+    public void Shriek_Root_TakeDamage(float d)
+    {
+        Shriek_Root_Health_Current -= d;
+
+        if (Shriek_Root_Health_Current <= 0)
+        {
+            StopAllCoroutines();
+
+            My_Plant_Pot.GetComponent<Plant_Pot>().UpdatePlantStatus_Dead();
+            Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject);
+            Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActiveShriekRoot(this.gameObject);
+
+            Destroy(this.gameObject);
         }
     }
 

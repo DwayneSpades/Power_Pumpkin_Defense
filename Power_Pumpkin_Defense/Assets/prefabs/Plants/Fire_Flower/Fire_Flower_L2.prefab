@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5521680506770235781}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.17005, y: 9.196579, z: -30.825228}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 7671853897596454282}
   m_Father: {fileID: 0}
@@ -92,7 +92,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.6
+  m_Radius: 3
   m_Height: 8.5
   m_Direction: 1
   m_Center: {x: 0.6, y: 3.1, z: 0}
@@ -110,10 +110,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Fire_Flower_Next_Lvl: {fileID: 5521680506770235781, guid: bd06096984f628f49af7ca928f104a9b,
     type: 3}
-  Fire_Flower_Health: 15
+  Fire_Flower_Health: 10
   Fire_Flower_Damage: 2
   Fire_Flower_Attack_Cooldown: 3
-  Water_To_Upgrade_Level: 100
+  Water_To_Upgrade_Level: 40
   isMaxLevel: 0
   Flower_Level: 2
 --- !u!1001 &8484819223766670051
