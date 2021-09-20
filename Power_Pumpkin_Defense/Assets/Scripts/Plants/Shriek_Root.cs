@@ -31,12 +31,29 @@ public class Shriek_Root : MonoBehaviour
         {
             if (Water_Level >= Water_To_Upgrade_Level)
             {
+                StopAllCoroutines();
+
                 // Instantiate the next level plant
+                GameObject P;
+                P = Instantiate(Shriek_Root_Next_Lvl, transform.position, transform.rotation);
+
                 // Set new plants plant pot - pass this one's plant pot gameobject
+                P.gameObject.GetComponent<Shriek_Root>().Assign_Plant_Pot(My_Plant_Pot);
+                Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePlant(P);
+                Plant_Mngr.GetComponent<Plant_Manager>().Add_ActiveShriekRoot(P);
+
+                Debug.Log("Shriek Root upgraded to level " + (Flower_Level + 1));
 
                 // Delete this plant
-                // Maybe stop coroutines
+                Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject);
+                Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActiveShriekRoot(this.gameObject);
+
+                Destroy(this.gameObject);
             }
+        }
+        else
+        {
+            Debug.Log("Shriek root is max level");
         }
     }
 
@@ -105,4 +122,5 @@ public class Shriek_Root : MonoBehaviour
 
     public int Water_To_Upgrade_Level;
     public bool isMaxLevel;
+    public int Flower_Level;
 }

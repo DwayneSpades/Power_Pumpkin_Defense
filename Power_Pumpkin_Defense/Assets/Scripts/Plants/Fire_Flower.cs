@@ -31,12 +31,29 @@ public class Fire_Flower : MonoBehaviour
         {
             if (Water_Level >= Water_To_Upgrade_Level)
             {
+                StopAllCoroutines();
+
                 // Instantiate the next level plant
+                GameObject P;
+                P = Instantiate(Fire_Flower_Next_Lvl, transform.position, transform.rotation);
+
                 // Set new plants plant pot - pass this one's plant pot gameobject
+                P.gameObject.GetComponent<Fire_Flower>().Assign_Plant_Pot(My_Plant_Pot);
+                Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePlant(P);
+                Plant_Mngr.GetComponent<Plant_Manager>().Add_ActiveFireFlower(P);
+
+                Debug.Log("Fire flower upgraded to level " + (Flower_Level + 1));
 
                 // Delete this plant
-                // Maybe stop coroutines
+                Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject);
+                Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActiveFireFlower(this.gameObject);
+
+                Destroy(this.gameObject);
             }
+        }
+        else
+        {
+            Debug.Log("Fire flower is max level");
         }
   
     }
@@ -106,4 +123,5 @@ public class Fire_Flower : MonoBehaviour
 
     public int Water_To_Upgrade_Level;
     public bool isMaxLevel;
+    public int Flower_Level;
 }

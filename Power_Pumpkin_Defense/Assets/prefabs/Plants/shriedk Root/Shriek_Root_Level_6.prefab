@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6767708658769982372}
   - component: {fileID: 6809011961529450780}
   - component: {fileID: 2768451665638821797}
-  - component: {fileID: 1273432924625164023}
   - component: {fileID: -7456153994370639669}
+  - component: {fileID: 2231796565026175489}
   m_Layer: 0
   m_Name: Shriek_Root_Level_6
   m_TagString: Shriek_Root
@@ -82,20 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &1273432924625164023
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2525707053648864739}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &-7456153994370639669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +100,20 @@ MonoBehaviour:
   Shriek_Root_Attack_Cooldown: 3
   Water_To_Upgrade_Level: -1
   isMaxLevel: 1
+  Flower_Level: 3
+--- !u!135 &2231796565026175489
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2525707053648864739}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.8
+  m_Center: {x: 0.5, y: 2.18, z: 0}
 --- !u!1001 &4298016492014301820
 PrefabInstance:
   m_ObjectHideFlags: 0

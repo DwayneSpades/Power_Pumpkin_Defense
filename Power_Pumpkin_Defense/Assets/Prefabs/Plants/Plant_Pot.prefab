@@ -106,9 +106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe7c5722cc5703144bc6957f1f4f27bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FireFlower: {fileID: 5521680506770235781, guid: 0ea80c2179d703249bd38595831b428b,
+  FireFlower: {fileID: 5521680506770235781, guid: 4d3c671b2a43f1c46bf7f7b82c68e4ab,
     type: 3}
-  ShriekRoot: {fileID: 2525707053648864739, guid: b284b07bc50ce514aa177b1321e2dd03,
+  ShriekRoot: {fileID: 2525707053648864739, guid: 9f32a141795db4c478b6087a33e136ad,
     type: 3}
-  PunchCactus: {fileID: 5880386846402516068, guid: f321a53500664424f94795abe5c983e4,
+  PunchCactus: {fileID: 5880386846402516068, guid: 2e7f562585762134b8da83b1b0e6b4c4,
     type: 3}

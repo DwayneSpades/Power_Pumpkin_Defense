@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6767708658769982372}
   - component: {fileID: 6809011961529450780}
   - component: {fileID: 2768451665638821797}
-  - component: {fileID: 1273432924625164023}
   - component: {fileID: 4291797444163095755}
+  - component: {fileID: 8833846949410293108}
   m_Layer: 0
   m_Name: Shriek_Root_Level_4
   m_TagString: Shriek_Root
@@ -82,20 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &1273432924625164023
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2525707053648864739}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &4291797444163095755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,13 +94,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46debdbdeb63f3a47a771c3776368ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Shriek_Root_Next_Lvl: {fileID: 2525707053648864739, guid: 9bdacc70170ae584587fbb83566f21d0,
+  Shriek_Root_Next_Lvl: {fileID: 2525707053648864739, guid: 3995608df09909b45833ad2786213317,
     type: 3}
   Shriek_Root_Health: 10
   Shriek_Root_Damage: 1
   Shriek_Root_Attack_Cooldown: 3
-  Water_To_Upgrade_Level: 100
+  Water_To_Upgrade_Level: 50
   isMaxLevel: 0
+  Flower_Level: 1
+--- !u!135 &8833846949410293108
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2525707053648864739}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.8
+  m_Center: {x: 0.5, y: 2.18, z: 0}
 --- !u!1001 &2483442622449180507
 PrefabInstance:
   m_ObjectHideFlags: 0

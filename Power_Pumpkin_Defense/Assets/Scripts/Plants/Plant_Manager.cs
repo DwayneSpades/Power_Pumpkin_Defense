@@ -7,12 +7,17 @@ public class Plant_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlantPot_List = new List<GameObject>();
         Active_Plants = new List<GameObject>();
         Active_PunchCacti = new List<GameObject>();
         Active_ShriekRoots = new List<GameObject>();
         Active_FireFlowers = new List<GameObject>();
 
-        Instantiate(PlantPot, Pot_Spawn_Test.position, Pot_Spawn_Test.rotation);
+        foreach (Transform t in PlantPot_Positions)
+        {
+            GameObject Pot;
+            Pot = Instantiate(PlantPot, t.position, t.rotation);
+        }
     }
 
     // Update is called once per frame
@@ -68,24 +73,14 @@ public class Plant_Manager : MonoBehaviour
         Active_FireFlowers.Remove(P);
     }
 
-    public List<GameObject> PlantPot_List;
+    [SerializeField] private List<GameObject> PlantPot_List;
+
+    [SerializeField] private List<Transform> PlantPot_Positions;
 
     [SerializeField] private List<GameObject> Active_Plants;
     [SerializeField] private List<GameObject> Active_PunchCacti;
     [SerializeField] private List<GameObject> Active_ShriekRoots;
     [SerializeField] private List<GameObject> Active_FireFlowers;
-
-    public GameObject FireFlower_Lvl1;
-    public GameObject FireFlower_Lvl2;
-    public GameObject FireFlower_Lvl3;
-
-    public GameObject ShriekRoot_Lvl1;
-    public GameObject ShriekRoot_Lvl2;
-    public GameObject ShriekRoot_Lvl3;
-
-    public GameObject PunchCactus_Lvl1;
-    public GameObject PunchCactus_Lvl2;
-    public GameObject PunchCactus_Lvl3;
 
     public GameObject PlantPot;
 

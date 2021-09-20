@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6901504985604178327}
   - component: {fileID: 1193146989351146004}
   m_Layer: 0
-  m_Name: Polter 1
+  m_Name: Polter
   m_TagString: Polter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,8 +94,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1.045511
+  m_Center: {x: -0.021855354, y: 0, z: 0}
 --- !u!54 &6901504985604178327
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6901504985604178327}
   - component: {fileID: 3872302697952971368}
   m_Layer: 0
-  m_Name: Hexer 1
+  m_Name: Hexer
   m_TagString: Hexer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,8 +94,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.8539956
+  m_Center: {x: 0.19730204, y: 0, z: 0}
 --- !u!54 &6901504985604178327
 Rigidbody:
   m_ObjectHideFlags: 0

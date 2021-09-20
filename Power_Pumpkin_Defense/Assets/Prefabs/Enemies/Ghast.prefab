@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6901504985604178327}
   - component: {fileID: 8713937719225039174}
   m_Layer: 0
-  m_Name: Ghast 1
+  m_Name: Ghast
   m_TagString: Ghast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,8 +94,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.61080146
+  m_Center: {x: 0.0622952, y: 0.3889159, z: 0.010678768}
 --- !u!54 &6901504985604178327
 Rigidbody:
   m_ObjectHideFlags: 0
