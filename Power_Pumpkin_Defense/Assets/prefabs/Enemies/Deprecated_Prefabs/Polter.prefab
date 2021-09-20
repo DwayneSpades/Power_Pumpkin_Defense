@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 4189157600354944229}
   - component: {fileID: 4189157600354944226}
   - component: {fileID: 6901504985604178327}
-  - component: {fileID: 8713937719225039174}
+  - component: {fileID: 1193146989351146004}
   m_Layer: 0
-  m_Name: Ghast 1
-  m_TagString: Ghast
+  m_Name: Polter
+  m_TagString: Polter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,8 +31,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.96, y: 0.17000008, z: 4.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 295172734832355476}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -51,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4189157600354944227}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -62,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100008, guid: 54b107e50acd7e24b96d7de887c68833, type: 3}
+  - {fileID: 2100006, guid: 7977e423937da9b48aac1866c67bb5be, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -112,7 +111,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8713937719225039174
+--- !u!114 &1193146989351146004
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,85 +120,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4189157600354944227}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cc610b68d009a1419615a00ef2548c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 306e21f25c994344cbfb197bb7a4c95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ghast_Speed: 0.4
-  Ghast_Health: 1
-  Ghast_Damage: 1
-  Ghast_Attack_Cooldown: 1
---- !u!1001 &1390998609997561695
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 4189157600354944231}
-    m_Modifications:
-    - target: {fileID: 1681386188384458693, guid: 3f098701b53d846439893a9b801834b4,
-        type: 3}
-      propertyPath: m_Name
-      value: ghast_0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1681386188384458699, guid: 3f098701b53d846439893a9b801834b4,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1681386188384458699, guid: 3f098701b53d846439893a9b801834b4,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.387
-      objectReference: {fileID: 0}
-    - target: {fileID: 1681386188384458699, guid: 3f098701b53d846439893a9b801834b4,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1681386188384458699, guid: 3f098701b53d846439893a9b801834b4,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1681386188384458699, guid: 3f098701b53d846439893a9b801834b4,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1681386188384458699, guid: 3f098701b53d846439893a9b801834b4,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1681386188384458699, guid: 3f098701b53d846439893a9b801834b4,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1681386188384458699, guid: 3f098701b53d846439893a9b801834b4,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1681386188384458699, guid: 3f098701b53d846439893a9b801834b4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1681386188384458699, guid: 3f098701b53d846439893a9b801834b4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1681386188384458699, guid: 3f098701b53d846439893a9b801834b4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3f098701b53d846439893a9b801834b4, type: 3}
---- !u!4 &295172734832355476 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1681386188384458699, guid: 3f098701b53d846439893a9b801834b4,
-    type: 3}
-  m_PrefabInstance: {fileID: 1390998609997561695}
-  m_PrefabAsset: {fileID: 0}
+  Polter_Speed: 0.25
+  Polter_Health: 2
+  Polter_Damage: 2
+  Polter_Attack_Cooldown: 1
