@@ -44,38 +44,56 @@ public class Character_Controller : MonoBehaviour
             {
                 if (Nearby_Flower.tag == "Punch_Cactus")
                 {
-                    // Play Animation
+                    if (Current_Water_Amount > 0)
+                    {
+                        // Play Animation
 
-                    // Watering Cooldown
-                    StartCoroutine(Watering_Cooldown());
-
-                    // Water Plant
-                    CanWater = false;
-                    Nearby_Flower.gameObject.GetComponent<Punch_Cactus>().Water_Punch_Cactus(Water_To_Give_Plant);
+                        // Water Stuff
+                        CanWater = false;
+                        StartCoroutine(Watering_Cooldown());
+                        Nearby_Flower.gameObject.GetComponent<Punch_Cactus>().Water_Punch_Cactus(Water_To_Give_Plant);
+                        Use_Water(Water_To_Give_Plant);
+                    }
+                    else
+                    {
+                        Debug.Log("Not enough Water");
+                    }
                 }
 
                 if (Nearby_Flower.tag == "Fire_Flower")
                 {
-                    // Play Animation
+                    if (Current_Water_Amount > 0)
+                    {
+                        // Play Animation
 
-                    // Watering Cooldown
-                    StartCoroutine(Watering_Cooldown());
-
-                    // Water Plant
-                    CanWater = false;
-                    Nearby_Flower.gameObject.GetComponent<Fire_Flower>().Water_Fire_Flower(Water_To_Give_Plant);
+                        // Water Stuff
+                        CanWater = false;
+                        StartCoroutine(Watering_Cooldown());
+                        Nearby_Flower.gameObject.GetComponent<Fire_Flower>().Water_Fire_Flower(Water_To_Give_Plant);
+                        Use_Water(Water_To_Give_Plant);
+                    }
+                    else
+                    {
+                        Debug.Log("Not enough Water");
+                    }
                 }
 
                 if (Nearby_Flower.tag == "Shriek_Root")
                 {
-                    // Play Animation
+                    if (Current_Water_Amount > 0)
+                    {
+                        // Play Animation
 
-                    // Watering Cooldown
-                    StartCoroutine(Watering_Cooldown());
-
-                    // Water Plant
-                    CanWater = false;
-                    Nearby_Flower.gameObject.GetComponent<Shriek_Root>().Water_Shriek_Root(Water_To_Give_Plant);
+                        // Water Stuff
+                        CanWater = false;
+                        StartCoroutine(Watering_Cooldown());
+                        Nearby_Flower.gameObject.GetComponent<Shriek_Root>().Water_Shriek_Root(Water_To_Give_Plant);
+                        Use_Water(Water_To_Give_Plant);
+                    }
+                    else
+                    {
+                        Debug.Log("Not enough Water");
+                    }
                 }
             }
         }
@@ -116,6 +134,28 @@ public class Character_Controller : MonoBehaviour
         {
             isFlowerNear = false;
             Nearby_Flower = null;
+        }
+    }
+
+    public void Refill_Water()
+    {
+        if (Current_Water_Amount < Max_Water_Amount)
+        {
+            Current_Water_Amount = Max_Water_Amount;
+            Debug.Log("Watering can refilled: " + Current_Water_Amount);
+        }
+        else
+        {
+            Debug.Log("Watering can is full");
+        }
+    }
+
+    private void Use_Water(int w_amount)
+    {
+        if (Current_Water_Amount >= 0)
+        {
+            Current_Water_Amount -= w_amount;
+            Debug.Log("Used Water, Water Left: " + Current_Water_Amount);
         }
     }
 

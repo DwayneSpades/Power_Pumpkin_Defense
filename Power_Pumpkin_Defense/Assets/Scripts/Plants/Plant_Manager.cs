@@ -89,7 +89,5 @@ public class Plant_Manager : MonoBehaviour
 
     public GameObject PlantPot;
 
-    public GameObject TestPlayer;
-
     public Transform Pot_Spawn_Test;
 }

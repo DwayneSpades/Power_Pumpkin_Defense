@@ -16,7 +16,6 @@ public class Wave_Manager : MonoBehaviour
 
         Monster_Mngr = GameObject.Find("Monster_Manager");
 
-        Instantiate(GreatPumpkin, GreatPumpkin_Pos.transform.position, GreatPumpkin_Pos.transform.rotation);
         Great_Pumpkin_Alive = true;
 
         StartCoroutine(WaveCooldown());
@@ -137,11 +136,8 @@ public class Wave_Manager : MonoBehaviour
     private int Current_Wave_Num;
     private bool Great_Pumpkin_Alive;
 
-    public GameObject GreatPumpkin;
-
     public GameObject StartPos;
     public GameObject EndPos;
-    public GameObject GreatPumpkin_Pos;
 
     // Wave cooldown/control variables
     public float Wave_Cooldown_Timer;

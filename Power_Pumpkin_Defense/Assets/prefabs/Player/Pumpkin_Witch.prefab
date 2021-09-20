@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 4646742229495417477}
   - component: {fileID: 2538866856439889351}
   m_Layer: 0
-  m_Name: Player 1
+  m_Name: Pumpkin_Witch
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

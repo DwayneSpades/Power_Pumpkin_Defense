@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Starting_Water_Amount: 0
-  Max_Water_Amount: 100
+  Max_Water_Amount: 20
   Move_Speed: 5
   Water_To_Give_Plant: 10
   Water_Cooldown_Time: 5
