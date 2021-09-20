@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Character_Controller : MonoBehaviour
 {
+
+    public Animator animControl;
+    public GameObject model;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +24,17 @@ public class Character_Controller : MonoBehaviour
         float Z_Direction = Input.GetAxis("Vertical");
 
         Vector3 Move_Dir = new Vector3(X_Direction, 0.0f, Z_Direction);
+        Move_Dir.Normalize();
 
+        model.transform.forward = Move_Dir;
+        if (Move_Dir.x != 0 || Move_Dir.z != 0)
+        {
+            animControl.Play("run");
+        }
+        else
+        {
+            animControl.Play("idle");
+        }
         transform.position += Move_Dir * Move_Speed * Time.deltaTime;
 
 
