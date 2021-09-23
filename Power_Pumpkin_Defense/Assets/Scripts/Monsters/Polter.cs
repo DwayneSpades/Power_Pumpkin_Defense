@@ -17,6 +17,7 @@ public class Polter : MonoBehaviour
 
         LnMngr = GameObject.Find("Lane_Manager");
         Monster_Mngr = GameObject.Find("Monster_Manager");
+        Resource_Mngr = GameObject.Find("Resource_Manager");
         Path = LnMngr.GetComponent<Lane_Manager>().GetAPath();
 
         //Debug.Log("Path size: " + Path.Count);
@@ -59,6 +60,7 @@ public class Polter : MonoBehaviour
             other.gameObject.GetComponent<Great_Pumpkin>().TakeDamage(Polter_Damage_Current);
             Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject);
             Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActivePolter(this.gameObject);
+
             Destroy(this.gameObject);
         }
 
@@ -102,6 +104,8 @@ public class Polter : MonoBehaviour
         {
             StopAllCoroutines();
 
+            Resource_Mngr.GetComponent<Resource_Manager>().Spawn_Mana_Sphere(transform, ManaSphere);
+
             Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject);
             Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActivePolter(this.gameObject);
 
@@ -119,6 +123,9 @@ public class Polter : MonoBehaviour
     // Internal Functionality stuff
     private GameObject LnMngr;
     private GameObject Monster_Mngr;
+    private GameObject Resource_Mngr;
+
+    public GameObject ManaSphere;
 
     private Vector3 ToVector;
     private Vector3 TargetPos;

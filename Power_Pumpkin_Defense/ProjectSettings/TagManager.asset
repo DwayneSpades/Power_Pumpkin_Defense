@@ -17,6 +17,7 @@ TagManager:
   - Fire_Flower
   - Shriek_Root
   - Plant_Pot
+  - Mana_Sphere
   layers:
   - Default
   - TransparentFX

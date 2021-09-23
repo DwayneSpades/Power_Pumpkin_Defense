@@ -124,6 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc610b68d009a1419615a00ef2548c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ManaSphere: {fileID: 7804931546375534357, guid: ac230a30a7e3ab447a5e1dbb1191ee7c,
+    type: 3}
   Ghast_Speed: 0.4
   Ghast_Health: 1
   Ghast_Damage: 1

@@ -8,7 +8,7 @@ public class Water_Spigot : MonoBehaviour
     void Start()
     {
         isPlayer_Near = false;
-        PlayerRef = GameObject.Find("Pumpkin_Witch");
+        Resource_Mngr = GameObject.Find("Resource_Manager");
     }
 
     // Update is called once per frame
@@ -18,7 +18,7 @@ public class Water_Spigot : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                PlayerRef.GetComponent<Character_Controller>().Refill_Water();
+                Resource_Mngr.GetComponent<Resource_Manager>().Refill_Water();
             }
         }
     }
@@ -40,6 +40,6 @@ public class Water_Spigot : MonoBehaviour
     }
 
     private bool isPlayer_Near;
-    private GameObject PlayerRef;
+    private GameObject Resource_Mngr;
 }
 
