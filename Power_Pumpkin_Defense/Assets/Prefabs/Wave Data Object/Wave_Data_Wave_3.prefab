@@ -49,4 +49,6 @@ MonoBehaviour:
   Polter_Spawn_Interval: 3
   Num_Hexers: 0
   Hexer_Spawn_Interval: 0
-  Hexer_Lifespan: 0
+  Available_Ghast_Lanes: 3
+  Available_Polter_Lanes: 3
+  Available_Hexer_Lanes: 3

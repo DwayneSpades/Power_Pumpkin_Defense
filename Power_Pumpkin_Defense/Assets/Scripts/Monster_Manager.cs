@@ -8,6 +8,7 @@ public class Monster_Manager : MonoBehaviour
     void Start()
     {
         Wave_Mngr = GameObject.Find("Wave_Manager");
+        Lane_Mngr = GameObject.Find("Lane_Manager");
 
         Active_Monsters = new List<GameObject>();
         Active_Ghasts = new List<GameObject>();
@@ -119,30 +120,34 @@ public class Monster_Manager : MonoBehaviour
     //  Monster Spawning
     //
 
-    public void Spawn_Ghasts(GameObject pos, int Num_Ghasts, float Spawn_Interval)
+    public void Spawn_Ghasts(int Available_Lanes, int Num_Ghasts, float Spawn_Interval)
     {
-        StartCoroutine(Ghast_Spawner(pos, Num_Ghasts, Spawn_Interval));
+        StartCoroutine(Ghast_Spawner(Available_Lanes, Num_Ghasts, Spawn_Interval));
     }
 
-    public void Spawn_Polters(GameObject pos, int Num_Polters, float Spawn_Interval)
+    public void Spawn_Polters(int Available_Lanes, int Num_Polters, float Spawn_Interval)
     {
-        StartCoroutine(Polter_Spawner(pos, Num_Polters, Spawn_Interval));
+        StartCoroutine(Polter_Spawner(Available_Lanes, Num_Polters, Spawn_Interval));
     }
 
-    public void Spawn_Hexers(GameObject pos, int Num_Hexers, float Spawn_Interval)
+    public void Spawn_Hexers(int Available_Lanes, int Num_Hexers, float Spawn_Interval)
     {
-        StartCoroutine(Hexer_Spawner(pos, Num_Hexers, Spawn_Interval));
+        StartCoroutine(Hexer_Spawner(Available_Lanes, Num_Hexers, Spawn_Interval));
     }
 
 
-    IEnumerator Ghast_Spawner(GameObject StartPos, int Num_Ghasts, float Spawn_Interval)
+    IEnumerator Ghast_Spawner(int Available_Lanes, int Num_Ghasts, float Spawn_Interval)
     {
         int GhastNum = Num_Ghasts;
 
         if (GhastNum > 0)
         {
             GameObject M;
-            M = Instantiate(Ghast, StartPos.transform.position, StartPos.transform.rotation);
+
+            // Get starting position from lane manager
+            Transform start_pos = Lane_Mngr.GetComponent<Lane_Manager>().Get_Lane_Pos(Available_Lanes);
+
+            M = Instantiate(Ghast, start_pos.position, start_pos.rotation);
             Active_Monsters.Add(M);
             Active_Ghasts.Add(M);
 
@@ -150,7 +155,7 @@ public class Monster_Manager : MonoBehaviour
 
             yield return new WaitForSeconds(Spawn_Interval);
 
-            StartCoroutine(Ghast_Spawner(StartPos, GhastNum, Spawn_Interval));
+            StartCoroutine(Ghast_Spawner(Available_Lanes, GhastNum, Spawn_Interval));
         }
         else
         {
@@ -159,14 +164,18 @@ public class Monster_Manager : MonoBehaviour
         }
     }
 
-    IEnumerator Polter_Spawner(GameObject StartPos, int Num_Polters, float Spawn_Interval)
+    IEnumerator Polter_Spawner(int Available_Lanes, int Num_Polters, float Spawn_Interval)
     {
         int PolterNum = Num_Polters;
 
         if (PolterNum > 0)
         {
             GameObject M;
-            M = Instantiate(Polter, StartPos.transform.position, StartPos.transform.rotation);
+
+            // Get starting position from lane manager
+            Transform start_pos = Lane_Mngr.GetComponent<Lane_Manager>().Get_Lane_Pos(Available_Lanes);
+
+            M = Instantiate(Polter, start_pos.position, start_pos.rotation);
             Active_Monsters.Add(M);
             Active_Polters.Add(M);
 
@@ -174,7 +183,7 @@ public class Monster_Manager : MonoBehaviour
 
             yield return new WaitForSeconds(Spawn_Interval);
 
-            StartCoroutine(Polter_Spawner(StartPos, PolterNum, Spawn_Interval));
+            StartCoroutine(Polter_Spawner(Available_Lanes, PolterNum, Spawn_Interval));
         }
         else
         {
@@ -183,14 +192,18 @@ public class Monster_Manager : MonoBehaviour
         }
     }
 
-    IEnumerator Hexer_Spawner(GameObject StartPos, int Num_Hexers, float Spawn_Interval)
+    IEnumerator Hexer_Spawner(int Available_Lanes, int Num_Hexers, float Spawn_Interval)
     {
         int HexerNum = Num_Hexers;
 
         if (HexerNum > 0)
         {
             GameObject M;
-            M = Instantiate(Hexer, StartPos.transform.position, StartPos.transform.rotation);
+
+            // Get starting position from lane manager
+            Transform start_pos = Lane_Mngr.GetComponent<Lane_Manager>().Get_Lane_Pos(Available_Lanes);
+
+            M = Instantiate(Hexer, start_pos.position, start_pos.rotation);
             Active_Monsters.Add(M);
             Active_Hexers.Add(M);
 
@@ -198,7 +211,7 @@ public class Monster_Manager : MonoBehaviour
 
             yield return new WaitForSeconds(Spawn_Interval);
 
-            StartCoroutine(Hexer_Spawner(StartPos, HexerNum, Spawn_Interval));
+            StartCoroutine(Hexer_Spawner(Available_Lanes, HexerNum, Spawn_Interval));
         }
         else
         {
@@ -212,6 +225,7 @@ public class Monster_Manager : MonoBehaviour
     //
 
     private GameObject Wave_Mngr;
+    private GameObject Lane_Mngr;
 
     [SerializeField] private List<GameObject> Active_Monsters;
     [SerializeField] private List<GameObject> Active_Ghasts;

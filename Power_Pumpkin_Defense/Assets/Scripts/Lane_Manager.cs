@@ -20,17 +20,21 @@ public class Lane_Manager : MonoBehaviour
     public List<Transform> Lane_2_List;
     public List<Transform> Lane_3_List;
 
-    public List<Transform> GetAPath()
+    public List<Transform> Lane_Starting_List;
+
+    public List<Transform> GetPath(Vector3 t)
     {
         List<Transform> ret;
 
-        int LaneNum = Random.Range(0, 3);
-
-        if (LaneNum == 0)
+        float test = Vector3.Distance(t, Lane_Starting_List[0].transform.position);
+        float test2 = Vector3.Distance(t, Lane_Starting_List[1].transform.position);
+        float test3 = Vector3.Distance(t, Lane_Starting_List[2].transform.position);
+        // (test < 1.0f)
+        if (Vector3.Distance(t, Lane_Starting_List[0].transform.position) == 0)
         {
             ret = Lane_1_List;
         }
-        else if (LaneNum == 1)
+        else if (Vector3.Distance(t, Lane_Starting_List[1].transform.position) == 0)
         {
             ret = Lane_2_List;
         }
@@ -42,15 +46,10 @@ public class Lane_Manager : MonoBehaviour
         return ret;
     }
 
-    void GetLanes()
+    public Transform Get_Lane_Pos(int Lane_Range)
     {
-        //Transform Lane2 = GameObject.Find("Lane2_Positions").GetComponent<Transform>();
+        int tmp = Random.Range(0, Lane_Range);
 
-        //for (int i = 0; i < Lane2.childCount; i++)
-        //{
-        //    Lane_2_List.Add(Lane2.GetChild(i));
-        //}
-
-        //Debug.Log("Lane 2 list size: " + Lane_2_List.Count);
+        return Lane_Starting_List[tmp];
     }
 }

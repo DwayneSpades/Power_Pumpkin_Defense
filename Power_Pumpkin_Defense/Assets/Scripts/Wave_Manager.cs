@@ -38,20 +38,23 @@ public class Wave_Manager : MonoBehaviour
                 // Spawn Ghasts
                 int Num_Monsters = Current_Wave_Obj.GetComponent<Wave_Data>().Num_Ghasts;
                 float Interval = Current_Wave_Obj.GetComponent<Wave_Data>().Ghast_Spawn_Interval;
+                int Avail_Lanes = Current_Wave_Obj.GetComponent<Wave_Data>().Available_Ghast_Lanes;
 
-                Monster_Mngr.GetComponent<Monster_Manager>().Spawn_Ghasts(StartPos, Num_Monsters, Interval);
+                Monster_Mngr.GetComponent<Monster_Manager>().Spawn_Ghasts(Avail_Lanes, Num_Monsters, Interval);
 
                 // Spawn Polters
                 Num_Monsters = Current_Wave_Obj.GetComponent<Wave_Data>().Num_Polters;
                 Interval = Current_Wave_Obj.GetComponent<Wave_Data>().Polter_Spawn_Interval;
+                Avail_Lanes = Current_Wave_Obj.GetComponent<Wave_Data>().Available_Polter_Lanes;
 
-                Monster_Mngr.GetComponent<Monster_Manager>().Spawn_Polters(StartPos, Num_Monsters, Interval);
+                Monster_Mngr.GetComponent<Monster_Manager>().Spawn_Polters(Avail_Lanes, Num_Monsters, Interval);
 
                 // Spawn Hexers
                 Num_Monsters = Current_Wave_Obj.GetComponent<Wave_Data>().Num_Hexers;
                 Interval = Current_Wave_Obj.GetComponent<Wave_Data>().Hexer_Spawn_Interval;
+                Avail_Lanes = Current_Wave_Obj.GetComponent<Wave_Data>().Available_Hexer_Lanes;
 
-                Monster_Mngr.GetComponent<Monster_Manager>().Spawn_Hexers(StartPos, Num_Monsters, Interval);
+                Monster_Mngr.GetComponent<Monster_Manager>().Spawn_Hexers(Avail_Lanes, Num_Monsters, Interval);
 
 
                 Current_Wave_Num++;
@@ -135,9 +138,6 @@ public class Wave_Manager : MonoBehaviour
     private GameObject Current_Wave_Obj;
     private int Current_Wave_Num;
     private bool Great_Pumpkin_Alive;
-
-    public GameObject StartPos;
-    public GameObject EndPos;
 
     // Wave cooldown/control variables
     public float Wave_Cooldown_Timer;

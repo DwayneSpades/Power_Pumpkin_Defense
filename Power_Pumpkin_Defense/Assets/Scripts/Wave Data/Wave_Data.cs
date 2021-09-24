@@ -24,4 +24,11 @@ public class Wave_Data : MonoBehaviour
 
     public int Num_Hexers;
     public float Hexer_Spawn_Interval;
+
+    // 0 up to the number of available lanes
+    // If 0, lane is always lane 1
+    // If 0, x - lanes are chosen randomly from lane 1 to x
+    public int Available_Ghast_Lanes;
+    public int Available_Polter_Lanes;
+    public int Available_Hexer_Lanes;
 }

@@ -18,7 +18,7 @@ public class Ghast : MonoBehaviour
         LnMngr = GameObject.Find("Lane_Manager");
         Monster_Mngr = GameObject.Find("Monster_Manager");
         Resource_Mngr = GameObject.Find("Resource_Manager");
-        Path = LnMngr.GetComponent<Lane_Manager>().GetAPath();
+        Path = LnMngr.GetComponent<Lane_Manager>().GetPath(transform.position);
 
         //Debug.Log("Path size: " + Path.Count);
 

@@ -83,6 +83,4 @@ public class Plant_Manager : MonoBehaviour
     [SerializeField] private List<GameObject> Active_FireFlowers;
 
     public GameObject PlantPot;
-
-    public Transform Pot_Spawn_Test;
 }
