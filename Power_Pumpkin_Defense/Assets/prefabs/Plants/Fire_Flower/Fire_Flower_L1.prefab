@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4215977271183402854}
   m_Layer: 0
   m_Name: Fire_Flower_L1
-  m_TagString: Fire_Flower
+  m_TagString: Plant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,14 +108,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f1ad5b0940336b4ebc5b720d6cbe5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Fire_Flower_Next_Lvl: {fileID: 5521680506770235781, guid: 957202b9c64a6cf4abea5bfc92372db1,
-    type: 3}
-  Fire_Flower_Health: 5
-  Fire_Flower_Damage: 1
-  Fire_Flower_Attack_Cooldown: 2
   Water_To_Upgrade_Level: 20
   isMaxLevel: 0
   Flower_Level: 1
+  Plant_Health: 10
+  Plant_Damage: 1
+  Plant_Attack_Cooldown: 1
+  Plant_Next_Lvl: {fileID: 5521680506770235781, guid: 957202b9c64a6cf4abea5bfc92372db1,
+    type: 3}
+  My_Plant_Pot: {fileID: 0}
 --- !u!1001 &6141450728601182928
 PrefabInstance:
   m_ObjectHideFlags: 0

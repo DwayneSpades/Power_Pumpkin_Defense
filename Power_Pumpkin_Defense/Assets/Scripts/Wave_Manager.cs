@@ -14,6 +14,7 @@ public class Wave_Manager : MonoBehaviour
 
         Num_Enemy_SpawnTypes_Done = 0;
 
+        Lane_Mngr = GameObject.Find("Lane_Manager");
         Monster_Mngr = GameObject.Find("Monster_Manager");
 
         Great_Pumpkin_Alive = true;
@@ -83,13 +84,15 @@ public class Wave_Manager : MonoBehaviour
         }
     }
 
+    // Called when game over
     public void Clean_Up_Wave()
     {
         // This call is necessary to stop the spawners
         StopAllCoroutines();
 
-        // Tell Monster manager to clean up active monsters
+        // Tell Monster manager and lane manager to clean up active monsters / plants
         Monster_Mngr.GetComponent<Monster_Manager>().All_Cleanup();
+        Lane_Mngr.GetComponent<Lane_Manager>().All_Cleanup();
 
         // Call Game Controller - Game over
 
@@ -132,6 +135,7 @@ public class Wave_Manager : MonoBehaviour
     }
 
     private GameObject Monster_Mngr;
+    private GameObject Lane_Mngr;
 
     public List<GameObject> Wave_Data_List;
 

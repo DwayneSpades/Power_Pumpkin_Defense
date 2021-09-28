@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2638506660399621504}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.18767513, y: 2.376, z: -6.594}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -112,3 +112,4 @@ MonoBehaviour:
     type: 3}
   PunchCactus: {fileID: 5880386846402516068, guid: 2e7f562585762134b8da83b1b0e6b4c4,
     type: 3}
+  Lane_Num: 0

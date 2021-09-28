@@ -2,24 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hexer : MonoBehaviour
+public class Hexer : Monster_Base
 {
     // Start is called before the first frame update
     void Start()
     {
         CurrentPoint = 0;
-        Hexer_Speed_Current = Hexer_Speed;
-        Hexer_Damage_Current = Hexer_Damage;
-        Hexer_Health_Current = Hexer_Health;
-        Hexer_Attack_Cooldown_Current = Hexer_Attack_Cooldown;
+        Hexer_Speed_Current = Monster_Speed;
+        Hexer_Damage_Current = Monster_Damage;
+        Hexer_Health_Current = Monster_Health;
+        Hexer_Attack_Cooldown_Current = Monster_Attack_Cooldown;
 
         CanAttack = true;
 
-        LnMngr = GameObject.Find("Lane_Manager");
+        Lane_Mngr = GameObject.Find("Lane_Manager");
         Monster_Mngr = GameObject.Find("Monster_Manager");
         Plant_Mngr = GameObject.Find("Plant_Manager");
         Resource_Mngr = GameObject.Find("Resource_Manager");
-        Path = LnMngr.GetComponent<Lane_Manager>().GetPath(transform.position);
+
+        Path = Lane_Mngr.GetComponent<Lane_Manager>().GetPath(this.gameObject, transform.position);
 
         //Debug.Log("Path size: " + Path.Count);
 
@@ -33,17 +34,7 @@ public class Hexer : MonoBehaviour
         if (CurrentPoint < Path.Count)
         {
             transform.position += ToVector * Hexer_Speed_Current * Time.deltaTime;
-
-            //Debug.Log("Current point: " + CurrentPoint);
         }
-
-        //if (Hexer_Health_Current < 1)
-        //{
-        //    Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject);
-        //    Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveHexer(this.gameObject);
-        //    Destroy(this.gameObject);
-        //}
-
     }
 
     void UpdateTargetPos()
@@ -57,12 +48,6 @@ public class Hexer : MonoBehaviour
         if (other.tag == "Lane_Obj")
         {
             CurrentPoint++;
-
-            if (CurrentPoint >= Path.Count)
-            {
-                CurrentPoint = 0;
-            }
-
             UpdateTargetPos();
         }
 
@@ -72,7 +57,7 @@ public class Hexer : MonoBehaviour
 
             //Debug.Log("Polter Reached Great Pumpkin");
             other.gameObject.GetComponent<Great_Pumpkin>().TakeDamage(Hexer_Damage_Current);
-            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject);
+            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject, Lane_Num);
             Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveHexer(this.gameObject);
 
             Destroy(this.gameObject);
@@ -80,38 +65,25 @@ public class Hexer : MonoBehaviour
 
         if (CanAttack)
         {
-            if (other.tag == "Punch_Cactus")
+            if (other.tag == "Plant")
             {
                 CanAttack = false;
 
                 //Debug.Log("Hexer Attacked Punch Cactus");
-                other.gameObject.GetComponent<Punch_Cactus>().Punch_Cactus_TakeDamage(Hexer_Damage_Current);
-
-                StartCoroutine(Attack_Cooldown());
-            }
-            else if (other.tag == "Fire_Flower")
-            {
-                CanAttack = false;
-
-                //Debug.Log("Hexer Attacked Fire Flower");
-                other.gameObject.GetComponent<Fire_Flower>().Fire_Flower_TakeDamage(Hexer_Damage_Current);
-
-                StartCoroutine(Attack_Cooldown());
-            }
-            else if (other.tag == "Shriek_Root")
-            {
-                CanAttack = false;
-
-                //Debug.Log("Hexer Attacked Shriek Root");
-                other.gameObject.GetComponent<Shriek_Root>().Shriek_Root_TakeDamage(Hexer_Damage_Current);
+                other.gameObject.GetComponent<Plant_Base>().TakeDamage(Hexer_Damage_Current);
 
                 StartCoroutine(Attack_Cooldown());
             }
         }
-
     }
 
-    public void Hexer_TakeDamage(float d)
+    public override void Assign_Lane_Number(int L_num)
+    {
+        Lane_Num = L_num;
+        Lane_Mngr.GetComponent<Lane_Manager>().Add_Monster_To_Lane(this.gameObject, Lane_Num);
+    }
+
+    public override void TakeDamage(float d)
     {
         Hexer_Health_Current -= d;
 
@@ -121,11 +93,31 @@ public class Hexer : MonoBehaviour
 
             Resource_Mngr.GetComponent<Resource_Manager>().Spawn_Mana_Sphere(transform, ManaSphere);
 
-            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject);
+            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject, Lane_Num);
             Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveHexer(this.gameObject);
 
             Destroy(this.gameObject);
         }
+    }
+
+    public override void GainHealth(float h)
+    {
+        Hexer_Health_Current += h;
+    }
+
+    public override void Modify_AttackSpeed(float modifier, float time)
+    {
+        StartCoroutine(Temp_Change_AttackSpeed(modifier, time));
+    }
+
+    public override void Modify_MoveSpeed(float modifier, float time)
+    {
+        StartCoroutine(Temp_Change_MoveSpeed(modifier, time));
+    }
+
+    public override void Modify_DamageDone(float modifier, float time)
+    {
+        StartCoroutine(Temp_Change_DamageDone(modifier, time));
     }
 
     IEnumerator Attack_Cooldown()
@@ -135,33 +127,52 @@ public class Hexer : MonoBehaviour
         CanAttack = true;
     }
 
+    IEnumerator Temp_Change_AttackSpeed(float modifier, float time)
+    {
+        Debug.Log("Ghast current attack cd: " + Hexer_Attack_Cooldown_Current);
+
+        Hexer_Attack_Cooldown_Current *= modifier;
+        Debug.Log("Temporary Ghast current attack cd: " + Hexer_Attack_Cooldown_Current);
+
+        yield return new WaitForSeconds(time);
+
+        Hexer_Attack_Cooldown_Current = Monster_Attack_Cooldown;
+        Debug.Log("Effect done - Ghast current attack cd: " + Hexer_Attack_Cooldown_Current);
+    }
+
+    IEnumerator Temp_Change_MoveSpeed(float modifier, float time)
+    {
+        Hexer_Speed_Current *= modifier;
+
+        yield return new WaitForSeconds(time);
+
+        Hexer_Speed_Current = Monster_Speed;
+    }
+
+    IEnumerator Temp_Change_DamageDone(float modifier, float time)
+    {
+        Hexer_Damage_Current *= modifier;
+
+        yield return new WaitForSeconds(time);
+
+        Hexer_Damage_Current = Monster_Damage;
+    }
+
 
     // Internal Functionality stuff
-    private GameObject LnMngr;
+    private GameObject Lane_Mngr;
     private GameObject Monster_Mngr;
     private GameObject Plant_Mngr;
     private GameObject Resource_Mngr;
 
     public GameObject ManaSphere;
 
-    private Vector3 ToVector;
-    private Vector3 TargetPos;
-
-    private List<Transform> Path;
-    private int CurrentPoint;
-
     // Hexer variables
-    public float Hexer_Speed;
     private float Hexer_Speed_Current;
 
-    public float Hexer_Health;
     private float Hexer_Health_Current;
 
-    public float Hexer_Damage;
     private float Hexer_Damage_Current;
 
-    public float Hexer_Attack_Cooldown;
     private float Hexer_Attack_Cooldown_Current;
-
-    private bool CanAttack;
 }

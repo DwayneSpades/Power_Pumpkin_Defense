@@ -43,25 +43,11 @@ public class Resource_Manager : MonoBehaviour
     {
         if (m_Current_Water_Amount > 0)
         {
-            if (F.tag == "Punch_Cactus")
+            if (F.tag == "Plant")
             {
                 m_CanWater = false;
                 StartCoroutine(Watering_Cooldown());
-                F.gameObject.GetComponent<Punch_Cactus>().Water_Punch_Cactus(m_Water_To_Give_Plant);
-                Use_Water(m_Water_To_Give_Plant);
-            }
-            else if (F.tag == "Fire_Flower")
-            {
-                m_CanWater = false;
-                StartCoroutine(Watering_Cooldown());
-                F.gameObject.GetComponent<Fire_Flower>().Water_Fire_Flower(m_Water_To_Give_Plant);
-                Use_Water(m_Water_To_Give_Plant);
-            }
-            else if (F.tag == "Shriek_Root")
-            {
-                m_CanWater = false;
-                StartCoroutine(Watering_Cooldown());
-                F.gameObject.GetComponent<Shriek_Root>().Water_Shriek_Root(m_Water_To_Give_Plant);
+                F.gameObject.GetComponent<Plant_Base>().Water_Plant(m_Water_To_Give_Plant);
                 Use_Water(m_Water_To_Give_Plant);
             }
         }
@@ -162,23 +148,38 @@ public class Resource_Manager : MonoBehaviour
         }
     }
 
-    public int m_Starting_Water_Amount;
-    public int m_Max_Water_Amount;
+    public int Get_Punch_Cactus_Mana_Cost()
+    {
+        return m_Mana_Cost_PunchCactus;
+    }
+
+    public int Get_Fire_Flower_Mana_Cost()
+    {
+        return m_Mana_Cost_FireFlower;
+    }
+
+    public int Get_Shriek_Root_Mana_Cost()
+    {
+        return m_Mana_Cost_ShriekRoot;
+    }
+
+    [SerializeField] private int m_Starting_Water_Amount;
+    [SerializeField] private int m_Max_Water_Amount;
     private int m_Current_Water_Amount;
 
-    public int m_Starting_Mana_Amount;
-    public int m_Max_Mana_Amount;
+    [SerializeField] private int m_Starting_Mana_Amount;
+    [SerializeField] private int m_Max_Mana_Amount;
     private int m_Current_Mana_Amount;
 
     // Generic number for water given to all plants
-    public int m_Water_To_Give_Plant;
+    [SerializeField] private int m_Water_To_Give_Plant;
 
-    public float m_Water_Cooldown_Time;
+    [SerializeField] private float m_Water_Cooldown_Time;
     private bool m_CanWater;
 
-    public int m_Mana_Cost_PunchCactus;
-    public int m_Mana_Cost_FireFlower;
-    public int m_Mana_Cost_ShriekRoot;
+    [SerializeField] private int m_Mana_Cost_PunchCactus;
+    [SerializeField] private int m_Mana_Cost_FireFlower;
+    [SerializeField] private int m_Mana_Cost_ShriekRoot;
 
     private bool m_CanPlant_PunchCactus;
     private bool m_CanPlant_FireFlower;

@@ -30,52 +30,24 @@ public class Monster_Manager : MonoBehaviour
     {
         StopAllCoroutines();
 
-        Ghast_Cleanup();
-        Polter_Cleanup();
-        Hexer_Cleanup();
-    }
-
-    public void Ghast_Cleanup()
-    {
-        GameObject[] Monsters;
-
-        // Ghast Clean up
-        Monsters = GameObject.FindGameObjectsWithTag("Ghast");
-
-        foreach (GameObject M in Monsters)
+        foreach (GameObject M in Active_Ghasts)
         {
             Remove_ActiveGhast(M);
-            Remove_ActiveMonster(M);
-            Destroy(M);
         }
-    }
 
-    public void Polter_Cleanup()
-    {
-        GameObject[] Monsters;
-
-        // Polter Clean up
-        Monsters = GameObject.FindGameObjectsWithTag("Polter");
-
-        foreach (GameObject M in Monsters)
+        foreach (GameObject M in Active_Polters)
         {
             Remove_ActivePolter(M);
-            Remove_ActiveMonster(M);
-            Destroy(M);
         }
-    }
 
-    public void Hexer_Cleanup()
-    {
-        GameObject[] Monsters;
-
-        // Hexer Clean up
-        Monsters = GameObject.FindGameObjectsWithTag("Hexer");
-
-        foreach (GameObject M in Monsters)
+        foreach (GameObject M in Active_Hexers)
         {
             Remove_ActiveHexer(M);
-            Remove_ActiveMonster(M);
+        }
+
+        foreach (GameObject M in Active_Monsters)
+        {
+            Active_Monsters.Remove(M);
             Destroy(M);
         }
     }
@@ -96,9 +68,31 @@ public class Monster_Manager : MonoBehaviour
         return ans;
     }
 
-    public void Remove_ActiveMonster(GameObject M)
+    // Get monster list functions
+    public List<GameObject> Get_Active_Monsters()
+    {
+        return Active_Monsters;
+    }
+
+    public List<GameObject> Get_Active_Ghasts()
+    {
+        return Active_Ghasts;
+    }
+
+    public List<GameObject> Get_Active_Polters()
+    {
+        return Active_Polters;
+    }
+
+    public List<GameObject> Get_Active_Hexers()
+    {
+        return Active_Hexers;
+    }
+
+    public void Remove_ActiveMonster(GameObject M, int Lane_Num)
     {
         Active_Monsters.Remove(M);
+        Lane_Mngr.GetComponent<Lane_Manager>().Remove_Monster_In_Lane(M, Lane_Num);
     }
 
     public void Remove_ActiveGhast(GameObject M)
@@ -145,7 +139,7 @@ public class Monster_Manager : MonoBehaviour
             GameObject M;
 
             // Get starting position from lane manager
-            Transform start_pos = Lane_Mngr.GetComponent<Lane_Manager>().Get_Lane_Pos(Available_Lanes);
+            Transform start_pos = Lane_Mngr.GetComponent<Lane_Manager>().Get_Lane_Start_Pos(Available_Lanes);
 
             M = Instantiate(Ghast, start_pos.position, start_pos.rotation);
             Active_Monsters.Add(M);
@@ -173,7 +167,7 @@ public class Monster_Manager : MonoBehaviour
             GameObject M;
 
             // Get starting position from lane manager
-            Transform start_pos = Lane_Mngr.GetComponent<Lane_Manager>().Get_Lane_Pos(Available_Lanes);
+            Transform start_pos = Lane_Mngr.GetComponent<Lane_Manager>().Get_Lane_Start_Pos(Available_Lanes);
 
             M = Instantiate(Polter, start_pos.position, start_pos.rotation);
             Active_Monsters.Add(M);
@@ -201,7 +195,7 @@ public class Monster_Manager : MonoBehaviour
             GameObject M;
 
             // Get starting position from lane manager
-            Transform start_pos = Lane_Mngr.GetComponent<Lane_Manager>().Get_Lane_Pos(Available_Lanes);
+            Transform start_pos = Lane_Mngr.GetComponent<Lane_Manager>().Get_Lane_Start_Pos(Available_Lanes);
 
             M = Instantiate(Hexer, start_pos.position, start_pos.rotation);
             Active_Monsters.Add(M);
@@ -235,4 +229,6 @@ public class Monster_Manager : MonoBehaviour
     public GameObject Ghast;
     public GameObject Polter;
     public GameObject Hexer;
+
+    public GameObject BloodWitch;
 }

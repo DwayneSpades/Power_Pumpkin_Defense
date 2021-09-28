@@ -8,6 +8,7 @@ public class Character_Controller : MonoBehaviour
     void Start()
     {
         Resource_Mngr = GameObject.Find("Resource_Manager");
+        Spell_Mngr = GameObject.Find("Spell_Manager");
 
         isFlowerNear = false;
 
@@ -35,7 +36,7 @@ public class Character_Controller : MonoBehaviour
 
         transform.position += Move_Dir * Move_Speed * Time.deltaTime;
 
-
+        // Watering
         if (Input.GetKey(KeyCode.Z) )
         {
             if (isFlowerNear && Nearby_Flower && Resource_Mngr.GetComponent<Resource_Manager>().Can_Water()) // Can take out nearby_flower check, prob dont need but will leave it for now
@@ -45,21 +46,23 @@ public class Character_Controller : MonoBehaviour
                 Resource_Mngr.GetComponent<Resource_Manager>().Water_Flower(Nearby_Flower);
             }
         }
+
+        // Cycle through available spells
+        if (Input.GetKey(KeyCode.C))
+        {
+            Spell_Mngr.GetComponent<Spell_Manager>().Cycle_Spell();
+        }
+
+        // Use selected spell
+        if (Input.GetKey(KeyCode.X))
+        {
+            Spell_Mngr.GetComponent<Spell_Manager>().Use_Selected_Spell();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Punch_Cactus")
-        {
-            isFlowerNear = true;
-            Nearby_Flower = other.gameObject;
-        }
-        else if (other.tag == "Fire_Flower")
-        {
-            isFlowerNear = true;
-            Nearby_Flower = other.gameObject;
-        }
-        else if (other.tag == "Shriek_Root")
+        if (other.tag == "Plant")
         {
             isFlowerNear = true;
             Nearby_Flower = other.gameObject;
@@ -68,17 +71,7 @@ public class Character_Controller : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Punch_Cactus")
-        {
-            isFlowerNear = false;
-            Nearby_Flower = null;
-        }
-        else if (other.tag == "Fire_Flower")
-        {
-            isFlowerNear = false;
-            Nearby_Flower = null;
-        }
-        else if (other.tag == "Shriek_Root")
+        if (other.tag == "Plant")
         {
             isFlowerNear = false;
             Nearby_Flower = null;
@@ -89,6 +82,7 @@ public class Character_Controller : MonoBehaviour
     public GameObject model;
 
     private GameObject Resource_Mngr;
+    private GameObject Spell_Mngr;
 
     public float Move_Speed;
     private float Current_Move_Speed;

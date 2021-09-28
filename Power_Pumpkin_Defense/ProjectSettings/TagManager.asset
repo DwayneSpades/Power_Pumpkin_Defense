@@ -12,12 +12,13 @@ TagManager:
   - Ghast
   - Polter
   - Hexer
-  - Hexer_Lane_Obj
   - Punch_Cactus
   - Fire_Flower
   - Shriek_Root
   - Plant_Pot
   - Mana_Sphere
+  - Monster
+  - Plant
   layers:
   - Default
   - TransparentFX

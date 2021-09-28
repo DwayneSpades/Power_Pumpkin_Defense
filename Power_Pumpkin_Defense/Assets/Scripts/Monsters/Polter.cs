@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Polter : MonoBehaviour
+public class Polter : Monster_Base
 {
     // Start is called before the first frame update
     void Start()
     {
         CurrentPoint = 0;
-        Polter_Speed_Current = Polter_Speed;
-        Polter_Damage_Current = Polter_Damage;
-        Polter_Health_Current = Polter_Health;
-        Polter_Attack_Cooldown_Current = Polter_Attack_Cooldown;
+        Polter_Speed_Current = Monster_Speed;
+        Polter_Damage_Current = Monster_Damage;
+        Polter_Health_Current = Monster_Health;
+        Polter_Attack_Cooldown_Current = Monster_Attack_Cooldown;
 
         CanAttack = true;
 
-        LnMngr = GameObject.Find("Lane_Manager");
+        Lane_Mngr = GameObject.Find("Lane_Manager");
         Monster_Mngr = GameObject.Find("Monster_Manager");
         Resource_Mngr = GameObject.Find("Resource_Manager");
-        Path = LnMngr.GetComponent<Lane_Manager>().GetPath(transform.position);
+
+        Path = Lane_Mngr.GetComponent<Lane_Manager>().GetPath(this.gameObject, transform.position);
 
         //Debug.Log("Path size: " + Path.Count);
 
@@ -58,7 +59,7 @@ public class Polter : MonoBehaviour
 
             //Debug.Log("Polter Reached Great Pumpkin");
             other.gameObject.GetComponent<Great_Pumpkin>().TakeDamage(Polter_Damage_Current);
-            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject);
+            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject, Lane_Num);
             Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActivePolter(this.gameObject);
 
             Destroy(this.gameObject);
@@ -66,37 +67,25 @@ public class Polter : MonoBehaviour
 
         if (CanAttack)
         {
-            if (other.tag == "Punch_Cactus")
+            if (other.tag == "Plant")
             {
                 CanAttack = false;
 
                 //Debug.Log("Polter Attacked Punch Cactus");
-                other.gameObject.GetComponent<Punch_Cactus>().Punch_Cactus_TakeDamage(Polter_Damage_Current);
-
-                StartCoroutine(Attack_Cooldown());
-            }
-            else if (other.tag == "Fire_Flower")
-            {
-                CanAttack = false;
-
-                //Debug.Log("Polter Attacked Fire Flower");
-                other.gameObject.GetComponent<Fire_Flower>().Fire_Flower_TakeDamage(Polter_Damage_Current);
-
-                StartCoroutine(Attack_Cooldown());
-            }
-            else if (other.tag == "Shriek_Root")
-            {
-                CanAttack = false;
-
-                //Debug.Log("Polter Attacked Shriek Root");
-                other.gameObject.GetComponent<Shriek_Root>().Shriek_Root_TakeDamage(Polter_Damage_Current);
+                other.gameObject.GetComponent<Plant_Base>().TakeDamage(Polter_Damage_Current);
 
                 StartCoroutine(Attack_Cooldown());
             }
         }
     }
 
-    public void Polter_TakeDamage(float d)
+    public override void Assign_Lane_Number(int L_num)
+    {
+        Lane_Num = L_num;
+        Lane_Mngr.GetComponent<Lane_Manager>().Add_Monster_To_Lane(this.gameObject, Lane_Num);
+    }
+
+    public override void TakeDamage(float d)
     {
         Polter_Health_Current -= d;
 
@@ -106,11 +95,31 @@ public class Polter : MonoBehaviour
 
             Resource_Mngr.GetComponent<Resource_Manager>().Spawn_Mana_Sphere(transform, ManaSphere);
 
-            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject);
+            Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActiveMonster(this.gameObject, Lane_Num);
             Monster_Mngr.gameObject.GetComponent<Monster_Manager>().Remove_ActivePolter(this.gameObject);
 
             Destroy(this.gameObject);
         }
+    }
+
+    public override void GainHealth(float h)
+    {
+        Polter_Health_Current += h;
+    }
+
+    public override void Modify_AttackSpeed(float modifier, float time)
+    {
+        StartCoroutine(Temp_Change_AttackSpeed(modifier, time));
+    }
+
+    public override void Modify_MoveSpeed(float modifier, float time)
+    {
+        StartCoroutine(Temp_Change_MoveSpeed(modifier, time));
+    }
+
+    public override void Modify_DamageDone(float modifier, float time)
+    {
+        StartCoroutine(Temp_Change_DamageDone(modifier, time));
     }
 
     IEnumerator Attack_Cooldown()
@@ -120,31 +129,50 @@ public class Polter : MonoBehaviour
         CanAttack = true;
     }
 
+    IEnumerator Temp_Change_AttackSpeed(float modifier, float time)
+    {
+        Debug.Log("Ghast current attack cd: " + Polter_Attack_Cooldown_Current);
+
+        Polter_Attack_Cooldown_Current *= modifier;
+        Debug.Log("Temporary Ghast current attack cd: " + Polter_Attack_Cooldown_Current);
+
+        yield return new WaitForSeconds(time);
+
+        Polter_Attack_Cooldown_Current = Monster_Attack_Cooldown;
+        Debug.Log("Effect done - Ghast current attack cd: " + Polter_Attack_Cooldown_Current);
+    }
+
+    IEnumerator Temp_Change_MoveSpeed(float modifier, float time)
+    {
+        Polter_Speed_Current *= modifier;
+
+        yield return new WaitForSeconds(time);
+
+        Polter_Speed_Current = Monster_Speed;
+    }
+
+    IEnumerator Temp_Change_DamageDone(float modifier, float time)
+    {
+        Polter_Damage_Current *= modifier;
+
+        yield return new WaitForSeconds(time);
+
+        Polter_Damage_Current = Monster_Damage;
+    }
+
     // Internal Functionality stuff
-    private GameObject LnMngr;
+    private GameObject Lane_Mngr;
     private GameObject Monster_Mngr;
     private GameObject Resource_Mngr;
 
     public GameObject ManaSphere;
 
-    private Vector3 ToVector;
-    private Vector3 TargetPos;
-
-    private List<Transform> Path;
-    private int CurrentPoint;
-
     // Polter variables
-    public float Polter_Speed;
     private float Polter_Speed_Current;
 
-    public float Polter_Health;
     private float Polter_Health_Current;
 
-    public float Polter_Damage;
     private float Polter_Damage_Current;
 
-    public float Polter_Attack_Cooldown;
     private float Polter_Attack_Cooldown_Current;
-
-    private bool CanAttack;
 }

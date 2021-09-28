@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Punch_Cactus : MonoBehaviour
+public class Punch_Cactus : Plant_Base
 {
     // Start is called before the first frame update
     void Start()
@@ -11,9 +11,9 @@ public class Punch_Cactus : MonoBehaviour
 
         CanAttack = true;
         Water_Level = 0;
-        Punch_Cactus_Health_Current = Punch_Cactus_Health;
-        Punch_Cactus_Damage_Current = Punch_Cactus_Damage;
-        Punch_Cactus_Attack_Cooldown_Current = Punch_Cactus_Attack_Cooldown;
+        Punch_Cactus_Health_Current = Plant_Health;
+        Punch_Cactus_Damage_Current = Plant_Damage;
+        Punch_Cactus_Attack_Cooldown_Current = Plant_Attack_Cooldown;
     }
 
     // Update is called once per frame
@@ -22,7 +22,7 @@ public class Punch_Cactus : MonoBehaviour
         
     }
 
-    public void Water_Punch_Cactus(int Water_Amount)
+    public override void Water_Plant(int Water_Amount)
     {
         Debug.Log("Gave water to punch cactus: " + Water_Amount);
         Water_Level += Water_Amount;
@@ -35,17 +35,17 @@ public class Punch_Cactus : MonoBehaviour
 
                 // Instantiate the next level plant
                 GameObject P;
-                P = Instantiate(Punch_Cactus_Next_Lvl, transform.position, transform.rotation);
+                P = Instantiate(Plant_Next_Lvl, transform.position, transform.rotation);
 
                 // Set new plants plant pot - pass this one's plant pot gameobject
-                P.gameObject.GetComponent<Punch_Cactus>().Assign_Plant_Pot(My_Plant_Pot);
-                Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePlant(P);
+                P.gameObject.GetComponent<Plant_Base>().Assign_Plant_Pot(My_Plant_Pot);
+                Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePlant(P, Lane_Num);
                 Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePunchCactus(P);
 
                 Debug.Log("Punch Cactus upgraded to level " + (Flower_Level + 1));
 
                 // Delete this plant
-                Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject);
+                Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject, Lane_Num);
                 Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePunchCactus(this.gameObject);
 
                 Destroy(this.gameObject);
@@ -57,46 +57,23 @@ public class Punch_Cactus : MonoBehaviour
         }
     }
 
-    public void Assign_Plant_Pot(GameObject P)
-    {
-        My_Plant_Pot = P;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (CanAttack)
         {
-            if (other.tag == "Ghast")
+            if (other.tag == "Monster")
             {
                 CanAttack = false;
 
                 //Debug.Log("Punch Cactus Attacked Ghast");
-                other.gameObject.GetComponent<Ghast>().Ghast_TakeDamage(Punch_Cactus_Damage_Current);
-
-                StartCoroutine(Attack_Cooldown());
-            }
-            else if (other.tag == "Polter")
-            {
-                CanAttack = false;
-
-                //Debug.Log("Punch Cactus Attacked Polter");
-                other.gameObject.GetComponent<Polter>().Polter_TakeDamage(Punch_Cactus_Damage_Current);
-
-                StartCoroutine(Attack_Cooldown());
-            }
-            else if (other.tag == "Hexer")
-            {
-                CanAttack = false;
-
-                //Debug.Log("Punch Cactus Attacked Hexer");
-                other.gameObject.GetComponent<Hexer>().Hexer_TakeDamage(Punch_Cactus_Damage_Current);
+                other.gameObject.GetComponent<Monster_Base>().TakeDamage(Punch_Cactus_Damage_Current);
 
                 StartCoroutine(Attack_Cooldown());
             }
         }
     }
 
-    public void Punch_Cactus_TakeDamage(float d)
+    public override void TakeDamage(float d)
     {
         Punch_Cactus_Health_Current -= d;
 
@@ -105,7 +82,7 @@ public class Punch_Cactus : MonoBehaviour
             StopAllCoroutines();
 
             My_Plant_Pot.GetComponent<Plant_Pot>().UpdatePlantStatus_Dead();
-            Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject);
+            Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject, Lane_Num);
             Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePunchCactus(this.gameObject);
 
             Destroy(this.gameObject);
@@ -121,25 +98,8 @@ public class Punch_Cactus : MonoBehaviour
 
     private GameObject Plant_Mngr;
 
-    public GameObject Punch_Cactus_Next_Lvl;
-
-    private GameObject My_Plant_Pot;
-
     // Punch Cactus variables
-    public float Punch_Cactus_Health;
     private float Punch_Cactus_Health_Current;
-
-    public float Punch_Cactus_Damage;
     private float Punch_Cactus_Damage_Current;
-
-    public float Punch_Cactus_Attack_Cooldown;
     private float Punch_Cactus_Attack_Cooldown_Current;
-
-    private bool CanAttack;
-
-    private int Water_Level;
-
-    public int Water_To_Upgrade_Level;
-    public bool isMaxLevel;
-    public int Flower_Level;
 }

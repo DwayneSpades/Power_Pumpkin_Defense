@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1193146989351146004}
   m_Layer: 0
   m_Name: Polter
-  m_TagString: Polter
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,12 +124,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306e21f25c994344cbfb197bb7a4c95e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Monster_Speed: 0.25
+  Monster_Health: 1
+  Monster_Damage: 2
+  Monster_Attack_Cooldown: 1
   ManaSphere: {fileID: 7804931546375534357, guid: b5eed36797d88e44db881506b362c629,
     type: 3}
-  Polter_Speed: 0.25
-  Polter_Health: 1
-  Polter_Damage: 2
-  Polter_Attack_Cooldown: 1
 --- !u!1001 &5714588355663010800
 PrefabInstance:
   m_ObjectHideFlags: 0

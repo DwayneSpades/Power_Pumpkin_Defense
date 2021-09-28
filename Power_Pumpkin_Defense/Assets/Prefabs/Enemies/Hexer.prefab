@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3872302697952971368}
   m_Layer: 0
   m_Name: Hexer
-  m_TagString: Hexer
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,12 +124,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b3291531817844e9b543cc4e48c32f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Monster_Speed: 0.5
+  Monster_Health: 1
+  Monster_Damage: 1
+  Monster_Attack_Cooldown: 1
   ManaSphere: {fileID: 7804931546375534357, guid: eeb62bcef6d1b6a4da3dfb62b4d5953c,
     type: 3}
-  Hexer_Speed: 0.5
-  Hexer_Health: 1
-  Hexer_Damage: 1
-  Hexer_Attack_Cooldown: 1
 --- !u!1001 &5825897273567058625
 PrefabInstance:
   m_ObjectHideFlags: 0

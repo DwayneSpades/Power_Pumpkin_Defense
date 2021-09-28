@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fire_Flower : MonoBehaviour
+public class Fire_Flower : Plant_Base
 {
     // Start is called before the first frame update
     void Start()
@@ -11,9 +11,9 @@ public class Fire_Flower : MonoBehaviour
 
         CanAttack = true;
         Water_Level = 0;
-        Fire_Flower_Health_Current = Fire_Flower_Health;
-        Fire_Flower_Damage_Current = Fire_Flower_Damage;
-        Fire_Flower_Attack_Cooldown_Current = Fire_Flower_Attack_Cooldown;
+        Fire_Flower_Health_Current = Plant_Health;
+        Fire_Flower_Damage_Current = Plant_Damage;
+        Fire_Flower_Attack_Cooldown_Current = Plant_Attack_Cooldown;
     }
 
     // Update is called once per frame
@@ -22,7 +22,7 @@ public class Fire_Flower : MonoBehaviour
         
     }
 
-    public void Water_Fire_Flower(int Water_Amount)
+    public override void Water_Plant(int Water_Amount)
     {
         Debug.Log("Gave water to fire flower: " + Water_Amount);
         Water_Level += Water_Amount;
@@ -35,17 +35,17 @@ public class Fire_Flower : MonoBehaviour
 
                 // Instantiate the next level plant
                 GameObject P;
-                P = Instantiate(Fire_Flower_Next_Lvl, transform.position, transform.rotation);
+                P = Instantiate(Plant_Next_Lvl, transform.position, transform.rotation);
 
                 // Set new plants plant pot - pass this one's plant pot gameobject
-                P.gameObject.GetComponent<Fire_Flower>().Assign_Plant_Pot(My_Plant_Pot);
-                Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePlant(P);
+                P.gameObject.GetComponent<Plant_Base>().Assign_Plant_Pot(My_Plant_Pot);
+                Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePlant(P, Lane_Num);
                 Plant_Mngr.GetComponent<Plant_Manager>().Add_ActiveFireFlower(P);
 
                 Debug.Log("Fire flower upgraded to level " + (Flower_Level + 1));
 
                 // Delete this plant
-                Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject);
+                Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject, Lane_Num);
                 Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActiveFireFlower(this.gameObject);
 
                 Destroy(this.gameObject);
@@ -58,46 +58,23 @@ public class Fire_Flower : MonoBehaviour
   
     }
 
-    public void Assign_Plant_Pot(GameObject P)
-    {
-        My_Plant_Pot = P;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (CanAttack)
         {
-            if (other.tag == "Ghast")
+            if (other.tag == "Monster")
             {
                 CanAttack = false;
 
                 //Debug.Log("Fire Flower Attacked Ghast");
-                other.gameObject.GetComponent<Ghast>().Ghast_TakeDamage(Fire_Flower_Damage_Current);
-
-                StartCoroutine(Attack_Cooldown());
-            }
-            else if (other.tag == "Polter")
-            {
-                CanAttack = false;
-
-                //Debug.Log("Fire Flower Attacked Polter");
-                other.gameObject.GetComponent<Polter>().Polter_TakeDamage(Fire_Flower_Damage_Current);
-
-                StartCoroutine(Attack_Cooldown());
-            }
-            else if (other.tag == "Hexer")
-            {
-                CanAttack = false;
-
-                //Debug.Log("Fire Flower Attacked Hexer");
-                other.gameObject.GetComponent<Hexer>().Hexer_TakeDamage(Fire_Flower_Damage_Current);
+                other.gameObject.GetComponent<Monster_Base>().TakeDamage(Fire_Flower_Damage_Current);
 
                 StartCoroutine(Attack_Cooldown());
             }
         }
     }
 
-    public void Fire_Flower_TakeDamage(float d)
+    public override void TakeDamage(float d)
     {
         Fire_Flower_Health_Current -= d;
 
@@ -106,7 +83,7 @@ public class Fire_Flower : MonoBehaviour
             StopAllCoroutines();
 
             My_Plant_Pot.GetComponent<Plant_Pot>().UpdatePlantStatus_Dead();
-            Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject);
+            Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject, Lane_Num);
             Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActiveFireFlower(this.gameObject);
 
             Destroy(this.gameObject);
@@ -122,25 +99,8 @@ public class Fire_Flower : MonoBehaviour
 
     private GameObject Plant_Mngr;
 
-    public GameObject Fire_Flower_Next_Lvl;
-
-    private GameObject My_Plant_Pot;
-
-    // Punch Cactus variables
-    public float Fire_Flower_Health;
+    // Plant variables
     private float Fire_Flower_Health_Current;
-
-    public float Fire_Flower_Damage;
     private float Fire_Flower_Damage_Current;
-
-    public float Fire_Flower_Attack_Cooldown;
     private float Fire_Flower_Attack_Cooldown_Current;
-
-    private bool CanAttack;
-
-    private int Water_Level;
-
-    public int Water_To_Upgrade_Level;
-    public bool isMaxLevel;
-    public int Flower_Level;
 }

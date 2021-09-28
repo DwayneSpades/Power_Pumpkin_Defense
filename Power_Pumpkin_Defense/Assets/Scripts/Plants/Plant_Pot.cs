@@ -71,13 +71,14 @@ public class Plant_Pot : MonoBehaviour
         tmp.x -= 0.35f;
         GameObject P = Instantiate(PunchCactus, tmp, transform.rotation);
 
-        Resource_Mngr.GetComponent<Resource_Manager>().UseMana(Resource_Mngr.GetComponent<Resource_Manager>().m_Mana_Cost_PunchCactus);
+        Resource_Mngr.GetComponent<Resource_Manager>().UseMana(Resource_Mngr.GetComponent<Resource_Manager>().Get_Punch_Cactus_Mana_Cost());
 
         Current_Active_Plant = P;
-        P.GetComponent<Punch_Cactus>().Assign_Plant_Pot(this.gameObject);
+        P.GetComponent<Plant_Base>().Assign_Plant_Pot(this.gameObject);
+        P.GetComponent<Plant_Base>().Assign_Lane(Lane_Num);
 
         // Tell plant manager
-        Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePlant(P);
+        Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePlant(P, Lane_Num);
         Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePunchCactus(P);
     }
 
@@ -92,13 +93,14 @@ public class Plant_Pot : MonoBehaviour
         tmp.x -= 0.25f;
         GameObject P = Instantiate(ShriekRoot, tmp, transform.rotation);
 
-        Resource_Mngr.GetComponent<Resource_Manager>().UseMana(Resource_Mngr.GetComponent<Resource_Manager>().m_Mana_Cost_ShriekRoot);
+        Resource_Mngr.GetComponent<Resource_Manager>().UseMana(Resource_Mngr.GetComponent<Resource_Manager>().Get_Shriek_Root_Mana_Cost());
 
         Current_Active_Plant = P;
-        P.GetComponent<Shriek_Root>().Assign_Plant_Pot(this.gameObject);
+        P.GetComponent<Plant_Base>().Assign_Plant_Pot(this.gameObject);
+        P.GetComponent<Plant_Base>().Assign_Lane(Lane_Num);
 
         // Tell plant manager
-        Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePlant(P);
+        Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePlant(P, Lane_Num);
         Plant_Mngr.GetComponent<Plant_Manager>().Add_ActiveShriekRoot(P);
     }
 
@@ -113,13 +115,14 @@ public class Plant_Pot : MonoBehaviour
         tmp.x -= 0.1f;
         GameObject P = Instantiate(FireFlower, tmp, transform.rotation);
 
-        Resource_Mngr.GetComponent<Resource_Manager>().UseMana(Resource_Mngr.GetComponent<Resource_Manager>().m_Mana_Cost_FireFlower);
+        Resource_Mngr.GetComponent<Resource_Manager>().UseMana(Resource_Mngr.GetComponent<Resource_Manager>().Get_Fire_Flower_Mana_Cost());
 
         Current_Active_Plant = P;
-        P.GetComponent<Fire_Flower>().Assign_Plant_Pot(this.gameObject);
+        P.GetComponent<Plant_Base>().Assign_Plant_Pot(this.gameObject);
+        P.GetComponent<Plant_Base>().Assign_Lane(Lane_Num);
 
         // Tell plant manager
-        Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePlant(P);
+        Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePlant(P, Lane_Num);
         Plant_Mngr.GetComponent<Plant_Manager>().Add_ActiveFireFlower(P);
     }
 
@@ -142,12 +145,14 @@ public class Plant_Pot : MonoBehaviour
     private GameObject Plant_Mngr;
     private GameObject Resource_Mngr;
 
-    public GameObject FireFlower;
-    public GameObject ShriekRoot;
-    public GameObject PunchCactus;
+    [SerializeField] private GameObject FireFlower;
+    [SerializeField] private GameObject ShriekRoot;
+    [SerializeField] private GameObject PunchCactus;
 
     private GameObject Current_Active_Plant;
     private bool Active_Plant;
 
     private bool isPlayer_Near;
+
+    [SerializeField] private int Lane_Num;
 }

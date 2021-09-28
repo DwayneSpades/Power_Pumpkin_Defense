@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7630030307683135557}
   m_Layer: 0
   m_Name: Shriek_Root_Level_5
-  m_TagString: Shriek_Root
+  m_TagString: Plant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,14 +94,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46debdbdeb63f3a47a771c3776368ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Shriek_Root_Next_Lvl: {fileID: 2525707053648864739, guid: 46ab3168410524c4383a9f43146d4925,
-    type: 3}
-  Shriek_Root_Health: 10
-  Shriek_Root_Damage: 2
-  Shriek_Root_Attack_Cooldown: 4
   Water_To_Upgrade_Level: 40
   isMaxLevel: 0
   Flower_Level: 2
+  Plant_Health: 12
+  Plant_Damage: 1
+  Plant_Attack_Cooldown: 2
+  Plant_Next_Lvl: {fileID: 2525707053648864739, guid: 46ab3168410524c4383a9f43146d4925,
+    type: 3}
+  My_Plant_Pot: {fileID: 0}
+  Shriek_Root_Attack_Slow_Modifier: 0.5
+  Shriek_Root_Attack_Slow_Duration: 3
 --- !u!135 &7630030307683135557
 SphereCollider:
   m_ObjectHideFlags: 0
