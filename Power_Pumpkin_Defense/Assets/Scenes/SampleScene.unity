@@ -573,7 +573,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -6897791941134747714, guid: b894bce67cd990b43b80ed705ba26a2b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b894bce67cd990b43b80ed705ba26a2b, type: 3}
 --- !u!1 &385779085 stripped
 GameObject:
@@ -1175,7 +1176,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spell_Manager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7002480419593810420, guid: 8a1231adbf1e17b4cb0ac4851f98376f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8a1231adbf1e17b4cb0ac4851f98376f, type: 3}
 --- !u!1 &631246545 stripped
 GameObject:
@@ -1197,7 +1199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Spell_List:
   - {fileID: 3343662358530295284, guid: 883d24ef256955a4f81226129dbdf810, type: 3}
-  Spell_Cooldown_Time: 0
+  Spell_Cooldown_Time: 5
 --- !u!1 &632721383
 GameObject:
   m_ObjectHideFlags: 0
@@ -4058,6 +4060,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 739161817135183785, guid: 89ce393614511354b87967638ac342a8,
         type: 3}
+      propertyPath: Available_Plant_List.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 739161817135183785, guid: 89ce393614511354b87967638ac342a8,
+        type: 3}
       propertyPath: FireFlower_Lvl1
       value: 
       objectReference: {fileID: 5521680506770235781, guid: 0ea80c2179d703249bd38595831b428b,
@@ -4177,6 +4184,24 @@ PrefabInstance:
       propertyPath: PlantPot_Positions.Array.data[8]
       value: 
       objectReference: {fileID: 530028892}
+    - target: {fileID: 739161817135183785, guid: 89ce393614511354b87967638ac342a8,
+        type: 3}
+      propertyPath: Available_Plant_List.Array.data[1]
+      value: 
+      objectReference: {fileID: 5521680506770235781, guid: 4d3c671b2a43f1c46bf7f7b82c68e4ab,
+        type: 3}
+    - target: {fileID: 739161817135183785, guid: 89ce393614511354b87967638ac342a8,
+        type: 3}
+      propertyPath: Available_Plant_List.Array.data[0]
+      value: 
+      objectReference: {fileID: 5880386846402516068, guid: 2e7f562585762134b8da83b1b0e6b4c4,
+        type: 3}
+    - target: {fileID: 739161817135183785, guid: 89ce393614511354b87967638ac342a8,
+        type: 3}
+      propertyPath: Available_Plant_List.Array.data[2]
+      value: 
+      objectReference: {fileID: 2525707053648864739, guid: 9f32a141795db4c478b6087a33e136ad,
+        type: 3}
     - target: {fileID: 1755438502287887219, guid: 89ce393614511354b87967638ac342a8,
         type: 3}
       propertyPath: m_Name

@@ -68,6 +68,30 @@ public class Monster_Manager : MonoBehaviour
         return ans;
     }
 
+    public List<GameObject> Get_Monster_List(GameObject M)
+    {
+        List<GameObject> Monster_List;
+
+        if (M.name == "Ghast")
+        {
+            Monster_List = Active_Ghasts;
+        }
+        else if (M.name == "Polter")
+        {
+            Monster_List = Active_Polters;
+        }
+        else if (M.name == "Hexer")
+        {
+            Monster_List = Active_Hexers;
+        }
+        else
+        {
+            Monster_List = null;
+        }
+
+        return Monster_List;
+    }
+
     // Get monster list functions
     public List<GameObject> Get_Active_Monsters()
     {

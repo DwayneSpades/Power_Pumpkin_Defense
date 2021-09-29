@@ -89,11 +89,124 @@ public class Punch_Cactus : Plant_Base
         }
     }
 
+    public override void GainHealth(float h)
+    {
+        Punch_Cactus_Health_Current += h;
+    }
+
+    public override void Modify_AttackSpeed(float modifier, float time)
+    {
+        if (!AttackSpeed_Modified)
+        {
+            AttackSpeed_Modified = true;
+            StartCoroutine(Temp_Change_AttackSpeed(modifier, time));
+        }
+        else
+        {
+            Debug.Log("Attack speed is currently modified - Punch Cactus");
+        }
+    }
+
+    public override void Modify_DamageDone(float modifier, float time)
+    {
+        if (!DamageDone_Modified)
+        {
+            DamageDone_Modified = true;
+            StartCoroutine(Temp_Change_DamageDone(modifier, time));
+        }
+        else
+        {
+            Debug.Log("Damage is currently modified - Punch Cactus");
+        }
+    }
+
+    public override void Take_DamageOverTime(float d, float time)
+    {
+        if (!DoT_Active)
+        {
+            DoT_Active = true;
+            StartCoroutine(Take_Damage_Over_Time(d, time));
+        }
+        else
+        {
+            Debug.Log("DoT is active - Punch Cactus");
+        }
+    }
+
+    public override void Gain_HealthOverTime(float h, float time)
+    {
+        if (!HoT_Active)
+        {
+            HoT_Active = true;
+            StartCoroutine(Gain_Health_Over_Time(h, time));
+        }
+        else
+        {
+            Debug.Log("HoT is active - Punch Cactus");
+        }
+    }
+
     IEnumerator Attack_Cooldown()
     {
         yield return new WaitForSeconds(Punch_Cactus_Attack_Cooldown_Current);
 
         CanAttack = true;
+    }
+
+    IEnumerator Temp_Change_AttackSpeed(float modifier, float time)
+    {
+        Debug.Log("Punch Cactus current attack cd: " + Punch_Cactus_Attack_Cooldown_Current);
+
+        Punch_Cactus_Attack_Cooldown_Current *= modifier;
+        Debug.Log("Temporary Punch Cactus current attack cd: " + Punch_Cactus_Attack_Cooldown_Current);
+
+        yield return new WaitForSeconds(time);
+
+        Punch_Cactus_Attack_Cooldown_Current = Plant_Attack_Cooldown;
+        Debug.Log("Effect done - Punch Cactus current attack cd: " + Punch_Cactus_Attack_Cooldown_Current);
+        AttackSpeed_Modified = false;
+    }
+
+    IEnumerator Temp_Change_DamageDone(float modifier, float time)
+    {
+        Punch_Cactus_Damage_Current *= modifier;
+
+        yield return new WaitForSeconds(time);
+
+        Punch_Cactus_Damage_Current = Plant_Damage;
+        DamageDone_Modified = false;
+    }
+
+    IEnumerator Take_Damage_Over_Time(float d, float time)
+    {
+        TakeDamage(d);
+
+        yield return new WaitForSeconds(1);
+
+        if (time - 1 > 0)
+        {
+            StartCoroutine(Take_Damage_Over_Time(d, time - 1));
+        }
+        else
+        {
+            DoT_Active = false;
+        }
+    }
+
+    IEnumerator Gain_Health_Over_Time(float h, float time)
+    {
+        GainHealth(h);
+
+        yield return new WaitForSeconds(1);
+
+        if (time - 1 > 0)
+        {
+            StartCoroutine(Gain_Health_Over_Time(h, time - 1));
+        }
+        else
+        {
+            HoT_Active = false;
+        }
     }
 
     private GameObject Plant_Mngr;

@@ -8,18 +8,14 @@ public class Plant_Manager : MonoBehaviour
     void Start()
     {
         Lane_Mngr = GameObject.Find("Lane_Manager");
+        CurrentPlant_Index = 0;
+        Current_Selected_Plant = Available_Plant_List[CurrentPlant_Index];
 
-        PlantPot_List = new List<GameObject>();
+        //PlantPot_List = new List<GameObject>();
         Active_Plants = new List<GameObject>();
         Active_PunchCacti = new List<GameObject>();
         Active_ShriekRoots = new List<GameObject>();
         Active_FireFlowers = new List<GameObject>();
-
-        //foreach (Transform t in PlantPot_Positions)
-        //{
-        //    GameObject Pot;
-        //    Pot = Instantiate(PlantPot, t.position, t.rotation);
-        //}
     }
 
     // Update is called once per frame
@@ -28,7 +24,52 @@ public class Plant_Manager : MonoBehaviour
         
     }
 
+    public void Cycle_Plant()
+    {
+        if (CurrentPlant_Index >= (Available_Plant_List.Count - 1))
+        {
+            CurrentPlant_Index = 0;
+        }
+        else
+        {
+            CurrentPlant_Index++;
+        }
+
+        Current_Selected_Plant = Available_Plant_List[CurrentPlant_Index];
+
+        Debug.Log("Plant Cycled - Current Selected Plant: " + Current_Selected_Plant.name);
+    }
+
+    public GameObject Get_Selected_Plant()
+    {
+        return Current_Selected_Plant;
+    }
+
     // Get list
+    public List<GameObject> Get_Plant_List(GameObject P)
+    {
+        List<GameObject> Plant_List;
+
+        if (P.name == "Punch_Cactus_L1")
+        {
+            Plant_List = Active_PunchCacti;
+        }
+        else if (P.name == "Fire_Flower_L1")
+        {
+            Plant_List = Active_FireFlowers;
+        }
+        else if (P.name == "Shriek_Root_Level_4")
+        {
+            Plant_List = Active_ShriekRoots;
+        }
+        else
+        {
+            Plant_List = null;
+        }
+
+        return Plant_List;
+    }
+
     public List<GameObject> Get_Active_Plants()
     {
         return Active_Plants;
@@ -95,12 +136,16 @@ public class Plant_Manager : MonoBehaviour
 
     private GameObject Lane_Mngr;
 
-    [SerializeField] private List<GameObject> PlantPot_List;
+    //[SerializeField] private List<GameObject> PlantPot_List;
 
     [SerializeField] private List<GameObject> Active_Plants;
     [SerializeField] private List<GameObject> Active_PunchCacti;
     [SerializeField] private List<GameObject> Active_ShriekRoots;
     [SerializeField] private List<GameObject> Active_FireFlowers;
 
-    public GameObject PlantPot;
+    private GameObject Current_Selected_Plant;
+    [SerializeField] private List<GameObject> Available_Plant_List;
+    private int CurrentPlant_Index;
+
+    [SerializeField] private GameObject PlantPot;
 }

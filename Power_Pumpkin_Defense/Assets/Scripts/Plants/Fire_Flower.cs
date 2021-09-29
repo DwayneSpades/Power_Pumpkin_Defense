@@ -67,6 +67,7 @@ public class Fire_Flower : Plant_Base
                 CanAttack = false;
 
                 //Debug.Log("Fire Flower Attacked Ghast");
+                other.gameObject.GetComponent<Monster_Base>().Take_DamageOverTime(Fire_Flower_DoT_DPS, Fire_Flower_DoT_Duration);
                 other.gameObject.GetComponent<Monster_Base>().TakeDamage(Fire_Flower_Damage_Current);
 
                 StartCoroutine(Attack_Cooldown());
@@ -90,11 +91,124 @@ public class Fire_Flower : Plant_Base
         }
     }
 
+    public override void GainHealth(float h)
+    {
+        Fire_Flower_Health_Current += h;
+    }
+
+    public override void Modify_AttackSpeed(float modifier, float time)
+    {
+        if (!AttackSpeed_Modified)
+        {
+            AttackSpeed_Modified = true;
+            StartCoroutine(Temp_Change_AttackSpeed(modifier, time));
+        }
+        else
+        {
+            Debug.Log("Attack speed is currently modified - Fire Flower");
+        }
+    }
+
+    public override void Modify_DamageDone(float modifier, float time)
+    {
+        if (!DamageDone_Modified)
+        {
+            DamageDone_Modified = true;
+            StartCoroutine(Temp_Change_DamageDone(modifier, time));
+        }
+        else
+        {
+            Debug.Log("Damage is currently modified - Fire Flower");
+        }
+    }
+
+    public override void Take_DamageOverTime(float d, float time)
+    {
+        if (!DoT_Active)
+        {
+            DoT_Active = true;
+            StartCoroutine(Take_Damage_Over_Time(d, time));
+        }
+        else
+        {
+            Debug.Log("DoT is active - Fire Flower");
+        }
+    }
+
+    public override void Gain_HealthOverTime(float h, float time)
+    {
+        if (!HoT_Active)
+        {
+            HoT_Active = true;
+            StartCoroutine(Gain_Health_Over_Time(h, time));
+        }
+        else
+        {
+            Debug.Log("HoT is active - Fire Flower");
+        }
+    }
+
     IEnumerator Attack_Cooldown()
     {
         yield return new WaitForSeconds(Fire_Flower_Attack_Cooldown_Current);
 
         CanAttack = true;
+    }
+
+    IEnumerator Temp_Change_AttackSpeed(float modifier, float time)
+    {
+        Debug.Log("Fire Flower current attack cd: " + Fire_Flower_Attack_Cooldown_Current);
+
+        Fire_Flower_Attack_Cooldown_Current *= modifier;
+        Debug.Log("Temporary Fire Flower current attack cd: " + Fire_Flower_Attack_Cooldown_Current);
+
+        yield return new WaitForSeconds(time);
+
+        Fire_Flower_Attack_Cooldown_Current = Plant_Attack_Cooldown;
+        Debug.Log("Effect done - Fire Flower current attack cd: " + Fire_Flower_Attack_Cooldown_Current);
+        AttackSpeed_Modified = false;
+    }
+
+    IEnumerator Temp_Change_DamageDone(float modifier, float time)
+    {
+        Fire_Flower_Damage_Current *= modifier;
+
+        yield return new WaitForSeconds(time);
+
+        Fire_Flower_Damage_Current = Plant_Damage;
+        DamageDone_Modified = false;
+    }
+
+    IEnumerator Take_Damage_Over_Time(float d, float time)
+    {
+        TakeDamage(d);
+
+        yield return new WaitForSeconds(1);
+
+        if (time - 1 > 0)
+        {
+            StartCoroutine(Take_Damage_Over_Time(d, time - 1));
+        }
+        else
+        {
+            DoT_Active = false;
+        }
+    }
+
+    IEnumerator Gain_Health_Over_Time(float h, float time)
+    {
+        GainHealth(h);
+
+        yield return new WaitForSeconds(1);
+
+        if (time - 1 > 0)
+        {
+            StartCoroutine(Gain_Health_Over_Time(h, time - 1));
+        }
+        else
+        {
+            HoT_Active = false;
+        }
     }
 
     private GameObject Plant_Mngr;
@@ -103,4 +217,7 @@ public class Fire_Flower : Plant_Base
     private float Fire_Flower_Health_Current;
     private float Fire_Flower_Damage_Current;
     private float Fire_Flower_Attack_Cooldown_Current;
+
+    [SerializeField] private float Fire_Flower_DoT_DPS;
+    [SerializeField] private float Fire_Flower_DoT_Duration;
 }

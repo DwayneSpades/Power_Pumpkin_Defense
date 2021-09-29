@@ -26,7 +26,7 @@ public class Wave_Data : MonoBehaviour
     public float Hexer_Spawn_Interval;
 
     // bool to indicate if wave has boss modifier, wave manager asks monster manager to randomly pick 1
-    public bool Boss_Modifier;
+    public bool Blood_Witch;
 
     // 0 up to the number of available lanes
     // If 0, lane is always lane 1

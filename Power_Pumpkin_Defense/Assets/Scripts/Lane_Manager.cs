@@ -59,29 +59,45 @@ public class Lane_Manager : MonoBehaviour
         }
     }
 
+    // Get List functions
+
+    public List<GameObject> Get_Lane_Monsters(int L_num)
+    {
+        return Monster_Lanes[L_num];
+    }
+
+    public List<GameObject> Get_Lane_Plants(int L_num)
+    {
+        return Plant_Lanes[L_num];
+    }
+
+    // List management functions
+
     public void Add_Monster_To_Lane(GameObject M, int index)
     {
-        Debug.Log("Added Monster: " + M.name);
+        //Debug.Log("Added Monster: " + M.name);
         Monster_Lanes[index].Add(M);
     }
 
     public void Remove_Monster_In_Lane(GameObject M, int index)
     {
-        Debug.Log("Removed Monster: " + M.name);
+        //Debug.Log("Removed Monster: " + M.name);
         Monster_Lanes[index].Remove(M);
     }
 
     public void Add_Plant_To_Lane(GameObject P, int index)
     {
-        Debug.Log("Added Plant: " + P.name);
+        //Debug.Log("Added Plant: " + P.name);
         Plant_Lanes[index - 1].Add(P);
     }
 
     public void Remove_Plant_In_Lane(GameObject P, int index)
     {
-        Debug.Log("Removed Plant: " + P.name);
+        //Debug.Log("Removed Plant: " + P.name);
         Plant_Lanes[index - 1].Remove(P);
     }
+
+    // Path functions
 
     public List<Transform> GetPath(GameObject Monster, Vector3 t)
     {

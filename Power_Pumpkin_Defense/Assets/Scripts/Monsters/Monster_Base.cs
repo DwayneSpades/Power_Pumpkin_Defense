@@ -7,7 +7,7 @@ public class Monster_Base : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -21,7 +21,7 @@ public class Monster_Base : MonoBehaviour
         Debug.Log("Monster Base class TakeDamage()");
     }
 
-    public virtual void GainHealth(float d)
+    public virtual void GainHealth(float h)
     {
         Debug.Log("Monster Base class Gain health()");
     }
@@ -41,6 +41,16 @@ public class Monster_Base : MonoBehaviour
         Debug.Log("Monster Base class modify damage done()");
     }
 
+    public virtual void Take_DamageOverTime(float d, float time)
+    {
+        Debug.Log("Monster Base class take damage over time()");
+    }
+
+    public virtual void Gain_HealthOverTime(float h, float time)
+    {
+        Debug.Log("Monster Base class gain health over time()");
+    }
+
     public virtual void Assign_Lane_Number(int L_num)
     {
         Debug.Log("Monster Base class assign lane number");
@@ -55,15 +65,21 @@ public class Monster_Base : MonoBehaviour
     protected int CurrentPoint;
 
     // Monster variables
-    public float Monster_Speed;
+    [SerializeField] protected float Monster_Speed;
 
-    public float Monster_Health;
+    [SerializeField] protected float Monster_Health;
 
-    public float Monster_Damage;
+    [SerializeField] protected float Monster_Damage;
 
-    public float Monster_Attack_Cooldown;
+    [SerializeField] protected float Monster_Attack_Cooldown;
 
     protected int Lane_Num;
 
     protected bool CanAttack;
+
+    protected bool MoveSpeed_Modified;
+    protected bool AttackSpeed_Modified;
+    protected bool DamageDone_Modified;
+    protected bool DoT_Active;
+    protected bool HoT_Active;
 }

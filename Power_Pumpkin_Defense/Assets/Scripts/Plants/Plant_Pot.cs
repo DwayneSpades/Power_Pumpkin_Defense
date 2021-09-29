@@ -10,15 +10,21 @@ public class Plant_Pot : MonoBehaviour
         Plant_Mngr = GameObject.Find("Plant_Manager");
         Resource_Mngr = GameObject.Find("Resource_Manager");
         Active_Plant = false;
-        isPlayer_Near = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!Active_Plant && isPlayer_Near)
+ 
+    }
+
+    public void Grow_Plant()
+    {
+        if (!Active_Plant)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            GameObject plant = Plant_Mngr.GetComponent<Plant_Manager>().Get_Selected_Plant();
+
+            if (plant.name == PunchCactus.name)
             {
                 if (Resource_Mngr.GetComponent<Resource_Manager>().Can_Plant_Punch_Cactus())
                 {
@@ -26,21 +32,10 @@ public class Plant_Pot : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Not enough mana to plant punch cactus");
+                    //Debug.Log("Not enough mana to plant punch cactus");
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.R))
-            {
-                if (Resource_Mngr.GetComponent<Resource_Manager>().Can_Plant_Shriek_Root())
-                {
-                    Spawn_Shriek_Root();
-                }
-                else
-                {
-                    Debug.Log("Not enough mana to plant shriek root");
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.F))
+            else if (plant.name == FireFlower.name)
             {
                 if (Resource_Mngr.GetComponent<Resource_Manager>().Can_Plant_Fire_Flower())
                 {
@@ -48,9 +43,24 @@ public class Plant_Pot : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Not enough mana to plant fire flower");
+                    //Debug.Log("Not enough mana to plant fire flower");
                 }
             }
+            else
+            {
+                if (Resource_Mngr.GetComponent<Resource_Manager>().Can_Plant_Shriek_Root())
+                {
+                    Spawn_Shriek_Root();
+                }
+                else
+                {
+                    //Debug.Log("Not enough mana to plant shriek root");
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Plant has an active plant");
         }
     }
 
@@ -126,22 +136,6 @@ public class Plant_Pot : MonoBehaviour
         Plant_Mngr.GetComponent<Plant_Manager>().Add_ActiveFireFlower(P);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            isPlayer_Near = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            isPlayer_Near = false;
-        }
-    }
-
     private GameObject Plant_Mngr;
     private GameObject Resource_Mngr;
 
@@ -151,8 +145,6 @@ public class Plant_Pot : MonoBehaviour
 
     private GameObject Current_Active_Plant;
     private bool Active_Plant;
-
-    private bool isPlayer_Near;
 
     [SerializeField] private int Lane_Num;
 }

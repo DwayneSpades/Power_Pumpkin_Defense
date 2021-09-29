@@ -31,7 +31,7 @@ public class Plant_Base : MonoBehaviour
         Debug.Log("Plant Base class water plant()");
     }
 
-    public virtual void Modify_AttackSpeed(float modifier)
+    public virtual void Modify_AttackSpeed(float modifier, float time)
     {
         Debug.Log("Plant Base class modify attack speed()");
     }
@@ -39,6 +39,16 @@ public class Plant_Base : MonoBehaviour
     public virtual void Modify_DamageDone(float modifier, float time)
     {
         Debug.Log("Plant Base class modify damage done()");
+    }
+
+    public virtual void Take_DamageOverTime(float modifier, float time)
+    {
+        Debug.Log("Plant Base class take damage over time()");
+    }
+
+    public virtual void Gain_HealthOverTime(float modifier, float time)
+    {
+        Debug.Log("Plant Base class gain health over time()");
     }
 
     public void Assign_Lane(int L)
@@ -69,4 +79,9 @@ public class Plant_Base : MonoBehaviour
 
     protected bool CanAttack;
     protected int Water_Level;
+
+    protected bool AttackSpeed_Modified;
+    protected bool DamageDone_Modified;
+    protected bool DoT_Active;
+    protected bool HoT_Active;
 }

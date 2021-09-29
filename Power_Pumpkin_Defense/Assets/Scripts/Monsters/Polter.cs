@@ -13,6 +13,12 @@ public class Polter : Monster_Base
         Polter_Health_Current = Monster_Health;
         Polter_Attack_Cooldown_Current = Monster_Attack_Cooldown;
 
+        MoveSpeed_Modified = false;
+        AttackSpeed_Modified = false;
+        DamageDone_Modified = false;
+        DoT_Active = false;
+        HoT_Active = false;
+
         CanAttack = true;
 
         Lane_Mngr = GameObject.Find("Lane_Manager");
@@ -109,17 +115,67 @@ public class Polter : Monster_Base
 
     public override void Modify_AttackSpeed(float modifier, float time)
     {
-        StartCoroutine(Temp_Change_AttackSpeed(modifier, time));
+        if (!AttackSpeed_Modified)
+        {
+            AttackSpeed_Modified = true;
+            StartCoroutine(Temp_Change_AttackSpeed(modifier, time));
+        }
+        else
+        {
+            Debug.Log("Attack speed is currently modified - Polter");
+        }
     }
 
     public override void Modify_MoveSpeed(float modifier, float time)
     {
-        StartCoroutine(Temp_Change_MoveSpeed(modifier, time));
+        if (!MoveSpeed_Modified)
+        {
+            MoveSpeed_Modified = true;
+            StartCoroutine(Temp_Change_MoveSpeed(modifier, time));
+        }
+        else
+        {
+            Debug.Log("Move speed is currently modified - Polter");
+        }
     }
 
     public override void Modify_DamageDone(float modifier, float time)
     {
-        StartCoroutine(Temp_Change_DamageDone(modifier, time));
+        if (!DamageDone_Modified)
+        {
+            DamageDone_Modified = true;
+            StartCoroutine(Temp_Change_DamageDone(modifier, time));
+        }
+        else
+        {
+            Debug.Log("Damage is currently modified - Polter");
+        }
+    }
+
+    public override void Take_DamageOverTime(float d, float time)
+    {
+        if (!DoT_Active)
+        {
+            DoT_Active = true;
+            StartCoroutine(Take_Damage_Over_Time(d, time));
+        }
+        else
+        {
+            Debug.Log("DoT is active - Polter");
+        }
+    }
+
+    public override void Gain_HealthOverTime(float h, float time)
+    {
+        if (!HoT_Active)
+        {
+            HoT_Active = true;
+            StartCoroutine(Gain_Health_Over_Time(h, time));
+        }
+        else
+        {
+            Debug.Log("HoT is active - Polter");
+        }
     }
 
     IEnumerator Attack_Cooldown()
@@ -140,6 +196,7 @@ public class Polter : Monster_Base
 
         Polter_Attack_Cooldown_Current = Monster_Attack_Cooldown;
         Debug.Log("Effect done - Ghast current attack cd: " + Polter_Attack_Cooldown_Current);
+        AttackSpeed_Modified = false;
     }
 
     IEnumerator Temp_Change_MoveSpeed(float modifier, float time)
@@ -149,6 +206,7 @@ public class Polter : Monster_Base
         yield return new WaitForSeconds(time);
 
         Polter_Speed_Current = Monster_Speed;
+        MoveSpeed_Modified = false;
     }
 
     IEnumerator Temp_Change_DamageDone(float modifier, float time)
@@ -158,6 +216,39 @@ public class Polter : Monster_Base
         yield return new WaitForSeconds(time);
 
         Polter_Damage_Current = Monster_Damage;
+        DamageDone_Modified = false;
+    }
+
+    IEnumerator Take_Damage_Over_Time(float d, float time)
+    {
+        TakeDamage(d);
+
+        yield return new WaitForSeconds(1);
+
+        if (time - 1 > 0)
+        {
+            StartCoroutine(Take_Damage_Over_Time(d, time - 1));
+        }
+        else
+        {
+            DoT_Active = false;
+        }
+    }
+
+    IEnumerator Gain_Health_Over_Time(float h, float time)
+    {
+        GainHealth(h);
+
+        yield return new WaitForSeconds(1);
+
+        if (time - 1 > 0)
+        {
+            StartCoroutine(Gain_Health_Over_Time(h, time - 1));
+        }
+        else
+        {
+            HoT_Active = false;
+        }
     }
 
     // Internal Functionality stuff

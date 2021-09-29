@@ -130,6 +130,8 @@ MonoBehaviour:
   Monster_Attack_Cooldown: 1
   ManaSphere: {fileID: 7804931546375534357, guid: eeb62bcef6d1b6a4da3dfb62b4d5953c,
     type: 3}
+  Hexer_Attack_Slow_Modifier: 0.5
+  Hexer_Attack_Slow_Duration: 3
 --- !u!1001 &5825897273567058625
 PrefabInstance:
   m_ObjectHideFlags: 0

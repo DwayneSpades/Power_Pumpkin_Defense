@@ -116,7 +116,8 @@ MonoBehaviour:
   Plant_Attack_Cooldown: 1
   Plant_Next_Lvl: {fileID: 5521680506770235781, guid: 957202b9c64a6cf4abea5bfc92372db1,
     type: 3}
-  My_Plant_Pot: {fileID: 0}
+  Fire_Flower_DoT_DPS: 0.5
+  Fire_Flower_DoT_Duration: 2
 --- !u!1001 &6141450728601182928
 PrefabInstance:
   m_ObjectHideFlags: 0

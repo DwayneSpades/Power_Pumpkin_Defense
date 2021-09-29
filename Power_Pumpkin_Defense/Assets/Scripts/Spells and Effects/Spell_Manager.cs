@@ -9,6 +9,7 @@ public class Spell_Manager : MonoBehaviour
     {
         Resource_Mngr = GameObject.Find("Resource_Manager");
         CurrentSpell_Index = 0;
+        Current_Selected_Spell = Spell_List[CurrentSpell_Index];
 
         Can_Use_Spell = true;
         //Current_Selected_Spell = Spell_List[CurrentSpell_Index];
@@ -22,7 +23,7 @@ public class Spell_Manager : MonoBehaviour
 
     public void Cycle_Spell()
     {
-        if (CurrentSpell_Index >= Spell_List.Count)
+        if (CurrentSpell_Index >= (Spell_List.Count - 1))
         {
             CurrentSpell_Index = 0;
         }
@@ -31,7 +32,9 @@ public class Spell_Manager : MonoBehaviour
             CurrentSpell_Index++;
         }
 
-        Debug.Log("Spell Cycled");
+        Current_Selected_Spell = Spell_List[CurrentSpell_Index];
+
+        Debug.Log("Spell Cycled - Current Selected Spell: " + Current_Selected_Spell.name);
     }
 
     public void Use_Selected_Spell()

@@ -9,8 +9,10 @@ public class Character_Controller : MonoBehaviour
     {
         Resource_Mngr = GameObject.Find("Resource_Manager");
         Spell_Mngr = GameObject.Find("Spell_Manager");
+        Plant_Mngr = GameObject.Find("Plant_Manager");
 
         isFlowerNear = false;
+        isPlantPotNear = false;
 
         Current_Move_Speed = Move_Speed;
     }
@@ -37,7 +39,7 @@ public class Character_Controller : MonoBehaviour
         transform.position += Move_Dir * Move_Speed * Time.deltaTime;
 
         // Watering
-        if (Input.GetKey(KeyCode.Z) )
+        if (Input.GetKeyUp(KeyCode.Z))
         {
             if (isFlowerNear && Nearby_Flower && Resource_Mngr.GetComponent<Resource_Manager>().Can_Water()) // Can take out nearby_flower check, prob dont need but will leave it for now
             {
@@ -48,15 +50,29 @@ public class Character_Controller : MonoBehaviour
         }
 
         // Cycle through available spells
-        if (Input.GetKey(KeyCode.C))
+        if (Input.GetKeyUp(KeyCode.C))
         {
             Spell_Mngr.GetComponent<Spell_Manager>().Cycle_Spell();
         }
 
         // Use selected spell
-        if (Input.GetKey(KeyCode.X))
+        if (Input.GetKeyUp(KeyCode.X))
         {
             Spell_Mngr.GetComponent<Spell_Manager>().Use_Selected_Spell();
+        }
+
+        // Cycle through available plants
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            Plant_Mngr.GetComponent<Plant_Manager>().Cycle_Plant();
+        }
+
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            if (isPlantPotNear && Nearby_Plant_Pot)
+            {
+                Nearby_Plant_Pot.GetComponent<Plant_Pot>().Grow_Plant();
+            }
         }
     }
 
@@ -67,6 +83,11 @@ public class Character_Controller : MonoBehaviour
             isFlowerNear = true;
             Nearby_Flower = other.gameObject;
         }
+        else if (other.tag == "Plant_Pot")
+        {
+            isPlantPotNear = true;
+            Nearby_Plant_Pot = other.gameObject;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -76,6 +97,11 @@ public class Character_Controller : MonoBehaviour
             isFlowerNear = false;
             Nearby_Flower = null;
         }
+        else if (other.tag == "Plant_Pot")
+        {
+            isPlantPotNear = false;
+            Nearby_Plant_Pot = null;
+        }
     }
 
     public Animator animControl;
@@ -83,10 +109,14 @@ public class Character_Controller : MonoBehaviour
 
     private GameObject Resource_Mngr;
     private GameObject Spell_Mngr;
+    private GameObject Plant_Mngr;
 
     public float Move_Speed;
     private float Current_Move_Speed;
 
     private bool isFlowerNear;
     private GameObject Nearby_Flower;
+
+    private bool isPlantPotNear;
+    private GameObject Nearby_Plant_Pot;
 }
