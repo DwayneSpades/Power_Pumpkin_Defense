@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f1ad5b0940336b4ebc5b720d6cbe5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Water_To_Upgrade_Level: 40
+  Water_To_Upgrade_Level: 10
   isMaxLevel: 0
   Flower_Level: 2
   Plant_Health: 12
@@ -125,6 +125,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3887720156566461414}
     m_Modifications:
+    - target: {fileID: 2285511225018894497, guid: 79bf7327954a2274e8279b3e4760f840,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285511225018894497, guid: 79bf7327954a2274e8279b3e4760f840,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.32169944
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285511225018894497, guid: 79bf7327954a2274e8279b3e4760f840,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.031372547
+      objectReference: {fileID: 0}
     - target: {fileID: 2285511226050633577, guid: 79bf7327954a2274e8279b3e4760f840,
         type: 3}
       propertyPath: m_LocalPosition.x

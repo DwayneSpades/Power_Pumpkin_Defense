@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46debdbdeb63f3a47a771c3776368ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Water_To_Upgrade_Level: 40
+  Water_To_Upgrade_Level: 10
   isMaxLevel: 0
   Flower_Level: 2
   Plant_Health: 12
@@ -102,7 +102,6 @@ MonoBehaviour:
   Plant_Attack_Cooldown: 2
   Plant_Next_Lvl: {fileID: 2525707053648864739, guid: 46ab3168410524c4383a9f43146d4925,
     type: 3}
-  My_Plant_Pot: {fileID: 0}
   Shriek_Root_Attack_Slow_Modifier: 0.5
   Shriek_Root_Attack_Slow_Duration: 3
 --- !u!135 &7630030307683135557
@@ -184,6 +183,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Mandrake 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553955843462539305, guid: 96f55e33dcc22f0489f2de46049b19b6,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.3207547
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553955843462539305, guid: 96f55e33dcc22f0489f2de46049b19b6,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.20125906
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553955843462539305, guid: 96f55e33dcc22f0489f2de46049b19b6,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.1255785
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96f55e33dcc22f0489f2de46049b19b6, type: 3}

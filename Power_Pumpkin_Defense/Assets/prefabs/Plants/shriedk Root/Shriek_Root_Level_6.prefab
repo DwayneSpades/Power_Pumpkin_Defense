@@ -101,7 +101,6 @@ MonoBehaviour:
   Plant_Damage: 2
   Plant_Attack_Cooldown: 2
   Plant_Next_Lvl: {fileID: 0}
-  My_Plant_Pot: {fileID: 0}
   Shriek_Root_Attack_Slow_Modifier: 0.25
   Shriek_Root_Attack_Slow_Duration: 3
 --- !u!135 &2231796565026175489
@@ -183,6 +182,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Mandrake 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553955843462539305, guid: 96f55e33dcc22f0489f2de46049b19b6,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.23584908
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553955843462539305, guid: 96f55e33dcc22f0489f2de46049b19b6,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.07190521
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553955843462539305, guid: 96f55e33dcc22f0489f2de46049b19b6,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96f55e33dcc22f0489f2de46049b19b6, type: 3}

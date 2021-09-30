@@ -16,6 +16,7 @@ public class Wave_Manager : MonoBehaviour
 
         Lane_Mngr = GameObject.Find("Lane_Manager");
         Monster_Mngr = GameObject.Find("Monster_Manager");
+        UI_Mngr = GameObject.Find("UI_Manager");
 
         Great_Pumpkin_Alive = true;
 
@@ -32,6 +33,7 @@ public class Wave_Manager : MonoBehaviour
             if (Current_Wave_Num < Wave_Data_List.Count)
             {
                 Debug.Log("Wave Start - Wave: " + (Current_Wave_Num + 1)); // Displays current wave + 1, so wave 0 is wave 1
+                UI_Mngr.GetComponent<UI_Manager>().Display_Wave_Num(Current_Wave_Num + 1);
 
                 // Update Wave Object
                 Current_Wave_Obj = Wave_Data_List[Current_Wave_Num];
@@ -121,6 +123,7 @@ public class Wave_Manager : MonoBehaviour
 
     IEnumerator WaveCooldown()
     {
+        UI_Mngr.GetComponent<UI_Manager>().Display_Wave_Cooldown();
         yield return new WaitForSeconds(Wave_Cooldown_Timer);
 
         //Debug.Log("Wave Cooldown Done");
@@ -134,17 +137,23 @@ public class Wave_Manager : MonoBehaviour
         Num_Enemy_SpawnTypes_Done++;
     }
 
+    public float Get_Wave_Cooldown_Time()
+    {
+        return Wave_Cooldown_Timer;
+    }
+
     private GameObject Monster_Mngr;
     private GameObject Lane_Mngr;
+    private GameObject UI_Mngr;
 
-    public List<GameObject> Wave_Data_List;
+    [SerializeField] private List<GameObject> Wave_Data_List;
 
     private GameObject Current_Wave_Obj;
     private int Current_Wave_Num;
     private bool Great_Pumpkin_Alive;
 
     // Wave cooldown/control variables
-    public float Wave_Cooldown_Timer;
+    [SerializeField] private float Wave_Cooldown_Timer;
     //private bool IsWaveActive;
     private bool ReadyForNewWave;
 

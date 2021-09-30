@@ -8,6 +8,7 @@ public class Plant_Manager : MonoBehaviour
     void Start()
     {
         Lane_Mngr = GameObject.Find("Lane_Manager");
+        UI_Mngr = GameObject.Find("UI_Manager");
         CurrentPlant_Index = 0;
         Current_Selected_Plant = Available_Plant_List[CurrentPlant_Index];
 
@@ -36,6 +37,7 @@ public class Plant_Manager : MonoBehaviour
         }
 
         Current_Selected_Plant = Available_Plant_List[CurrentPlant_Index];
+        UI_Mngr.GetComponent<UI_Manager>().Cycle_Plant_Icon();
 
         Debug.Log("Plant Cycled - Current Selected Plant: " + Current_Selected_Plant.name);
     }
@@ -135,6 +137,7 @@ public class Plant_Manager : MonoBehaviour
     }
 
     private GameObject Lane_Mngr;
+    private GameObject UI_Mngr;
 
     //[SerializeField] private List<GameObject> PlantPot_List;
 

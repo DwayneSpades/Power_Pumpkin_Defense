@@ -88,13 +88,13 @@ public class Lane_Manager : MonoBehaviour
     public void Add_Plant_To_Lane(GameObject P, int index)
     {
         //Debug.Log("Added Plant: " + P.name);
-        Plant_Lanes[index - 1].Add(P);
+        Plant_Lanes[index].Add(P);
     }
 
     public void Remove_Plant_In_Lane(GameObject P, int index)
     {
         //Debug.Log("Removed Plant: " + P.name);
-        Plant_Lanes[index - 1].Remove(P);
+        Plant_Lanes[index].Remove(P);
     }
 
     // Path functions

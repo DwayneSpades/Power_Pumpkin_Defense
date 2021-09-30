@@ -7,6 +7,7 @@ public class Resource_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UI_Mngr = GameObject.Find("UI_Manager");
         m_CanWater = true;
         m_CanPlant_FireFlower = true;
         m_CanPlant_PunchCactus = true;
@@ -14,6 +15,12 @@ public class Resource_Manager : MonoBehaviour
 
         m_Current_Water_Amount = m_Starting_Water_Amount;
         m_Current_Mana_Amount = m_Starting_Mana_Amount;
+
+        UI_Mngr.GetComponent<UI_Manager>().Update_Max_Mana(m_Max_Mana_Amount);
+        UI_Mngr.GetComponent<UI_Manager>().Update_Max_Water(m_Max_Water_Amount);
+
+        UI_Mngr.GetComponent<UI_Manager>().Update_Current_Mana(m_Current_Mana_Amount);
+        UI_Mngr.GetComponent<UI_Manager>().Update_Current_Water(m_Current_Water_Amount);
     }
 
     // Update is called once per frame
@@ -31,6 +38,7 @@ public class Resource_Manager : MonoBehaviour
         if (m_Current_Water_Amount < m_Max_Water_Amount)
         {
             m_Current_Water_Amount = m_Max_Water_Amount;
+            UI_Mngr.GetComponent<UI_Manager>().Update_Current_Water(m_Current_Water_Amount);
             Debug.Log("Watering can refilled: " + m_Current_Water_Amount);
         }
         else
@@ -46,6 +54,7 @@ public class Resource_Manager : MonoBehaviour
             if (F.tag == "Plant")
             {
                 m_CanWater = false;
+                UI_Mngr.GetComponent<UI_Manager>().Update_WaterReady_Icon_Status(false);
                 StartCoroutine(Watering_Cooldown());
                 F.gameObject.GetComponent<Plant_Base>().Water_Plant(m_Water_To_Give_Plant);
                 Use_Water(m_Water_To_Give_Plant);
@@ -67,6 +76,7 @@ public class Resource_Manager : MonoBehaviour
         if (m_Current_Water_Amount >= 0)
         {
             m_Current_Water_Amount -= w_amount;
+            UI_Mngr.GetComponent<UI_Manager>().Update_Current_Water(m_Current_Water_Amount);
             Debug.Log("Used Water, Water Left: " + m_Current_Water_Amount);
         }
     }
@@ -77,6 +87,7 @@ public class Resource_Manager : MonoBehaviour
 
         Debug.Log("Can Water Again");
         m_CanWater = true;
+        UI_Mngr.GetComponent<UI_Manager>().Update_WaterReady_Icon_Status(true);
     }
 
     //
@@ -107,6 +118,7 @@ public class Resource_Manager : MonoBehaviour
     public void GainMana(int M)
     {
         m_Current_Mana_Amount += M;
+        UI_Mngr.GetComponent<UI_Manager>().Update_Current_Mana(m_Current_Mana_Amount);
 
         Debug.Log("Gained " + M + " Mana, Mana Left: " + m_Current_Mana_Amount);
 
@@ -129,6 +141,7 @@ public class Resource_Manager : MonoBehaviour
     public void UseMana(int M)
     {
         m_Current_Mana_Amount -= M;
+        UI_Mngr.GetComponent<UI_Manager>().Update_Current_Mana(m_Current_Mana_Amount);
 
         Debug.Log("Used " + M + " Mana, Mana Left: " + m_Current_Mana_Amount);
 
@@ -163,6 +176,17 @@ public class Resource_Manager : MonoBehaviour
         return m_Mana_Cost_ShriekRoot;
     }
 
+    // Get Resource Amounts
+    public int Get_Current_Mana()
+    {
+        return m_Current_Mana_Amount;
+    }
+
+    public int Get_Current_Water()
+    {
+        return m_Current_Water_Amount;
+    }
+
     [SerializeField] private int m_Starting_Water_Amount;
     [SerializeField] private int m_Max_Water_Amount;
     private int m_Current_Water_Amount;
@@ -184,4 +208,6 @@ public class Resource_Manager : MonoBehaviour
     private bool m_CanPlant_PunchCactus;
     private bool m_CanPlant_FireFlower;
     private bool m_CanPlant_ShriekRoot;
+
+    private GameObject UI_Mngr;
 }

@@ -8,6 +8,7 @@ public class Spell_Manager : MonoBehaviour
     void Start()
     {
         Resource_Mngr = GameObject.Find("Resource_Manager");
+        UI_Mngr = GameObject.Find("UI_Manager");
         CurrentSpell_Index = 0;
         Current_Selected_Spell = Spell_List[CurrentSpell_Index];
 
@@ -33,6 +34,7 @@ public class Spell_Manager : MonoBehaviour
         }
 
         Current_Selected_Spell = Spell_List[CurrentSpell_Index];
+        UI_Mngr.GetComponent<UI_Manager>().Cycle_Spell_Icon();
 
         Debug.Log("Spell Cycled - Current Selected Spell: " + Current_Selected_Spell.name);
     }
@@ -42,6 +44,8 @@ public class Spell_Manager : MonoBehaviour
         if (Can_Use_Spell)
         {
             Can_Use_Spell = false;
+            UI_Mngr.GetComponent<UI_Manager>().Update_SpellReady_Icon_Status(false);
+            StartCoroutine(Spell_Cooldown());
             Instantiate(Current_Selected_Spell, transform.position, transform.rotation);
         }
         else
@@ -61,15 +65,17 @@ public class Spell_Manager : MonoBehaviour
         yield return new WaitForSeconds(Spell_Cooldown_Time);
 
         Can_Use_Spell = true;
+        UI_Mngr.GetComponent<UI_Manager>().Update_SpellReady_Icon_Status(true);
     }
 
     private GameObject Resource_Mngr;
+    private GameObject UI_Mngr;
 
     private GameObject Current_Selected_Spell;
 
-    public List<GameObject> Spell_List;
+    [SerializeField] private List<GameObject> Spell_List;
     private int CurrentSpell_Index;
 
     private bool Can_Use_Spell;
-    public float Spell_Cooldown_Time;
+    [SerializeField] private float Spell_Cooldown_Time;
 }

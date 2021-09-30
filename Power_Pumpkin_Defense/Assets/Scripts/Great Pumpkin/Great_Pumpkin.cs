@@ -10,6 +10,7 @@ public class Great_Pumpkin : MonoBehaviour
         GreatPumpkin_CurrentHealth = GreatPumpkin_Health;
 
         Wave_Mngr = GameObject.Find("Wave_Manager");
+        UI_Mngr = GameObject.Find("UI_Manager");
     }
 
     // Update is called once per frame
@@ -21,6 +22,7 @@ public class Great_Pumpkin : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         GreatPumpkin_CurrentHealth -= dmg;
+        UI_Mngr.GetComponent<UI_Manager>().Update_Current_GreatPumpkinHealth(GreatPumpkin_CurrentHealth);
 
         //Debug.Log("Great Pumpkin Health: " + GreatPumpkin_CurrentHealth);
 
@@ -38,4 +40,5 @@ public class Great_Pumpkin : MonoBehaviour
     private float GreatPumpkin_CurrentHealth;
 
     private GameObject Wave_Mngr;
+    private GameObject UI_Mngr;
 }

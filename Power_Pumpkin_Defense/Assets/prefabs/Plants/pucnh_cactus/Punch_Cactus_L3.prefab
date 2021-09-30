@@ -115,7 +115,6 @@ MonoBehaviour:
   Plant_Damage: 3
   Plant_Attack_Cooldown: 1
   Plant_Next_Lvl: {fileID: 0}
-  My_Plant_Pot: {fileID: 0}
 --- !u!1001 &223180944453946149
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -123,6 +122,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2521685868250769459}
     m_Modifications:
+    - target: {fileID: 8217853037241644395, guid: 2144213735d8b62419aab7b2879a7ba0,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.09710693
+      objectReference: {fileID: 0}
+    - target: {fileID: 8217853037241644395, guid: 2144213735d8b62419aab7b2879a7ba0,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8217853037241644395, guid: 2144213735d8b62419aab7b2879a7ba0,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8217853038063009912, guid: 2144213735d8b62419aab7b2879a7ba0,
         type: 3}
       propertyPath: m_Name
