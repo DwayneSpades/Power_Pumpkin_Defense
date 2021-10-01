@@ -23,38 +23,31 @@ public class Shriek_Root : Plant_Base
     }
 
     public override void Water_Plant(int Water_Amount)
-    {
-        Debug.Log("Gave water to shriek root: " + Water_Amount);
+    {     
+        //Debug.Log("Gave water to shriek root: " + Water_Amount);
         Water_Level += Water_Amount;
 
-        if (isMaxLevel == false)
+        if (Water_Level >= Water_To_Upgrade_Level)
         {
-            if (Water_Level >= Water_To_Upgrade_Level)
-            {
-                StopAllCoroutines();
+            StopAllCoroutines();
 
-                // Instantiate the next level plant
-                GameObject P;
-                P = Instantiate(Plant_Next_Lvl, transform.position, transform.rotation);
+            // Instantiate the next level plant
+            GameObject P;
+            P = Instantiate(Plant_Next_Lvl, transform.position, transform.rotation);
 
-                // Set new plants plant pot - pass this one's plant pot gameobject
-                P.gameObject.GetComponent<Plant_Base>().Assign_Plant_Pot(My_Plant_Pot);
-                Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePlant(P, Lane_Num);
-                Plant_Mngr.GetComponent<Plant_Manager>().Add_ActiveShriekRoot(P);
+            // Set new plants plant pot - pass this one's plant pot gameobject
+            P.gameObject.GetComponent<Plant_Base>().Assign_Plant_Pot(My_Plant_Pot);
+            Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePlant(P, Lane_Num);
+            Plant_Mngr.GetComponent<Plant_Manager>().Add_ActiveShriekRoot(P);
 
-                Debug.Log("Shriek Root upgraded to level " + (Flower_Level + 1));
+            //Debug.Log("Shriek Root upgraded to level " + (Flower_Level + 1));
 
-                // Delete this plant
-                Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject, Lane_Num);
-                Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActiveShriekRoot(this.gameObject);
+            // Delete this plant
+            Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject, Lane_Num);
+            Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActiveShriekRoot(this.gameObject);
 
-                Destroy(this.gameObject);
-            }
-        }
-        else
-        {
-            Debug.Log("Shriek root is max level");
-        }
+            Destroy(this.gameObject);
+        }     
     }
 
     private void OnTriggerEnter(Collider other)
@@ -104,7 +97,7 @@ public class Shriek_Root : Plant_Base
         }
         else
         {
-            Debug.Log("Attack speed is currently modified - Shriek Root");
+            //Debug.Log("Attack speed is currently modified - Shriek Root");
         }
     }
 
@@ -117,7 +110,7 @@ public class Shriek_Root : Plant_Base
         }
         else
         {
-            Debug.Log("Damage is currently modified - Shriek Root");
+            //Debug.Log("Damage is currently modified - Shriek Root");
         }
     }
 
@@ -130,7 +123,7 @@ public class Shriek_Root : Plant_Base
         }
         else
         {
-            Debug.Log("DoT is active - Shriek Root");
+            //Debug.Log("DoT is active - Shriek Root");
         }
     }
 
@@ -143,7 +136,7 @@ public class Shriek_Root : Plant_Base
         }
         else
         {
-            Debug.Log("HoT is active - Shriek Root");
+            //Debug.Log("HoT is active - Shriek Root");
         }
     }
 
@@ -156,15 +149,15 @@ public class Shriek_Root : Plant_Base
 
     IEnumerator Temp_Change_AttackSpeed(float modifier, float time)
     {
-        Debug.Log("Shriek Root current attack cd: " + Shriek_Root_Attack_Cooldown_Current);
+        //Debug.Log("Shriek Root current attack cd: " + Shriek_Root_Attack_Cooldown_Current);
 
         Shriek_Root_Attack_Cooldown_Current *= modifier;
-        Debug.Log("Temporary Shriek Root current attack cd: " + Shriek_Root_Attack_Cooldown_Current);
+        //Debug.Log("Temporary Shriek Root current attack cd: " + Shriek_Root_Attack_Cooldown_Current);
 
         yield return new WaitForSeconds(time);
 
         Shriek_Root_Attack_Cooldown_Current = Plant_Attack_Cooldown;
-        Debug.Log("Effect done - Shriek Root current attack cd: " + Shriek_Root_Attack_Cooldown_Current);
+        //Debug.Log("Effect done - Shriek Root current attack cd: " + Shriek_Root_Attack_Cooldown_Current);
         AttackSpeed_Modified = false;
     }
 

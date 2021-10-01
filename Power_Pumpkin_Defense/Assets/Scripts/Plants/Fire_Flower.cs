@@ -24,36 +24,30 @@ public class Fire_Flower : Plant_Base
 
     public override void Water_Plant(int Water_Amount)
     {
-        Debug.Log("Gave water to fire flower: " + Water_Amount);
+  
+        //Debug.Log("Gave water to fire flower: " + Water_Amount);
         Water_Level += Water_Amount;
 
-        if (isMaxLevel == false)
+        if (Water_Level >= Water_To_Upgrade_Level)
         {
-            if (Water_Level >= Water_To_Upgrade_Level)
-            {
-                StopAllCoroutines();
+            StopAllCoroutines();
 
-                // Instantiate the next level plant
-                GameObject P;
-                P = Instantiate(Plant_Next_Lvl, transform.position, transform.rotation);
+            // Instantiate the next level plant
+            GameObject P;
+            P = Instantiate(Plant_Next_Lvl, transform.position, transform.rotation);
 
-                // Set new plants plant pot - pass this one's plant pot gameobject
-                P.gameObject.GetComponent<Plant_Base>().Assign_Plant_Pot(My_Plant_Pot);
-                Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePlant(P, Lane_Num);
-                Plant_Mngr.GetComponent<Plant_Manager>().Add_ActiveFireFlower(P);
+            // Set new plants plant pot - pass this one's plant pot gameobject
+            P.gameObject.GetComponent<Plant_Base>().Assign_Plant_Pot(My_Plant_Pot);
+            Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePlant(P, Lane_Num);
+            Plant_Mngr.GetComponent<Plant_Manager>().Add_ActiveFireFlower(P);
 
-                Debug.Log("Fire flower upgraded to level " + (Flower_Level + 1));
+            //Debug.Log("Fire flower upgraded to level " + (Flower_Level + 1));
 
-                // Delete this plant
-                Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject, Lane_Num);
-                Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActiveFireFlower(this.gameObject);
+            // Delete this plant
+            Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject, Lane_Num);
+            Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActiveFireFlower(this.gameObject);
 
-                Destroy(this.gameObject);
-            }
-        }
-        else
-        {
-            Debug.Log("Fire flower is max level");
+            Destroy(this.gameObject);
         }
   
     }
@@ -105,7 +99,7 @@ public class Fire_Flower : Plant_Base
         }
         else
         {
-            Debug.Log("Attack speed is currently modified - Fire Flower");
+            //Debug.Log("Attack speed is currently modified - Fire Flower");
         }
     }
 
@@ -118,7 +112,7 @@ public class Fire_Flower : Plant_Base
         }
         else
         {
-            Debug.Log("Damage is currently modified - Fire Flower");
+            //Debug.Log("Damage is currently modified - Fire Flower");
         }
     }
 
@@ -131,7 +125,7 @@ public class Fire_Flower : Plant_Base
         }
         else
         {
-            Debug.Log("DoT is active - Fire Flower");
+            //Debug.Log("DoT is active - Fire Flower");
         }
     }
 
@@ -144,7 +138,7 @@ public class Fire_Flower : Plant_Base
         }
         else
         {
-            Debug.Log("HoT is active - Fire Flower");
+            //Debug.Log("HoT is active - Fire Flower");
         }
     }
 
@@ -157,15 +151,15 @@ public class Fire_Flower : Plant_Base
 
     IEnumerator Temp_Change_AttackSpeed(float modifier, float time)
     {
-        Debug.Log("Fire Flower current attack cd: " + Fire_Flower_Attack_Cooldown_Current);
+        //Debug.Log("Fire Flower current attack cd: " + Fire_Flower_Attack_Cooldown_Current);
 
         Fire_Flower_Attack_Cooldown_Current *= modifier;
-        Debug.Log("Temporary Fire Flower current attack cd: " + Fire_Flower_Attack_Cooldown_Current);
+        //Debug.Log("Temporary Fire Flower current attack cd: " + Fire_Flower_Attack_Cooldown_Current);
 
         yield return new WaitForSeconds(time);
 
         Fire_Flower_Attack_Cooldown_Current = Plant_Attack_Cooldown;
-        Debug.Log("Effect done - Fire Flower current attack cd: " + Fire_Flower_Attack_Cooldown_Current);
+        //Debug.Log("Effect done - Fire Flower current attack cd: " + Fire_Flower_Attack_Cooldown_Current);
         AttackSpeed_Modified = false;
     }
 

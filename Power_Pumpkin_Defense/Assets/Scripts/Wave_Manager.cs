@@ -60,6 +60,30 @@ public class Wave_Manager : MonoBehaviour
                 Monster_Mngr.GetComponent<Monster_Manager>().Spawn_Hexers(Avail_Lanes, Num_Monsters, Interval);
 
 
+                // Check Boss data
+                if (Current_Wave_Obj.GetComponent<Wave_Data>().Wave_Boss_Modifiers.Count != 0)
+                {
+                    GameObject Boss;
+                    float Time_To_Boss;
+
+                    // Boss Spawning
+                    if (Current_Wave_Obj.GetComponent<Wave_Data>().Wave_Boss_Modifiers.Count == 1)
+                    {
+                        Boss = Current_Wave_Obj.GetComponent<Wave_Data>().Wave_Boss_Modifiers[0];
+                        Time_To_Boss = Current_Wave_Obj.GetComponent<Wave_Data>().Time_Until_Boss_Active;
+
+                        Monster_Mngr.GetComponent<Monster_Manager>().Spawn_Boss_Modifier(Boss, Time_To_Boss);
+                    }
+                    else if (Current_Wave_Obj.GetComponent<Wave_Data>().Wave_Boss_Modifiers.Count > 1)
+                    {
+                        int Random_Boss_Pick = Random.Range(0, Current_Wave_Obj.GetComponent<Wave_Data>().Wave_Boss_Modifiers.Count);
+                        Boss = Current_Wave_Obj.GetComponent<Wave_Data>().Wave_Boss_Modifiers[Random_Boss_Pick];
+                        Time_To_Boss = Current_Wave_Obj.GetComponent<Wave_Data>().Time_Until_Boss_Active;
+
+                        Monster_Mngr.GetComponent<Monster_Manager>().Spawn_Boss_Modifier(Boss, Time_To_Boss);
+                    }
+                }
+
                 Current_Wave_Num++;
 
                 // Starts a coroutine that checks if there are no active monsters every second, If true then the wave cooldown can begin

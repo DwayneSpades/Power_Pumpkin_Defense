@@ -53,11 +53,18 @@ public class Resource_Manager : MonoBehaviour
         {
             if (F.tag == "Plant")
             {
-                m_CanWater = false;
-                UI_Mngr.GetComponent<UI_Manager>().Update_WaterReady_Icon_Status(false);
-                StartCoroutine(Watering_Cooldown());
-                F.gameObject.GetComponent<Plant_Base>().Water_Plant(m_Water_To_Give_Plant);
-                Use_Water(m_Water_To_Give_Plant);
+                if (!F.GetComponent<Plant_Base>().is_Plant_MaxLevel())
+                {
+                    m_CanWater = false;
+                    UI_Mngr.GetComponent<UI_Manager>().Update_WaterReady_Icon_Status(false);
+                    StartCoroutine(Watering_Cooldown());
+                    F.gameObject.GetComponent<Plant_Base>().Water_Plant(m_Water_To_Give_Plant);
+                    Use_Water(m_Water_To_Give_Plant);
+                }
+                else
+                {
+                    Debug.Log(F.name + " is max level");
+                }
             }
         }
         else

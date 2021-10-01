@@ -11,6 +11,7 @@ public class Great_Pumpkin : MonoBehaviour
 
         Wave_Mngr = GameObject.Find("Wave_Manager");
         UI_Mngr = GameObject.Find("UI_Manager");
+        UI_Mngr.GetComponent<UI_Manager>().Update_Max_GreatPumpkinHealth(GreatPumpkin_Health);
     }
 
     // Update is called once per frame
@@ -36,7 +37,7 @@ public class Great_Pumpkin : MonoBehaviour
         }
     }
 
-    public float GreatPumpkin_Health;
+    [SerializeField] private float GreatPumpkin_Health;
     private float GreatPumpkin_CurrentHealth;
 
     private GameObject Wave_Mngr;

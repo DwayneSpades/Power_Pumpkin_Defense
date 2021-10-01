@@ -43,10 +43,21 @@ public class Spell_Manager : MonoBehaviour
     {
         if (Can_Use_Spell)
         {
-            Can_Use_Spell = false;
-            UI_Mngr.GetComponent<UI_Manager>().Update_SpellReady_Icon_Status(false);
-            StartCoroutine(Spell_Cooldown());
-            Instantiate(Current_Selected_Spell, transform.position, transform.rotation);
+            int mana = Resource_Mngr.GetComponent<Resource_Manager>().Get_Current_Mana();
+            int spell_cost = Current_Selected_Spell.GetComponent<Spell_Base>().Get_Spell_Mana_Cost();
+
+            if (spell_cost <= mana)
+            {
+                Can_Use_Spell = false;
+                UI_Mngr.GetComponent<UI_Manager>().Update_SpellReady_Icon_Status(false);
+                Resource_Mngr.GetComponent<Resource_Manager>().UseMana(spell_cost);
+                StartCoroutine(Spell_Cooldown());
+                Instantiate(Current_Selected_Spell, transform.position, transform.rotation);
+            }
+            else
+            {
+                Debug.Log("Current Mana: " + mana + ", " + spell_cost + " mana needed to cast: " + Current_Selected_Spell.name);
+            }
         }
         else
         {

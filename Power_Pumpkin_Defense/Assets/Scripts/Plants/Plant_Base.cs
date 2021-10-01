@@ -51,6 +51,11 @@ public class Plant_Base : MonoBehaviour
         Debug.Log("Plant Base class gain health over time()");
     }
 
+    public bool is_Plant_MaxLevel()
+    {
+        return isMaxLevel;
+    }
+
     public void Assign_Lane(int L)
     {
         Lane_Num = L;

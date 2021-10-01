@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spell_Heal_Plants : MonoBehaviour
+public class Spell_Heal_Plants : Spell_Base
 {
     // Start is called before the first frame update
     void Start()

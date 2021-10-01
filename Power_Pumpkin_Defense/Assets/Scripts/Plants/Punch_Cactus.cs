@@ -24,36 +24,29 @@ public class Punch_Cactus : Plant_Base
 
     public override void Water_Plant(int Water_Amount)
     {
-        Debug.Log("Gave water to punch cactus: " + Water_Amount);
+        //Debug.Log("Gave water to punch cactus: " + Water_Amount);
         Water_Level += Water_Amount;
 
-        if (isMaxLevel == false)
+        if (Water_Level >= Water_To_Upgrade_Level)
         {
-            if (Water_Level >= Water_To_Upgrade_Level)
-            {
-                StopAllCoroutines();
+            StopAllCoroutines();
 
-                // Instantiate the next level plant
-                GameObject P;
-                P = Instantiate(Plant_Next_Lvl, transform.position, transform.rotation);
+            // Instantiate the next level plant
+            GameObject P;
+            P = Instantiate(Plant_Next_Lvl, transform.position, transform.rotation);
 
-                // Set new plants plant pot - pass this one's plant pot gameobject
-                P.gameObject.GetComponent<Plant_Base>().Assign_Plant_Pot(My_Plant_Pot);
-                Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePlant(P, Lane_Num);
-                Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePunchCactus(P);
+            // Set new plants plant pot - pass this one's plant pot gameobject
+            P.gameObject.GetComponent<Plant_Base>().Assign_Plant_Pot(My_Plant_Pot);
+            Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePlant(P, Lane_Num);
+            Plant_Mngr.GetComponent<Plant_Manager>().Add_ActivePunchCactus(P);
 
-                Debug.Log("Punch Cactus upgraded to level " + (Flower_Level + 1));
+            //Debug.Log("Punch Cactus upgraded to level " + (Flower_Level + 1));
 
-                // Delete this plant
-                Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject, Lane_Num);
-                Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePunchCactus(this.gameObject);
+            // Delete this plant
+            Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePlant(this.gameObject, Lane_Num);
+            Plant_Mngr.GetComponent<Plant_Manager>().Remove_ActivePunchCactus(this.gameObject);
 
-                Destroy(this.gameObject);
-            }
-        }
-        else
-        {
-            Debug.Log("Punch cactus is max level");
+            Destroy(this.gameObject);
         }
     }
 
@@ -103,7 +96,7 @@ public class Punch_Cactus : Plant_Base
         }
         else
         {
-            Debug.Log("Attack speed is currently modified - Punch Cactus");
+            //Debug.Log("Attack speed is currently modified - Punch Cactus");
         }
     }
 
@@ -116,7 +109,7 @@ public class Punch_Cactus : Plant_Base
         }
         else
         {
-            Debug.Log("Damage is currently modified - Punch Cactus");
+            //Debug.Log("Damage is currently modified - Punch Cactus");
         }
     }
 
@@ -129,7 +122,7 @@ public class Punch_Cactus : Plant_Base
         }
         else
         {
-            Debug.Log("DoT is active - Punch Cactus");
+            //Debug.Log("DoT is active - Punch Cactus");
         }
     }
 
@@ -142,7 +135,7 @@ public class Punch_Cactus : Plant_Base
         }
         else
         {
-            Debug.Log("HoT is active - Punch Cactus");
+            //Debug.Log("HoT is active - Punch Cactus");
         }
     }
 
@@ -155,15 +148,15 @@ public class Punch_Cactus : Plant_Base
 
     IEnumerator Temp_Change_AttackSpeed(float modifier, float time)
     {
-        Debug.Log("Punch Cactus current attack cd: " + Punch_Cactus_Attack_Cooldown_Current);
+        //Debug.Log("Punch Cactus current attack cd: " + Punch_Cactus_Attack_Cooldown_Current);
 
         Punch_Cactus_Attack_Cooldown_Current *= modifier;
-        Debug.Log("Temporary Punch Cactus current attack cd: " + Punch_Cactus_Attack_Cooldown_Current);
+        //Debug.Log("Temporary Punch Cactus current attack cd: " + Punch_Cactus_Attack_Cooldown_Current);
 
         yield return new WaitForSeconds(time);
 
         Punch_Cactus_Attack_Cooldown_Current = Plant_Attack_Cooldown;
-        Debug.Log("Effect done - Punch Cactus current attack cd: " + Punch_Cactus_Attack_Cooldown_Current);
+        //Debug.Log("Effect done - Punch Cactus current attack cd: " + Punch_Cactus_Attack_Cooldown_Current);
         AttackSpeed_Modified = false;
     }
 

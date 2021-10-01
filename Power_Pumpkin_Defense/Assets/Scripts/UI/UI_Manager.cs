@@ -13,6 +13,8 @@ public class UI_Manager : MonoBehaviour
         Spell_Manager = GameObject.Find("Spell_Manager");
         Effect_Manager = GameObject.Find("Effect_Manager");
 
+        Game_PauseMenu_Active = false;
+
         Spell_Icon_Index = 0;
         Plant_Icon_Index = 0;
 
@@ -33,7 +35,22 @@ public class UI_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            // If menu is up, close menu - If menu is not up, open menu
+            if (Game_PauseMenu_Active)
+            {
+                Game_PauseMenu_Active = false;
+                InGame_Pause_Menu.GetComponent<InGame_PauseMenu_Script>().UnPause_Game();
+                InGame_Pause_Menu.SetActive(false);
+            }
+            else
+            { 
+                Game_PauseMenu_Active = true;
+                InGame_Pause_Menu.SetActive(true);
+                Time.timeScale = 0;
+            }
+        }
     }
 
     public int Get_Current_Mane()
@@ -181,6 +198,9 @@ public class UI_Manager : MonoBehaviour
 
     [SerializeField] private GameObject WaterReady_Icon;
     [SerializeField] private GameObject SpellReady_Icon;
+
+    [SerializeField] private GameObject InGame_Pause_Menu;
+    private bool Game_PauseMenu_Active;
 
     private bool WaterReady_Check;
     private bool SpellReady_Check;

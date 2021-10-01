@@ -14,12 +14,21 @@ public class Blood_Witch : MonoBehaviour
         Effect_Mngr.GetComponent<Effect_Manager>().Plants_Take_Damage(Blood_Witch_DamageOverTime, Blood_Witch_DoT_Duration, Blood_Witch_Lane);  // (float d, float time, int Lane_Num)
 
         Effect_Mngr.GetComponent<Effect_Manager>().Monsters_Gain_Health(Blood_Witch_Monster_Heal_Amount, Blood_Witch_Lane);
+
+        StartCoroutine(Time_To_Destroy());
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    IEnumerator Time_To_Destroy()
+    {
+        yield return new WaitForSeconds(5);
+
+        Destroy(this.gameObject);
     }
 
     [SerializeField] private float Blood_Witch_DamageOverTime;

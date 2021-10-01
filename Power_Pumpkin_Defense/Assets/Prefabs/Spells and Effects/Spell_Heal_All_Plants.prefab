@@ -106,4 +106,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f90af342ae0b4548a08d3db89466360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Spell_Mana_Cost: 10
   Spell_Heal_Amount: 1

@@ -153,6 +153,11 @@ public class Monster_Manager : MonoBehaviour
         StartCoroutine(Hexer_Spawner(Available_Lanes, Num_Hexers, Spawn_Interval));
     }
 
+    public void Spawn_Boss_Modifier(GameObject Boss, float Time_Until_Active)
+    {
+        StartCoroutine(Boss_Spawner(Boss, Time_Until_Active));
+    }
+
 
     IEnumerator Ghast_Spawner(int Available_Lanes, int Num_Ghasts, float Spawn_Interval)
     {
@@ -236,6 +241,13 @@ public class Monster_Manager : MonoBehaviour
             Wave_Mngr.GetComponent<Wave_Manager>().Update_Enemy_SpawnType_Status();
             // End Coroutine
         }
+    }
+
+    IEnumerator Boss_Spawner(GameObject Boss, float Time_Until_Active)
+    {
+        yield return new WaitForSeconds(Time_Until_Active);
+
+        Instantiate(Boss);
     }
 
     //
