@@ -159,6 +159,11 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
+    public void Display_Win_Text()
+    {
+        Win_Text.SetActive(true);
+    }
+
     public void Display_Wave_Cooldown()
     {
         //Time_To_Next_Wave_Display.SetActive(true);
@@ -201,6 +206,8 @@ public class UI_Manager : MonoBehaviour
 
     [SerializeField] private GameObject InGame_Pause_Menu;
     private bool Game_PauseMenu_Active;
+
+    [SerializeField] private GameObject Win_Text;
 
     private bool WaterReady_Check;
     private bool SpellReady_Check;

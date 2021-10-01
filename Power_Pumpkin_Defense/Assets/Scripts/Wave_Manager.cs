@@ -100,6 +100,7 @@ public class Wave_Manager : MonoBehaviour
             // Moved this check here so that the game ends faster instead of triggering a cooldown before ending
             if (Current_Wave_Num >= Wave_Data_List.Count && Great_Pumpkin_Alive)
             {
+                UI_Mngr.GetComponent<UI_Manager>().Display_Win_Text();
                 Debug.Log("Great Pumpkin Survived. You Win!");
                 // Call Game Controller. Game Win
             }
