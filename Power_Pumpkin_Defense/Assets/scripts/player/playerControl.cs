@@ -19,12 +19,10 @@ public class playerControl : MonoBehaviour
         float dx = Input.GetAxis("Horizontal");
         float dz = Input.GetAxis("Vertical");
 
-        float targetAngle = Mathf.Atan2(dx, dz) * Mathf.Rad2Deg;
-         
-        Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * transform.forward;
-        moveDirection.Normalize();
-        transform.position = moveDirection * speed  * Time.deltaTime;
-       // transform.forward = moveDirection;
+        Vector3 moveDirection = new Vector3(dx, 0, dz);
+        
+        
+        transform.position = transform.position + moveDirection * speed  * Time.deltaTime;
 
     }
 }
