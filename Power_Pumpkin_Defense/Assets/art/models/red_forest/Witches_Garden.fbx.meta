@@ -1,9 +1,69 @@
 fileFormatVersion: 2
-guid: bfe097047072c7e4fbc5998eff0b5b92
+guid: 9d3b72a8b75e85044a6fa0308d2895c4
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gate
+    second: {fileID: 2100000, guid: debe49a1defe620418e98ea9b7d64cd4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hedge
+    second: {fileID: 2100004, guid: fdc7d8dffa381b54cb7740b8761d54c0, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Maple_leaves
+    second: {fileID: 2100000, guid: d196423076486fa45817d369c6ac5c66, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: boundary
+    second: {fileID: 2100000, guid: 3e9789fdf1e5b914aba2a34262a2ec85, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dirt
+    second: {fileID: 2100000, guid: 5e318b072aa303541a3ad6a0c22eb41e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dirt_leaves_A
+    second: {fileID: 2100000, guid: 0bc7c7b33831d844d85427e02bc00225, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: fallen_leaves
+    second: {fileID: 2100000, guid: ee8e0a6e986a9874d987a5d89af63eeb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: fence
+    second: {fileID: 2100000, guid: debe49a1defe620418e98ea9b7d64cd4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: grass_side
+    second: {fileID: 2100000, guid: 371f7ec64c82f7b49a1686b870ff921f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ivy_leaves
+    second: {fileID: 2100000, guid: c4b58af89e4cc1a44957ff8b18b0488a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: stone
+    second: {fileID: 2100000, guid: 89033ea3d2c0fb74ca0ff8512767e3ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tree_truink
+    second: {fileID: 2100000, guid: 3f743758994cd44459e0f903057ea4ac, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
