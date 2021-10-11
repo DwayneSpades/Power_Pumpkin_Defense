@@ -12,11 +12,21 @@ public class playerControl : MonoBehaviour
     public float speed;
 
     public float distanceFromPlayer;
+
+    public float dx;
+    public float dz;
+
+    public float lastDX;
+    public float lastDZ;
+
+    public float angleOfPlayer;
+
     public float angleAroundPlayer;
-    public float pitch;
+    public float pitch =45;
     public float yaw;
     public float roll;
     public float sensitivity = 1;
+    public float zoomSensitivity = 1;
 
     float horizontalDistance;
     float verticalDistance;
@@ -24,30 +34,72 @@ public class playerControl : MonoBehaviour
     float offsetX;
     float offsetZ;
 
+    float targetAngle=0;
+    float targetPitch = 45;
+
+    float targetZoom = 15;
+
+    public Vector3 crossProduct;
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
+        pitch = 45;
+        distanceFromPlayer = 15;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float dx = Input.GetAxis("Horizontal");
-        float dz = Input.GetAxis("Vertical");
-
+        dx = Input.GetAxis("Horizontal");
+        dz = Input.GetAxis("Vertical");
+        
         //update ouse
 
-        angleAroundPlayer += Input.GetAxis("Mouse X") * sensitivity;
-        pitch += Input.GetAxis("Mouse Y");
-        distanceFromPlayer += Input.GetAxis("Mouse ScrollWheel");
+        //angleAroundPlayer += Input.GetAxis("Mouse X") * sensitivity;
+        //pitch += Input.GetAxis("Mouse Y")*sensitivity;
+
+        
+        targetZoom -= Input.GetAxis("Mouse ScrollWheel")* zoomSensitivity;
+
 
         Vector3 moveDirection = new Vector3(dx, 0, dz);
         moveDirection.Normalize();
 
+        //claculate player facing position
+        angleOfPlayer = Vector3.Angle(model.transform.forward,new Vector3(cam.transform.forward.x,0, cam.transform.forward.z));
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            targetAngle += 45;
+
+        }
+        else if (Input.GetKeyDown(KeyCode.Q))
+        {
+            targetAngle -= 45;
+
+        }
+        if (targetZoom < 5)
+        {
+            targetZoom = 5;
+        }
+        else if (targetZoom > 40)
+        {
+            targetZoom = 40;
+        }
+
+        //interpolate camposition and rotation
+        pitch = Mathf.Lerp(pitch, targetPitch, 0.05f);
+        targetPitch = targetZoom + 15;
+        distanceFromPlayer = Mathf.Lerp(distanceFromPlayer, targetZoom, 0.05f);
+        angleAroundPlayer = Mathf.Lerp(angleAroundPlayer, targetAngle, 0.05f);
+
         if (moveDirection.x != 0 || moveDirection.z != 0)
         {
-            model.transform.forward = Quaternion.Euler(0, angleAroundPlayer, 0)*moveDirection;
+            lastDX = dx;
+            lastDZ = dz;
+
+            model.transform.forward = Quaternion.Euler(0,angleAroundPlayer, 0)*moveDirection;
             model.GetComponent<Animator>().Play("run");
         }
         else
