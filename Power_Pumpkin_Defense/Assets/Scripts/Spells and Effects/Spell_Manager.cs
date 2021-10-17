@@ -89,4 +89,6 @@ public class Spell_Manager : MonoBehaviour
 
     private bool Can_Use_Spell;
     [SerializeField] private float Spell_Cooldown_Time;
+
+    // Test Comment
 }
