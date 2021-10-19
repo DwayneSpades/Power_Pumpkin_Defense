@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3832412019651518397}
   - component: {fileID: 7002480419593810420}
+  - component: {fileID: 358272939404624433}
   m_Layer: 0
   m_Name: Spell_Manager
   m_TagString: Untagged
@@ -44,3 +45,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Spell_List: []
+  Spell_Cooldown_Time: 0
+--- !u!114 &358272939404624433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5603722581987899163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1187dedd6c37cd84489f50c6dc72900a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spell_List:
+  - {fileID: 3343662358530295284, guid: 883d24ef256955a4f81226129dbdf810, type: 3}
+  Spell_Cooldown_Time: 5
