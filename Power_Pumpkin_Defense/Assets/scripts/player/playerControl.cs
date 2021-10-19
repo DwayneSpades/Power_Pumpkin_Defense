@@ -86,6 +86,7 @@ public class playerControl : MonoBehaviour
         else if (targetZoom > 40)
         {
             targetZoom = 40;
+
         }
 
         //interpolate camposition and rotation

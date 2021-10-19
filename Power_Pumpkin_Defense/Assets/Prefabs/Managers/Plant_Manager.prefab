@@ -43,11 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f844525e3002b0046b86bae6865aab0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlantPot_List: []
   Active_Plants: []
   Active_PunchCacti: []
   Active_ShriekRoots: []
   Active_FireFlowers: []
-  FireFlower: {fileID: 0}
-  ShriekRoot: {fileID: 0}
-  PunchCactus: {fileID: 0}
+  Available_Plant_List:
+  - {fileID: 5880386846402516068, guid: 2e7f562585762134b8da83b1b0e6b4c4, type: 3}
+  - {fileID: 5521680506770235781, guid: 4d3c671b2a43f1c46bf7f7b82c68e4ab, type: 3}
+  - {fileID: 2525707053648864739, guid: 9f32a141795db4c478b6087a33e136ad, type: 3}

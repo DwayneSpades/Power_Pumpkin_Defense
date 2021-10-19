@@ -150,5 +150,5 @@ public class Plant_Manager : MonoBehaviour
     [SerializeField] private List<GameObject> Available_Plant_List;
     private int CurrentPlant_Index;
 
-    [SerializeField] private GameObject PlantPot;
+    //[SerializeField] private GameObject PlantPot;
 }

@@ -58,11 +58,11 @@ public class Monster_Base : MonoBehaviour
     }
 
     // Movement - Important
-    protected Vector3 ToVector;
-    protected Vector3 TargetPos;
+    [SerializeField] protected Vector3 ToVector;
+    [SerializeField]protected Vector3 TargetPos;
 
-    protected List<Transform> Path;
-    protected int CurrentPoint;
+    [SerializeField] protected List<Transform> Path;
+    [SerializeField]protected int CurrentPoint;
 
     // Monster variables
     [SerializeField] protected float Monster_Speed;

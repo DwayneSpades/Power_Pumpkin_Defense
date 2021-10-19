@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2891966828204835145
+--- !u!1 &2536641446499957266
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2891966828204835144}
-  - component: {fileID: 1788096259352329226}
+  - component: {fileID: 1916550586525771945}
+  - component: {fileID: 4843126738272225588}
   m_Layer: 0
-  m_Name: Monster_Manager
+  m_Name: Resource_Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2891966828204835144
+--- !u!4 &1916550586525771945
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2891966828204835145}
+  m_GameObject: {fileID: 2536641446499957266}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.58, y: 9.196579, z: -30.825228}
+  m_LocalPosition: {x: 2.1350622, y: -2.0426705, z: 1.3782679}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1788096259352329226
+--- !u!114 &4843126738272225588
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2891966828204835145}
+  m_GameObject: {fileID: 2536641446499957266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea1245706a775fd408f23de018315d28, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c5fa182e4109a64580f7bafc354df82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Active_Monsters: []
-  Active_Ghasts: []
-  Active_Polters: []
-  Active_Hexers: []
-  Ghast: {fileID: 4189157600354944227, guid: 6297cc3b6b3313b43ab8c680deaab7b5, type: 3}
-  Polter: {fileID: 4189157600354944227, guid: a84f878dcab743f4cbb94d21215f6a0a, type: 3}
-  Hexer: {fileID: 4189157600354944227, guid: a59b8841a019ddf45ad90bfbe7e88013, type: 3}
-  BloodWitch: {fileID: 0}
+  m_Starting_Water_Amount: 0
+  m_Max_Water_Amount: 100
+  m_Starting_Mana_Amount: 30
+  m_Max_Mana_Amount: 200
+  m_Water_To_Give_Plant: 10
+  m_Water_Cooldown_Time: 3
+  m_Mana_Cost_PunchCactus: 10
+  m_Mana_Cost_FireFlower: 10
+  m_Mana_Cost_ShriekRoot: 10

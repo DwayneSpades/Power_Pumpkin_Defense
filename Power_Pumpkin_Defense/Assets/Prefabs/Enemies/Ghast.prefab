@@ -124,7 +124,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc610b68d009a1419615a00ef2548c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Monster_Speed: 0.4
+  ToVector: {x: 0, y: 0, z: 0}
+  TargetPos: {x: 0, y: 0, z: 0}
+  Path: []
+  CurrentPoint: 0
+  Monster_Speed: 0.5
   Monster_Health: 3
   Monster_Damage: 1
   Monster_Attack_Cooldown: 1

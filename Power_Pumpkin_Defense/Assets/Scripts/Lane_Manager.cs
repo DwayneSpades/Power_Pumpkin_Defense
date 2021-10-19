@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class Lane_Manager : MonoBehaviour
 {
@@ -26,7 +27,24 @@ public class Lane_Manager : MonoBehaviour
         Monster_Lanes.Add(Lane_2_Monsters);
         Monster_Lanes.Add(Lane_3_Monsters);
     }
+    //Helpful debug visulaizer tool for drawing paths in the editor but no in game
+    void OnDrawGizmos()
+    {
 
+        Vector3 offset = Vector3.left * 3;
+
+        for(int i = 0; i < Lane_1_List.Count-1; i++)
+        {
+            Handles.DrawBezier(
+                Lane_1_List[i].position,
+                Lane_1_List[i+1].position,
+                Lane_1_List[i].position-offset,
+                Lane_1_List[i+1].position+offset,
+                Color.white,
+                EditorGUIUtility.whiteTexture,1f
+                );
+        }
+    }
     // Update is called once per frame
     void Update()
     {
