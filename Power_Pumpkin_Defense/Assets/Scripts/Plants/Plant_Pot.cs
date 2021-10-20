@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Plant_Pot : MonoBehaviour
 {
+
+    //public bool menuVisible = false;
+    public GameObject menu_ui;
+    public playerControl playerRef;
+
     // Start is called before the first frame update
     void Start()
     {
         Plant_Mngr = GameObject.Find("Plant_Manager");
         Resource_Mngr = GameObject.Find("Resource_Manager");
         Active_Plant = false;
+        menu_ui.SetActive(false);
+        playerRef = FindObjectOfType<playerControl>();
     }
 
     // Update is called once per frame
@@ -18,13 +25,30 @@ public class Plant_Pot : MonoBehaviour
  
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            menu_ui.SetActive(true);
+        }
+        
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            menu_ui.SetActive(false);
+        }
+    }
+
     public void Grow_Plant()
     {
         if (!Active_Plant)
         {
-            GameObject plant = Plant_Mngr.GetComponent<Plant_Manager>().Get_Selected_Plant();
+            //GameObject plant = Plant_Mngr.GetComponent<Plant_Manager>().Get_Selected_Plant();
 
-            if (plant.name == PunchCactus.name)
+            if (playerRef.currentPlant == playerControl.selectedPlant.punchCactus)
             {
                 if (Resource_Mngr.GetComponent<Resource_Manager>().Can_Plant_Punch_Cactus())
                 {
@@ -35,7 +59,7 @@ public class Plant_Pot : MonoBehaviour
                     //Debug.Log("Not enough mana to plant punch cactus");
                 }
             }
-            else if (plant.name == FireFlower.name)
+            else if (playerRef.currentPlant == playerControl.selectedPlant.fireFlower)
             {
                 if (Resource_Mngr.GetComponent<Resource_Manager>().Can_Plant_Fire_Flower())
                 {

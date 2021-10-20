@@ -40,12 +40,37 @@ public class playerControl : MonoBehaviour
     float targetZoom = 15;
 
     public Vector3 crossProduct;
+
+    public selectedPlant currentPlant;
+
+    public enum selectedPlant{
+        punchCactus,
+        fireFlower,
+        shriekRoot
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
         pitch = 45;
         distanceFromPlayer = 15;
+    }
+
+    public void selectCactus()
+    {
+        currentPlant = selectedPlant.punchCactus;
+    }
+
+    public void selectFlower()
+    {
+
+        currentPlant = selectedPlant.fireFlower;
+    }
+    public void selectRoot()
+    {
+
+        currentPlant = selectedPlant.shriekRoot;
     }
 
     // Update is called once per frame
