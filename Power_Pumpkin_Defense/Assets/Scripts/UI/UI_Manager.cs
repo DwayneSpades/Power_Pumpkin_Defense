@@ -8,7 +8,7 @@ public class UI_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Resource_Mngr = GameObject.Find("Resource_Manager");
+        //Resource_Mngr = GameObject.Find("Resource_Manager");
         Plant_Mngr = GameObject.Find("Plant_Manager");
         Spell_Manager = GameObject.Find("Spell_Manager");
         Effect_Manager = GameObject.Find("Effect_Manager");
@@ -25,8 +25,8 @@ public class UI_Manager : MonoBehaviour
         //Spell_Icon_List[Spell_Icon_Index].SetActive(true);
         //Plant_Icon_List[Plant_Icon_Index].SetActive(true);
 
-        Current_Mana = Resource_Mngr.GetComponent<Resource_Manager>().Get_Current_Mana();
-        Current_Water = Resource_Mngr.GetComponent<Resource_Manager>().Get_Current_Water();
+        //Current_Mana = Resource_Mngr.GetComponent<Resource_Manager>().Get_Current_Mana();
+        //Current_Water = Resource_Mngr.GetComponent<Resource_Manager>().Get_Current_Water();
 
         //Update_Current_Mana(Current_Mana);
         //Update_Current_Water(Current_Water);

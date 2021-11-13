@@ -42,6 +42,7 @@ public class Plant_Pot : MonoBehaviour
         }
     }
 
+    
     public void Grow_Plant()
     {
         if (!Active_Plant)
@@ -50,36 +51,15 @@ public class Plant_Pot : MonoBehaviour
 
             if (playerRef.currentPlant == playerControl.selectedPlant.punchCactus)
             {
-                if (Resource_Mngr.GetComponent<Resource_Manager>().Can_Plant_Punch_Cactus())
-                {
-                    Spawn_Punch_Cactus();
-                }
-                else
-                {
-                    //Debug.Log("Not enough mana to plant punch cactus");
-                }
+                Spawn_Punch_Cactus();
             }
             else if (playerRef.currentPlant == playerControl.selectedPlant.fireFlower)
-            {
-                if (Resource_Mngr.GetComponent<Resource_Manager>().Can_Plant_Fire_Flower())
-                {
-                    Spawn_Fire_Flower();
-                }
-                else
-                {
-                    //Debug.Log("Not enough mana to plant fire flower");
-                }
+            {            
+               Spawn_Fire_Flower();          
             }
             else
             {
-                if (Resource_Mngr.GetComponent<Resource_Manager>().Can_Plant_Shriek_Root())
-                {
-                    Spawn_Shriek_Root();
-                }
-                else
-                {
-                    //Debug.Log("Not enough mana to plant shriek root");
-                }
+                Spawn_Shriek_Root();          
             }
         }
         else
@@ -105,7 +85,7 @@ public class Plant_Pot : MonoBehaviour
         tmp.x -= 0.35f;
         GameObject P = Instantiate(PunchCactus, tmp, transform.rotation);
 
-        Resource_Mngr.GetComponent<Resource_Manager>().UseMana(Resource_Mngr.GetComponent<Resource_Manager>().Get_Punch_Cactus_Mana_Cost());
+        //Resource_Mngr.GetComponent<Resource_Manager>().UseMana(Resource_Mngr.GetComponent<Resource_Manager>().Get_Punch_Cactus_Mana_Cost());
 
         Current_Active_Plant = P;
         P.GetComponent<Plant_Base>().Assign_Plant_Pot(this.gameObject);
@@ -127,7 +107,7 @@ public class Plant_Pot : MonoBehaviour
         tmp.x -= 0.25f;
         GameObject P = Instantiate(ShriekRoot, tmp, transform.rotation);
 
-        Resource_Mngr.GetComponent<Resource_Manager>().UseMana(Resource_Mngr.GetComponent<Resource_Manager>().Get_Shriek_Root_Mana_Cost());
+        //Resource_Mngr.GetComponent<Resource_Manager>().UseMana(Resource_Mngr.GetComponent<Resource_Manager>().Get_Shriek_Root_Mana_Cost());
 
         Current_Active_Plant = P;
         P.GetComponent<Plant_Base>().Assign_Plant_Pot(this.gameObject);
@@ -149,7 +129,7 @@ public class Plant_Pot : MonoBehaviour
         tmp.x -= 0.1f;
         GameObject P = Instantiate(FireFlower, tmp, transform.rotation);
 
-        Resource_Mngr.GetComponent<Resource_Manager>().UseMana(Resource_Mngr.GetComponent<Resource_Manager>().Get_Fire_Flower_Mana_Cost());
+        //Resource_Mngr.GetComponent<Resource_Manager>().UseMana(Resource_Mngr.GetComponent<Resource_Manager>().Get_Fire_Flower_Mana_Cost());
 
         Current_Active_Plant = P;
         P.GetComponent<Plant_Base>().Assign_Plant_Pot(this.gameObject);
