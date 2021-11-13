@@ -33,7 +33,7 @@ public class Wave_Manager : MonoBehaviour
             if (Current_Wave_Num < Wave_Data_List.Count)
             {
                 Debug.Log("Wave Start - Wave: " + (Current_Wave_Num + 1)); // Displays current wave + 1, so wave 0 is wave 1
-                UI_Mngr.GetComponent<UI_Manager>().Display_Wave_Num(Current_Wave_Num + 1);
+                //UI_Mngr.GetComponent<UI_Manager>().Display_Wave_Num(Current_Wave_Num + 1);
 
                 // Update Wave Object
                 Current_Wave_Obj = Wave_Data_List[Current_Wave_Num];
