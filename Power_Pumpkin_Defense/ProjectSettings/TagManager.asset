@@ -4,9 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Lane_2
-  - Lane_1
-  - Lane_3
   - Great_Pumpkin
   - Lane_Obj
   - Ghast
@@ -19,6 +16,7 @@ TagManager:
   - Mana_Sphere
   - Monster
   - Plant
+  - ground
   layers:
   - Default
   - TransparentFX
