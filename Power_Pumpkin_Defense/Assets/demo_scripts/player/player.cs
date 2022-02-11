@@ -45,6 +45,11 @@ public class player : myTransform
 
     public void Start()
     {
+
+        //cap frame rate at 60FPS
+        Application.targetFrameRate = 55;
+
+
         cam = FindObjectOfType<camera>();
 
         //initialize input
@@ -98,13 +103,23 @@ public class player : myTransform
     public Ray ray;
     
     public bool onGround = true;
-
+    public float force = 5;
     public void FixedUpdate()
     {
+        
+        
+        
         if (rightStick.x != 0)
         {
             cam.targetAngleH += -rightStick.x * camSpeed * Time.deltaTime;
 
+            
+
+        }
+
+        if (rightStick.y != 0)
+        {
+            cam.targetAngleV += -rightStick.y * camSpeed * Time.deltaTime;
             if (cam.targetAngleV > 2.6f)
             {
                 cam.targetAngleV = 2.6f;
@@ -113,12 +128,6 @@ public class player : myTransform
             {
                 cam.targetAngleV = 0.6f;
             }
-
-        }
-
-        if (rightStick.y != 0)
-        {
-            cam.targetAngleV += -rightStick.y * camSpeed * Time.deltaTime;
         }
 
         pressure = (Mathf.Abs(leftStick.x) + Mathf.Abs(leftStick.y));
@@ -133,18 +142,77 @@ public class player : myTransform
        
         if (Physics.Raycast(ray, out hit))
         {
-            Debug.DrawRay(ray.origin, hit.point);
+            //Debug.DrawRay(ray.origin, hit.point);
 
             arm.forward = hit.point - arm.position;
 
-            Debug.Log("Camera Collision");
+            //Debug.Log("Camera Collision");
         }
 
-       
+        
+
+
 
         //update curernt state
         currentState.update(this);
 
+        float rH = 0.2f;
+        //collision resolution
+        ray = new Ray(transform.position + new Vector3(0,1,0)*rH, transform.forward);
+
+        float legnts = 1;
+        Debug.DrawRay(transform.position + new Vector3(0, 1, 0) * rH, transform.forward, Color.cyan,legnts);
+        Debug.DrawRay(transform.position + new Vector3(0, 1, 0) * rH, transform.right, Color.cyan, legnts);
+        Debug.DrawRay(transform.position + new Vector3(0, 1, 0) * rH, -transform.right, Color.cyan, legnts);
+        Debug.DrawRay(transform.position + new Vector3(0, 1, 0) * rH, -transform.right+transform.forward, Color.cyan, legnts);
+        Debug.DrawRay(transform.position + new Vector3(0, 1, 0) * rH, transform.right + transform.forward, Color.cyan, legnts);
+
+        //collision with walls
+        if (Physics.Raycast(ray, out hit, legnts))
+        {
+            Vector3 forceDir = new Vector3(hit.point.x, transform.position.y, hit.point.z) - transform.position;
+            transform.position -= forceDir * force * Time.deltaTime;
+            //Debug.Log("Camera Collision");
+        }
+        ray = new Ray(transform.position + new Vector3(0, 1,0) * rH, transform.right);
+
+        //collision with walls
+        if (Physics.Raycast(ray, out hit, legnts))
+        {
+            Vector3 forceDir = new Vector3(hit.point.x, transform.position.y, hit.point.z) - transform.position;
+            transform.position -= forceDir * force * Time.deltaTime;
+            //Debug.Log("Camera Collision");
+        }
+        ray = new Ray(transform.position + new Vector3(0, 1,0) * rH, -transform.right);
+
+        //collision with walls
+        if (Physics.Raycast(ray, out hit, legnts))
+        {
+            Vector3 forceDir = new Vector3(hit.point.x, transform.position.y, hit.point.z) - transform.position;
+            transform.position -= forceDir * force * Time.deltaTime;
+            //Debug.Log("Camera Collision");
+        }
+
+        ray = new Ray(transform.position + new Vector3(0, 1, 0) * rH, transform.right+transform.forward);
+
+        //collision with walls
+        if (Physics.Raycast(ray, out hit, legnts))
+        {
+            Vector3 forceDir = new Vector3(hit.point.x, transform.position.y, hit.point.z) - transform.position;
+            transform.position -= forceDir * force * Time.deltaTime;
+            //Debug.Log("Camera Collision");
+        }
+        ray = new Ray(transform.position + new Vector3(0, 1, 0) * rH, -transform.right + transform.forward);
+
+        //collision with walls
+        if (Physics.Raycast(ray, out hit, legnts))
+        {
+            Vector3 forceDir = new Vector3(hit.point.x, transform.position.y, hit.point.z) - transform.position;
+            transform.position -= forceDir * force * Time.deltaTime;
+            //Debug.Log("Camera Collision");
+        }
+
+        //cam.positionCamera(this);
         //compute current transform
         //computeTransform();
     }
@@ -187,27 +255,8 @@ public class player : myTransform
         playerInput.playerController.Disable();
     }
 
-    public float force = 5;
-    void OnCollisionEnter(Collision collision)
-    {
-       
-        
-    }
-
-    void OnCollisionStay(Collision collision)
-    {
-        Vector3 forceDir = new Vector3(0, 0, 0);
-        Vector3 contactPoint = new Vector3(0, 0, 0);
-
-        Debug.Log("collided object: " + collision.transform.name);
-        foreach (ContactPoint contact in collision.contacts)
-        {
-            forceDir = new Vector3(contact.point.x, transform.position.y, contact.point.z) - transform.position;
-            transform.position += -forceDir * force * Time.deltaTime;
-            Debug.DrawRay(contact.point, contact.normal, Color.white);
-        }
-
-    }
+   
+  
 
     void falling()
     {

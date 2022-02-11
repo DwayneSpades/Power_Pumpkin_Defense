@@ -67,14 +67,14 @@ public class walkPlayerState : i_PlayerState
         }
 
         //remember the last direction input by the stick to keep facing that direction
-        Vector3 direction = camRot * p.currentForward * p.velocityFWD * Time.deltaTime;
+        Vector3 direction = camRot * p.currentForward;
 
         // _rotation = Quaternion.Euler(direction);
 
         //_position = _position + direction ;
 
         //move horizontally
-        p.transform.Translate(direction, Space.World);
+        p.transform.position = p.transform.position + (direction) * p.velocityFWD * Time.deltaTime;
 
 
 
@@ -105,9 +105,10 @@ public class walkPlayerState : i_PlayerState
             Debug.DrawLine(p.ray.origin, p.hit.point);
             //Debug.Log(hit.collider.name);
 
-            if (p.hit.collider.tag == "ground" && p.velocityUP < 0)
+            if (p.hit.collider.tag == "ground" && p.velocityUP <= 0)
             {
-                p.transform.position = Vector3.Lerp(p.transform.position, new Vector3(p.transform.position.x, p.hit.point.y + p.footResponce, p.transform.position.z), p.footResponceRate);
+                p.transform.position = new Vector3(p.transform.position.x, p.hit.point.y + p.footResponce, p.transform.position.z);
+                //p.transform.position = Vector3.Lerp(p.transform.position, new Vector3(p.transform.position.x, p.hit.point.y + p.footResponce, p.transform.position.z), p.footResponceRate * Time.deltaTime);
                 p.velocityUP = 0;
                 p.onGround = true;
 

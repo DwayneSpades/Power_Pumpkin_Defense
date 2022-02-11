@@ -430,7 +430,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 30.082, y: 0, z: 0}
 --- !u!114 &83969144
 MonoBehaviour:
@@ -451,7 +451,7 @@ MonoBehaviour:
   theta: 0
   targetAngleH: 0
   targetAngleV: 0
-  trackSpeed: 0.05
+  trackSpeed: 4.67
   hOffset: 5.46
   vOffset: 2
   targetPosition: {x: 0, y: 0, z: 0}
@@ -459,8 +459,8 @@ MonoBehaviour:
   weapon: {fileID: 1308284299}
   weaponPhi: -0.74
   weaponTheta: 0
-  camTrackRate: 0.86
-  camSphereRate: 0.41
+  camTrackRate: 35.55
+  camSphereRate: 14.68
   focusPhi: -0.15
   focusTheta: 0
   setCamHeight: 1.37
@@ -965,7 +965,7 @@ Transform:
   m_Children:
   - {fileID: 1924955130}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &414183190
 MonoBehaviour:
@@ -989,22 +989,22 @@ MonoBehaviour:
   accelerationH: 50.62
   deccelerationH: 42
   accelerationV: 1.29
-  deccelerationV: 56.5
+  deccelerationV: 25.8
   velocityHLmit: 8
   walkingSpeedLimit: 8
   runningSpeedLimit: 12
   jumpHeight: 16.7
-  fallSpeed: -61.21
-  footSensor: 1.3
+  fallSpeed: -20.7
+  footSensor: 1.05
   footResponce: 1
-  footResponceRate: 0.8
+  footResponceRate: 20.9
   leftStick: {x: 0, y: 0}
   rightStick: {x: 0, y: 0}
   pressure: 0
   targetAngle: 0
   camFocusPoint: {fileID: 1196682623}
   onGround: 1
-  force: 8
+  force: 15
 --- !u!1 &432915226
 GameObject:
   m_ObjectHideFlags: 0

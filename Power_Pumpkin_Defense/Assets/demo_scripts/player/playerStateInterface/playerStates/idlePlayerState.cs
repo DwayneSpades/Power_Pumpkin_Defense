@@ -67,7 +67,8 @@ public class idlePlayerState : i_PlayerState
 
             if (p.hit.collider.tag == "ground" && p.velocityUP <= 0)
             {
-                p.transform.position = Vector3.Lerp(p.transform.position, new Vector3(p.transform.position.x, p.hit.point.y + p.footResponce, p.transform.position.z), p.footResponceRate);
+                p.transform.position = new Vector3(p.transform.position.x, p.hit.point.y + p.footResponce, p.transform.position.z);
+                //p.transform.position = Vector3.Lerp(p.transform.position, new Vector3(p.transform.position.x, p.hit.point.y + p.footResponce, p.transform.position.z), p.footResponceRate * Time.deltaTime);
                 p.velocityUP = 0;
                 p.onGround = true;
 
