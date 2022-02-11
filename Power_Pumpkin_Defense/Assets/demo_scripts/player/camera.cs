@@ -46,11 +46,12 @@ public class camera : MonoBehaviour
 
     private Vector3 focusPosition;
     public float camTrackRate = 0.05f;
-
+    public float camSphereRate = 0.5f;
 
     public float focusPhi = 0.21f;
     public float focusTheta = 0;
     public float setCamHeight = 3;
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -70,7 +71,7 @@ public class camera : MonoBehaviour
         float targetZPos2 = player.transform.position.z - distance * Mathf.Sin(weaponPhi) * Mathf.Sin((Mathf.Deg2Rad) + theta);
         weapon.position = new Vector3(targetXPos2, player.transform.position.y + setCamHeight, targetZPos2);
 
-        targetPosition = target.position;
+        targetPosition = Vector3.Lerp(targetPosition, target.position, camSphereRate);
 
         cameraCollision();
 
@@ -143,6 +144,6 @@ public class camera : MonoBehaviour
         }
         */
 
-        focusPosition = targetPosition;
+        focusPosition = Vector3.Lerp(focusPosition,targetPosition,camTrackRate);
     }
 }

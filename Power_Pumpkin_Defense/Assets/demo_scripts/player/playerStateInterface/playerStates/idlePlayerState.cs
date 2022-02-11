@@ -40,7 +40,7 @@ public class idlePlayerState : i_PlayerState
             p.velocityFWD = 0;
         }
 
-        //falling(p);
+        falling(p);
     }
 
     public void falling(player p)
@@ -49,18 +49,25 @@ public class idlePlayerState : i_PlayerState
         Debug.DrawRay(p.transform.position, -p.transform.up, Color.blue);
 
 
+        p.velocityUP -= p.deccelerationV * Time.deltaTime;
+        if (p.velocityUP <= p.fallSpeed)
+        {
+            p.velocityUP = p.fallSpeed;
+        }
+
+
         p.ray = new Ray(p.transform.position, -p.transform.up);
 
 
 
-        if (Physics.Raycast(p.ray, out p.hit, 1.5f))
+        if (Physics.Raycast(p.ray, out p.hit, p.footSensor))
         {
             Debug.DrawLine(p.ray.origin, p.hit.point);
             //Debug.Log(hit.collider.name);
 
-            if (p.hit.collider.tag == "ground" && p.velocityUP < 0)
+            if (p.hit.collider.tag == "ground" && p.velocityUP <= 0)
             {
-                p.transform.position = new Vector3(p.transform.position.x, p.hit.point.y + 1, p.transform.position.z);
+                p.transform.position = Vector3.Lerp(p.transform.position, new Vector3(p.transform.position.x, p.hit.point.y + p.footResponce, p.transform.position.z), p.footResponceRate);
                 p.velocityUP = 0;
                 p.onGround = true;
 
@@ -73,6 +80,10 @@ public class idlePlayerState : i_PlayerState
             p.switchStates(playerStates.activeAir);
         }
 
+        Vector3 directionUp = new Vector3(0, 1, 0) * p.velocityUP * Time.deltaTime;
+
+        //move vertically
+        p.transform.Translate(directionUp, Space.World);
     }
 
 }

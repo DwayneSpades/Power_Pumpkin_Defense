@@ -27,6 +27,9 @@ public class player : myTransform
 
     public float jumpHeight = 5;
     public float fallSpeed = -10;
+    public float footSensor = 1;
+    public float footResponce = 1;
+    public float footResponceRate = 0.8f;
 
     public Vector2 leftStick;
     public Vector2 rightStick;

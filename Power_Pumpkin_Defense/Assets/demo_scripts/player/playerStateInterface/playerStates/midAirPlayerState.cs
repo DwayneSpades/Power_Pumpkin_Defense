@@ -99,14 +99,14 @@ public class midAirPlayerState : i_PlayerState
 
         p.ray = new Ray(p.transform.position, -p.transform.up);
 
-        if (Physics.Raycast(p.ray, out p.hit, 1.5f))
+        if (Physics.Raycast(p.ray, out p.hit, p.footSensor))
         {
             Debug.DrawLine(p.ray.origin, p.hit.point);
             //Debug.Log(hit.collider.name);
 
             if (p.hit.collider.tag == "ground" && p.velocityUP < 0)
             {
-                p.transform.position = new Vector3(p.transform.position.x, p.hit.point.y + 1, p.transform.position.z);
+                p.transform.position = Vector3.Lerp(p.transform.position, new Vector3(p.transform.position.x, p.hit.point.y + p.footResponce, p.transform.position.z), p.footResponceRate);
                 p.velocityUP = 0;
                 p.onGround = true;
 
