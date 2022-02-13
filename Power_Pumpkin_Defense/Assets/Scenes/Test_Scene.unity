@@ -979,6 +979,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bee02b9ac49a3b41a0817f8ca4d5927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model: {fileID: 1924955128}
+  weapon: {fileID: 2655559457264990042, guid: 0969f83215d25f04692a79632b4f56aa, type: 3}
   cam: {fileID: 0}
   arm: {fileID: 1308284299}
   animController: {fileID: 1924955129}
@@ -989,12 +991,12 @@ MonoBehaviour:
   accelerationH: 50.62
   deccelerationH: 42
   accelerationV: 1.29
-  deccelerationV: 25.8
+  deccelerationV: 38.71
   velocityHLmit: 8
   walkingSpeedLimit: 8
   runningSpeedLimit: 12
   jumpHeight: 16.7
-  fallSpeed: -20.7
+  fallSpeed: -25
   footSensor: 1.05
   footResponce: 1
   footResponceRate: 20.9
@@ -1003,8 +1005,10 @@ MonoBehaviour:
   pressure: 0
   targetAngle: 0
   camFocusPoint: {fileID: 1196682623}
+  rotRate: 0.22
   onGround: 1
   force: 15
+  oldFWD: {x: 0, y: 0, z: 0}
 --- !u!1 &432915226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,7 +1281,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &678449803
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3761,7 +3765,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &2007040166
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3774,7 +3778,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 00a2cc0564f42d740a22fbdd5a90346e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.65
+  m_Volume: 0.29
   m_Pitch: 1
   Loop: 1
   Mute: 0

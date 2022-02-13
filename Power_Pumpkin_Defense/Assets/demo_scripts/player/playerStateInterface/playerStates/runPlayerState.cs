@@ -11,15 +11,19 @@ public class runPlayerState : i_PlayerState
         p.animController.Play("run");
         //register action
         p.velocityHLmit = p.runningSpeedLimit;
+        p.animController.speed = 1.5f;
     }
 
     public void onExit(player p)
     {
         //do something here    
+        p.animController.speed = 1f;
 
+        p.model.transform.localRotation = Quaternion.Euler(0,p.transform.rotation.y, 0);
         //deregister the actions for this input
     }
-
+    Vector3 oldForward;
+    float angleDif;
     public void update(player p)
     {
 
@@ -27,6 +31,7 @@ public class runPlayerState : i_PlayerState
         Matrix4x4 camRot = Matrix4x4.Rotate(Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0));
 
         //do something here
+
 
         if (p.leftStick != Vector2.zero)
         {
@@ -44,9 +49,14 @@ public class runPlayerState : i_PlayerState
                 //cam.targetAngleH += -(leftStick.x*camSpeed) * Time.deltaTime;
             }
 
+
             //the current forward needs to be relative to the camera's orientation
+
+           
             p.currentForward = new Vector3(p.leftStick.x, 0, p.leftStick.y);
             p.currentForward.Normalize();
+
+            
 
             float c2pAngle = Vector3.Angle(new Vector3(0, 0, 1), new Vector3(p.transform.forward.x, 0, p.transform.forward.z));
 
@@ -58,9 +68,11 @@ public class runPlayerState : i_PlayerState
             {
                 p.targetAngle = (360 - c2pAngle);
             }
-
+            
+            
             //new Matrix4x4(new Vector4(), transform.localToWorldMatrix.GetColumn(1), new Vector4(),new Vector4());
             p.transform.forward = camRot * p.currentForward;
+          
         }
         else
         {
@@ -80,7 +92,6 @@ public class runPlayerState : i_PlayerState
 
 
         //falling
-
         falling(p);
     }
 

@@ -57,6 +57,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""fb23ebf5-b4c6-4da8-ab81-f6bec503d4a3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -140,7 +148,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c92e4059-680d-4b92-b02e-2c9bbe10b85d"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -183,6 +191,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""c0878f85-2e05-4005-9c2a-524304d5d3ef"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""a0973b86-d6a3-4c69-b2e0-3173ed252f27"",
                     ""path"": ""<Gamepad>/leftStickPress"",
                     ""interactions"": """",
@@ -202,6 +221,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07a6c17e-8f80-44a2-b2c1-44204823438c"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -215,6 +245,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_playerController_snapCamFWD = m_playerController.FindAction("snapCamFWD", throwIfNotFound: true);
         m_playerController_jump = m_playerController.FindAction("jump", throwIfNotFound: true);
         m_playerController_sprint = m_playerController.FindAction("sprint", throwIfNotFound: true);
+        m_playerController_attack = m_playerController.FindAction("attack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -269,6 +300,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_playerController_snapCamFWD;
     private readonly InputAction m_playerController_jump;
     private readonly InputAction m_playerController_sprint;
+    private readonly InputAction m_playerController_attack;
     public struct PlayerControllerActions
     {
         private @PlayerInput m_Wrapper;
@@ -278,6 +310,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @snapCamFWD => m_Wrapper.m_playerController_snapCamFWD;
         public InputAction @jump => m_Wrapper.m_playerController_jump;
         public InputAction @sprint => m_Wrapper.m_playerController_sprint;
+        public InputAction @attack => m_Wrapper.m_playerController_attack;
         public InputActionMap Get() { return m_Wrapper.m_playerController; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -302,6 +335,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @sprint.started -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnSprint;
                 @sprint.performed -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnSprint;
                 @sprint.canceled -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnSprint;
+                @attack.started -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnAttack;
+                @attack.performed -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnAttack;
+                @attack.canceled -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnAttack;
             }
             m_Wrapper.m_PlayerControllerActionsCallbackInterface = instance;
             if (instance != null)
@@ -321,6 +357,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @sprint.started += instance.OnSprint;
                 @sprint.performed += instance.OnSprint;
                 @sprint.canceled += instance.OnSprint;
+                @attack.started += instance.OnAttack;
+                @attack.performed += instance.OnAttack;
+                @attack.canceled += instance.OnAttack;
             }
         }
     }
@@ -332,5 +371,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnSnapCamFWD(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
 }
