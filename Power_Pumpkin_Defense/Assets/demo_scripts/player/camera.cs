@@ -43,7 +43,7 @@ public class camera : MonoBehaviour
     
     public float weaponPhi = 0.21f;
     public float weaponTheta = 0;
-
+    public float weaponDistance = 3;
     private Vector3 focusPosition;
     public float camTrackRate = 0.05f;
     public float camSphereRate = 0.5f;
@@ -67,8 +67,8 @@ public class camera : MonoBehaviour
         float targetZPos = player.transform.position.z - distance * Mathf.Sin(focusPhi) * Mathf.Sin((  Mathf.Deg2Rad) + theta);
         target.position = new Vector3(targetXPos,player.transform.position.y + setCamHeight,targetZPos);
 
-        float targetXPos2 = player.transform.position.x - distance * Mathf.Sin(weaponPhi) * Mathf.Cos((Mathf.Deg2Rad) + theta);
-        float targetZPos2 = player.transform.position.z - distance * Mathf.Sin(weaponPhi) * Mathf.Sin((Mathf.Deg2Rad) + theta);
+        float targetXPos2 = player.transform.position.x - weaponDistance * Mathf.Sin(weaponPhi) * Mathf.Cos((Mathf.Deg2Rad) + weaponTheta + theta);
+        float targetZPos2 = player.transform.position.z - weaponDistance * Mathf.Sin(weaponPhi) * Mathf.Sin((Mathf.Deg2Rad) + weaponTheta + theta);
         weapon.position = new Vector3(targetXPos2, player.transform.position.y + setCamHeight, targetZPos2);
 
         //Vector3 vel = player.currentForward * player.velocityFWD;
@@ -116,7 +116,7 @@ public class camera : MonoBehaviour
         ray = new Ray(focusPosition, transform.position - focusPosition);
 
         //Debug.DrawRay(focusPosition, transform.position - focusPosition, Color.green, length);
-        if (Physics.Raycast(ray, out hit, length))
+        if (Physics.Raycast(ray, out hit, length, ~(1 << LayerMask.NameToLayer("Ignore Raycast"))))
         {
             //Debug.DrawRay(ray.origin, hit.point);
             //Debug.Log(hit.collider.name);

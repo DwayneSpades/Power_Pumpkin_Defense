@@ -101,9 +101,8 @@ public class player : myTransform
     public void attack()
     {
         temp = Instantiate(weapon,arm.position,arm.rotation);
-        temp.GetComponent<pumpkinBlast>().arm = gameObject;
-        temp.transform.forward = arm.forward;
-        temp.GetComponent<pumpkinBlast>().shoot();
+        temp.GetComponent<pumpkinBlast>().arm = arm;
+        temp.GetComponent<pumpkinBlast>().initialize();
 
         Debug.Log("pressed");
     }
@@ -111,11 +110,8 @@ public class player : myTransform
     public void release()
     {
         Debug.Log("released");
-        if (!temp)
-        {
-            
-        }
-            
+        temp.GetComponent<pumpkinBlast>().shoot();
+        temp.transform.forward = arm.forward;
     }
 
     //switch states and execute on enter and exit
@@ -172,7 +168,7 @@ public class player : myTransform
 
         RaycastHit hit;
        
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit,100, ~(1 << LayerMask.NameToLayer("Ignore Raycast"))))
         {
             //Debug.DrawRay(ray.origin, hit.point);
 

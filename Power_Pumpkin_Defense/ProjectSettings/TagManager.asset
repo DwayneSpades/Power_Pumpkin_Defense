@@ -17,6 +17,7 @@ TagManager:
   - Monster
   - Plant
   - ground
+  - pumpkin
   layers:
   - Default
   - TransparentFX
