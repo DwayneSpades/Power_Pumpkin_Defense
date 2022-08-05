@@ -64,7 +64,8 @@ public class ghast : MonoBehaviour
             GetComponent<SpriteRenderer>().color = Color.red;
             if (health <= 0)
             {
-                FindObjectOfType<player>().zTarget();
+
+                FindObjectOfType<player>().undoLock();
                 Destroy(gameObject);
             }
         }

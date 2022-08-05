@@ -46,7 +46,7 @@ public class runPlayerState : i_PlayerState
             {
                 //DP adventures style camera turning
                 // not good if the player is supposed to shoot on the move for 3rd person shooter game
-                p.cam.targetAngleH += -(p.leftStick.x*p.camSpeed) * Time.deltaTime;
+                //p.cam.targetAngleH += -(p.leftStick.x*p.camSpeed) * Time.deltaTime;
             }
 
             //the current forward needs to be relative to the camera's orientation

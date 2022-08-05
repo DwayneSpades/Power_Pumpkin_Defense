@@ -190,7 +190,18 @@ public class player : myTransform
         //temp.GetComponent<pumpkinBlast>().shoot();
         //temp.transform.forward = arm.forward;
     }
-    
+    public void undoLock()
+    {
+        if (strafeTarget)
+        {
+            cam.zTargeting = false;
+            cam.maxDistance = 4.3f;
+            cam.setCamHeight = 1.37f;
+            cam.camTarget = gameObject;
+            strafeTarget = null;
+        }
+    }
+
     public void zTarget()
     {
         if (viewTarget.name.Contains("ghast") & !strafeTarget)
