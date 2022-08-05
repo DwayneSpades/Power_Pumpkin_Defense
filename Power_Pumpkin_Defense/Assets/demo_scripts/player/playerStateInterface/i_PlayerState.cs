@@ -10,7 +10,8 @@ public enum playerStates
     midAir,
     activeAir,
     landing,
-
+    melee,
+    dash
 }
 
 public interface i_PlayerState 

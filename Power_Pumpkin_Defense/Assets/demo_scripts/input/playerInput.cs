@@ -65,6 +65,22 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""zTarget"",
+                    ""type"": ""Button"",
+                    ""id"": ""949e9e17-4702-4587-832e-577061b5e1a9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d0e8281-1cec-4f52-9f32-7b055ae83325"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -191,17 +207,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c0878f85-2e05-4005-9c2a-524304d5d3ef"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""a0973b86-d6a3-4c69-b2e0-3173ed252f27"",
                     ""path"": ""<Gamepad>/leftStickPress"",
                     ""interactions"": """",
@@ -232,6 +237,28 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d135d755-ce3d-438c-8bff-3c302e6d49cf"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""zTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""705fee2c-44fa-4c7e-bf0c-01afc01519f5"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -246,6 +273,8 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_playerController_jump = m_playerController.FindAction("jump", throwIfNotFound: true);
         m_playerController_sprint = m_playerController.FindAction("sprint", throwIfNotFound: true);
         m_playerController_attack = m_playerController.FindAction("attack", throwIfNotFound: true);
+        m_playerController_zTarget = m_playerController.FindAction("zTarget", throwIfNotFound: true);
+        m_playerController_dash = m_playerController.FindAction("dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -301,6 +330,8 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_playerController_jump;
     private readonly InputAction m_playerController_sprint;
     private readonly InputAction m_playerController_attack;
+    private readonly InputAction m_playerController_zTarget;
+    private readonly InputAction m_playerController_dash;
     public struct PlayerControllerActions
     {
         private @PlayerInput m_Wrapper;
@@ -311,6 +342,8 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @jump => m_Wrapper.m_playerController_jump;
         public InputAction @sprint => m_Wrapper.m_playerController_sprint;
         public InputAction @attack => m_Wrapper.m_playerController_attack;
+        public InputAction @zTarget => m_Wrapper.m_playerController_zTarget;
+        public InputAction @dash => m_Wrapper.m_playerController_dash;
         public InputActionMap Get() { return m_Wrapper.m_playerController; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -338,6 +371,12 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @attack.started -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnAttack;
                 @attack.performed -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnAttack;
                 @attack.canceled -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnAttack;
+                @zTarget.started -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnZTarget;
+                @zTarget.performed -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnZTarget;
+                @zTarget.canceled -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnZTarget;
+                @dash.started -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnDash;
+                @dash.performed -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnDash;
+                @dash.canceled -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_PlayerControllerActionsCallbackInterface = instance;
             if (instance != null)
@@ -360,6 +399,12 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @attack.started += instance.OnAttack;
                 @attack.performed += instance.OnAttack;
                 @attack.canceled += instance.OnAttack;
+                @zTarget.started += instance.OnZTarget;
+                @zTarget.performed += instance.OnZTarget;
+                @zTarget.canceled += instance.OnZTarget;
+                @dash.started += instance.OnDash;
+                @dash.performed += instance.OnDash;
+                @dash.canceled += instance.OnDash;
             }
         }
     }
@@ -372,5 +417,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnZTarget(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }

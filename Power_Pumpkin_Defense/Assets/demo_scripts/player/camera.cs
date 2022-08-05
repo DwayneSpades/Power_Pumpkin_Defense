@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class camera : MonoBehaviour
 {
-
-    public player player;
-    Camera cam;
+    public GameObject camTarget;
+    public GameObject player;
+    public Camera cam;
 
     Vector3 controlDir;
     Vector3 camDir;
@@ -26,12 +26,11 @@ public class camera : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-        player = FindObjectOfType<player>();
 
         controlDir = player.transform.forward;
 
-        targetAngleH = theta;
-        targetAngleV = phi;
+        //targetAngleH = theta;
+        //targetAngleV = phi;
     }
 
     public float hOffset = 3;
@@ -52,54 +51,79 @@ public class camera : MonoBehaviour
     public float focusTheta = 0;
     public float setCamHeight = 3;
 
+    public bool camFollow = false;
+    public bool overShoulder = false;
+    public bool zTargeting = false;
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (camFollow)
+        {
 
-        // cam shoot directions
-        //look at the player
 
-        //to get a cam controller that goes over the shoulder
-        // the cam focus position has to rotate around the player 
-        // this allows for the player character to be offset from the camera's center and stay in the position of the camera during gameplay movement
-        float targetXPos = player.transform.position.x - distance * Mathf.Sin(focusPhi) * Mathf.Cos(( Mathf.Deg2Rad) + theta);
-        float targetZPos = player.transform.position.z - distance * Mathf.Sin(focusPhi) * Mathf.Sin((  Mathf.Deg2Rad) + theta);
-        target.position = new Vector3(targetXPos,player.transform.position.y + setCamHeight,targetZPos);
+            // cam shoot directions
+            //look at the player
 
-        float targetXPos2 = player.transform.position.x - weaponDistance * Mathf.Sin(weaponPhi) * Mathf.Cos((Mathf.Deg2Rad) + weaponTheta + theta);
-        float targetZPos2 = player.transform.position.z - weaponDistance * Mathf.Sin(weaponPhi) * Mathf.Sin((Mathf.Deg2Rad) + weaponTheta + theta);
-        weapon.position = new Vector3(targetXPos2, player.transform.position.y + setCamHeight, targetZPos2);
+            //to get a cam controller that goes over the shoulder
+            // the cam focus position has to rotate around the player 
+            // this allows for the player character to be offset from the camera's center and stay in the position of the camera during gameplay movement
 
-        //Vector3 vel = player.currentForward * player.velocityFWD;
-        //targetPosition = Vector3.SmoothDamp(targetPosition, target.position, ref vel, camSphereRate);
+            float targetXPos = camTarget.transform.position.x - distance * Mathf.Sin(focusPhi) * Mathf.Cos((Mathf.Deg2Rad) + theta);
+            float targetZPos = camTarget.transform.position.z - distance * Mathf.Sin(focusPhi) * Mathf.Sin((Mathf.Deg2Rad) + theta);
+            target.position = new Vector3(targetXPos, camTarget.transform.position.y + setCamHeight, targetZPos);
 
-        //targetPosition = Vector3.Lerp(targetPosition, target.position, camSphereRate);
-        targetPosition = target.position;
+            if (overShoulder)
+            {
+                float targetXPos2 = camTarget.transform.position.x - weaponDistance * Mathf.Sin(weaponPhi) * Mathf.Cos((Mathf.Deg2Rad) + weaponTheta + theta);
+                float targetZPos2 = camTarget.transform.position.z - weaponDistance * Mathf.Sin(weaponPhi) * Mathf.Sin((Mathf.Deg2Rad) + weaponTheta + theta);
+                weapon.position = new Vector3(targetXPos2, camTarget.transform.position.y + setCamHeight, targetZPos2);
 
-        cameraCollision();
+                //Vector3 vel = player.currentForward * player.velocityFWD;
+                //targetPosition = Vector3.SmoothDamp(targetPosition, target.position, ref vel, camSphereRate);
 
-        
-        //focusPosition = targetPosition;
-        
-        Vector3 camDir = focusPosition - cam.transform.position;
-        //lerp this to make this seem fancy
-        cam.transform.forward = camDir;
 
-       
-        theta = Mathf.LerpAngle(theta, targetAngleH, trackSpeed*Time.deltaTime);
-        phi = Mathf.LerpAngle(phi, targetAngleV, trackSpeed * Time.deltaTime);
+                //targetPosition = target.position;
+                
+                targetPosition = Vector3.Lerp(targetPosition, target.position, camSphereRate);
 
-        //theta = targetAngleH;
-        //phi = targetAngleV;
+                focusPosition = targetPosition;
+                cameraCollision();
 
-        float xPos = focusPosition.x - distance * Mathf.Sin(phi) * Mathf.Cos((90 * Mathf.Deg2Rad ) + theta) ;
-        float zPos = focusPosition.z - distance * Mathf.Sin(phi) * Mathf.Sin((90 * Mathf.Deg2Rad ) + theta);
-        float yPos = focusPosition.y - distance * Mathf.Cos(phi);
+            }
 
-        Vector3 sphereCoordinate = new Vector3(xPos, yPos, zPos);
-        cam.transform.position = sphereCoordinate;
-        
+            
+
+            Vector3 camDir = focusPosition - cam.transform.position;
+            //lerp this to make this seem fancy
+            cam.transform.forward = camDir;
+
+
+            theta = Mathf.LerpAngle(theta, targetAngleH, trackSpeed * Time.deltaTime);
+            phi = Mathf.LerpAngle(phi, targetAngleV, trackSpeed * Time.deltaTime);
+
+            //theta = targetAngleH;
+            //phi = targetAngleV;
+            float xPos, yPos, zPos;
+
+            if (!zTargeting)
+            {
+                xPos = focusPosition.x - distance * Mathf.Sin(phi) * Mathf.Cos((90 * Mathf.Deg2Rad) + theta);
+                zPos = focusPosition.z - distance * Mathf.Sin(phi) * Mathf.Sin((90 * Mathf.Deg2Rad) + theta);
+                yPos = focusPosition.y - distance * Mathf.Cos(phi);
+
+            }
+            else
+            {
+                xPos = player.transform.position.x - distance * Mathf.Sin(phi) * Mathf.Cos((90 * Mathf.Deg2Rad) + theta);
+                zPos = player.transform.position.z - distance * Mathf.Sin(phi) * Mathf.Sin((90 * Mathf.Deg2Rad) + theta);
+                yPos = player.transform.position.y - distance * Mathf.Cos(phi);
+
+            }
+
+            Vector3 sphereCoordinate = new Vector3(xPos, yPos, zPos);
+            cam.transform.position = sphereCoordinate;
+        }
 
     }
 
@@ -114,14 +138,17 @@ public class camera : MonoBehaviour
         Vector3 camDir = transform.position - focusPosition;
 
         ray = new Ray(focusPosition, transform.position - focusPosition);
-
+        Debug.DrawRay(transform.position, ray.direction);
         //Debug.DrawRay(focusPosition, transform.position - focusPosition, Color.green, length);
-        if (Physics.Raycast(ray, out hit, length, ~(1 << LayerMask.NameToLayer("Ignore Raycast"))))
+        if (Physics.Raycast(ray, out hit, length))
         {
-            //Debug.DrawRay(ray.origin, hit.point);
-            //Debug.Log(hit.collider.name);
-            distance =  Vector3.Distance(focusPosition, hit.point)-0.5f;
-            
+            Debug.DrawRay(transform.position, hit.point- transform.position );
+
+            if (hit.collider.tag != "Player" && !hit.collider.name.Contains("ghast") && !hit.collider.name.Contains("hitBox"))
+            {
+                Debug.Log(hit.collider.name);
+                distance = Vector3.Distance(focusPosition, hit.point) - 0.5f;
+            }
             //Debug.Log("Camera Collision");
         }
         else
@@ -154,7 +181,7 @@ public class camera : MonoBehaviour
         }
         */
 
-        focusPosition = targetPosition;
+        //focusPosition = targetPosition;
 
         //Vector3 vel = player.transform.forward * player.velocityFWD;
        //focusPosition = Vector3.SmoothDamp(focusPosition, targetPosition, ref vel, camSphereRate);

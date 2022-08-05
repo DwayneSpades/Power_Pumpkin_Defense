@@ -14,6 +14,7 @@ public class idlePlayerState : i_PlayerState
         p.animController.Play("idle");
         //register action
         p.velocityHLmit = walkingSpeedLimit;
+        p.model.transform.eulerAngles = new Vector3(p.transform.eulerAngles.x, p.transform.eulerAngles.y, 0);
     }
 
     public void onExit(player p)
@@ -29,7 +30,7 @@ public class idlePlayerState : i_PlayerState
         
         if(p.leftStick != Vector2.zero)
         {
-            Debug.Log("walking");
+            //Debug.Log("walking");
             p.switchStates(playerStates.walking);
         }
 
@@ -39,6 +40,28 @@ public class idlePlayerState : i_PlayerState
         {
             p.velocityFWD = 0;
         }
+
+        //remember the last direction input by the stick to keep facing that direction
+        Vector3 direction = p.camRot * p.currentForward * p.velocityFWD * Time.deltaTime;
+
+        //direction = p.horizontalCollision(direction, camRot, p.currentForward, p.pLastDir, p.pPrevPosition, p.pTouchingWall);
+
+        // _rotation = Quaternion.Euler(direction);
+
+        //_position = _position + direction ;
+
+        //remember the last direction input by the stick to keep facing that direction
+        p.direction = p.camRot * p.mMovementVector;
+
+        p.direction = p.horizontalCollision(p.direction);
+
+        // _rotation = Quaternion.Euler(direction);
+
+        //_position = _position + direction ;
+
+        p.mPrevPosition = p.transform.position;
+        //move horizontally
+        p.transform.position += p.velocityFWD * (p.direction) * Time.deltaTime;
 
         falling(p);
     }

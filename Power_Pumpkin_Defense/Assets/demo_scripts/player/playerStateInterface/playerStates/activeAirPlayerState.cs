@@ -71,6 +71,8 @@ public class activeAirPlayerState : i_PlayerState
         //remember the last direction input by the stick to keep facing that direction
         Vector3 direction = camRot * p.currentForward * p.velocityFWD * Time.deltaTime;
 
+        //direction = p.horizontalCollision(direction, camRot, p.currentForward, p.pLastDir, p.pPrevPosition, p.pTouchingWall);
+
         //move horizontally
         p.transform.Translate(direction, Space.World);
 

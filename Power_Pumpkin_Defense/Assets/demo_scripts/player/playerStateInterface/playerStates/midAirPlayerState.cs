@@ -11,23 +11,22 @@ public class midAirPlayerState : i_PlayerState
 
     public void onEnter(player p)
     {
-        p.animController.Play("run");
+        
         //register action
-
+        p.model.transform.eulerAngles = new Vector3(p.transform.eulerAngles.x, p.transform.eulerAngles.y, 0);
     }
 
     public void onExit(player p)
     {
         //do something here    
-
+        p.model.transform.eulerAngles = new Vector3(p.transform.eulerAngles.x, p.transform.eulerAngles.y, 0);
         //deregister the actions for this input
     }
 
     public void update(player p)
     {
-
         //I want directional movemnet based on controller stick direction
-        Matrix4x4 camRot = Matrix4x4.Rotate(Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0));
+        p.camRot = Matrix4x4.Rotate(Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0));
 
         //do something here
 
@@ -44,17 +43,20 @@ public class midAirPlayerState : i_PlayerState
             {
                 //DP adventures style camera turning
                 // not good if the player is supposed to shoot on the move for 3rd person shooter game
-                //cam.targetAngleH += -(leftStick.x*camSpeed) * Time.deltaTime;
+                //p.cam.targetAngleH += -(p.leftStick.x*p.camSpeed) * Time.deltaTime;
             }
 
             //the current forward needs to be relative to the camera's orientation
-            p.currentForward = new Vector3(p.leftStick.x, 0, p.leftStick.y);
-            p.currentForward.Normalize();
+            p.mMovementVector = new Vector3(p.leftStick.x, 0, p.leftStick.y);
+            p.mMovementVector.Normalize();
+
+            //Debug.Log("shortest angle between: " + (Mathf.DeltaAngle(p.cam.theta * Mathf.Rad2Deg, p.targetAngle)));
 
             float c2pAngle = Vector3.Angle(new Vector3(0, 0, 1), new Vector3(p.transform.forward.x, 0, p.transform.forward.z));
 
             if (Vector3.Dot(new Vector3(1, 0, 0), new Vector3(p.transform.forward.x, 0, p.transform.forward.z)) < 0)
             {
+                p.prevTargetAngle = p.targetAngle;
                 p.targetAngle = (c2pAngle);
             }
             else
@@ -63,21 +65,51 @@ public class midAirPlayerState : i_PlayerState
             }
 
             //new Matrix4x4(new Vector4(), transform.localToWorldMatrix.GetColumn(1), new Vector4(),new Vector4());
-            p.transform.forward = camRot * p.currentForward;
-        }
+            p.prevFWD = p.transform.forward;
+            if (p.strafeTarget)
+                p.transform.forward = Vector3.Lerp(p.transform.forward, p.camRot * new Vector3(0, 0, 1), p.turnRate);
+            else
+                p.transform.forward = Vector3.Lerp(p.transform.forward, p.camRot * p.mMovementVector, p.turnRate);
 
-        //slow player down to halt
-        p.velocityFWD -= p.deccelerationH * Time.deltaTime;
-        if (p.velocityFWD <= 0)
+
+
+            float LR_Verdict = Mathf.Clamp(Vector3.Dot(p.transform.right, p.prevFWD), -0.01f, 0.01f);
+            float turnAngle = Vector3.Angle(p.prevFWD, p.transform.forward);
+            float tiltAngle = turnAngle * LR_Verdict;
+
+            //Debug.Log("Delta Angle: " + turnAngle);
+
+            p.model.transform.eulerAngles = new Vector3(p.transform.eulerAngles.x, p.transform.eulerAngles.y, tiltAngle * 800);
+
+        }
+        else
         {
-            p.velocityFWD = 0;
+
+            p.model.transform.eulerAngles = new Vector3(p.transform.eulerAngles.x, p.transform.eulerAngles.y, 0);
+            //p.switchStates(playerStates.idle);
         }
 
         //remember the last direction input by the stick to keep facing that direction
-        Vector3 direction = camRot * p.currentForward * p.velocityFWD * Time.deltaTime;
+        Vector3 direction = p.camRot * p.currentForward * p.velocityFWD * Time.deltaTime;
 
+        //direction = p.horizontalCollision(direction, camRot, p.currentForward, p.pLastDir, p.pPrevPosition, p.pTouchingWall);
+
+        // _rotation = Quaternion.Euler(direction);
+
+        //_position = _position + direction ;
+
+        //remember the last direction input by the stick to keep facing that direction
+        p.direction = p.camRot * p.mMovementVector;
+
+        p.direction = p.horizontalCollision(p.direction);
+
+        // _rotation = Quaternion.Euler(direction);
+
+        //_position = _position + direction ;
+
+        p.mPrevPosition = p.transform.position;
         //move horizontally
-        p.transform.Translate(direction, Space.World);
+        p.transform.position += p.velocityFWD * (p.direction) * Time.deltaTime;
 
 
         falling(p);
