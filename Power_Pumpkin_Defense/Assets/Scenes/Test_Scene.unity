@@ -11443,7 +11443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1308284296
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12687,7 +12687,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 00a2cc0564f42d740a22fbdd5a90346e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.29
+  m_Volume: 0.41
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -13142,12 +13142,22 @@ PrefabInstance:
     - target: {fileID: 5300630907733275344, guid: 868c67a86aa135b47a76c3ba478622f8,
         type: 3}
       propertyPath: focusPhi
-      value: -0.14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5300630907733275344, guid: 868c67a86aa135b47a76c3ba478622f8,
         type: 3}
       propertyPath: theta
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5300630907733275344, guid: 868c67a86aa135b47a76c3ba478622f8,
+        type: 3}
+      propertyPath: setCamHeight
+      value: 1.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 5300630907733275344, guid: 868c67a86aa135b47a76c3ba478622f8,
+        type: 3}
+      propertyPath: maxDistance
+      value: 4.36
       objectReference: {fileID: 0}
     - target: {fileID: 5300630907733275356, guid: 868c67a86aa135b47a76c3ba478622f8,
         type: 3}

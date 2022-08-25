@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class player : myTransform
 {
@@ -94,6 +95,8 @@ public class player : myTransform
 
         //cap frame rate at 60FPS
         Application.targetFrameRate = 60;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         //set camera for player
         cam = FindObjectOfType<camera>();
@@ -120,9 +123,18 @@ public class player : myTransform
             leftStick = Vector2.zero;
         };
 
-        playerInput.playerController.right_stick.performed += context => rightStick = context.ReadValue<Vector2>();
-        playerInput.playerController.right_stick.canceled += context => rightStick = Vector2.zero;
+        playerInput.playerController.right_stick.performed += context => {
+            rightStick = context.ReadValue<Vector2>();
+        };
 
+        playerInput.playerController.mouse_look.performed += context => {
+            rightStick = Mouse.current.delta.ReadValue() * Time.smoothDeltaTime;
+        };
+
+        playerInput.playerController.mouse_look.canceled += context => rightStick = Vector2.zero;
+
+        playerInput.playerController.right_stick.canceled += context => rightStick = Vector2.zero;
+        
         playerInput.playerController.snapCamFWD.performed += context => setCamAngle();
         playerInput.playerController.jump.performed += context => jump();
         playerInput.playerController.sprint.performed += context => run();
@@ -175,7 +187,7 @@ public class player : myTransform
 
     public void dash()
     {
-        if(cState != playerStates.dash)
+        if (cState != playerStates.dash && cam.zTargeting == true)
             switchStates(playerStates.dash);
         //temp = Instantiate(weapon,arm.position,arm.rotation);
         //temp.GetComponent<pumpkinBlast>().arm = arm;
@@ -196,7 +208,7 @@ public class player : myTransform
         {
             cam.zTargeting = false;
             cam.maxDistance = 4.3f;
-            cam.setCamHeight = 1.37f;
+            cam.setCamHeight = 1.72f;
             cam.camTarget = gameObject;
             strafeTarget = null;
         }
@@ -216,7 +228,7 @@ public class player : myTransform
         {
             cam.zTargeting = false;
             cam.maxDistance = 4.3f;
-            cam.setCamHeight = 1.37f;
+            cam.setCamHeight = 1.72f;
             cam.camTarget = gameObject;
             strafeTarget = null;
         }

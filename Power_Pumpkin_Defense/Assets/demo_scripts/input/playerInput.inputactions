@@ -68,6 +68,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "mouse_look",
+                    "type": "Value",
+                    "id": "872705a8-0b47-416f-947c-34c557e9655b",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -161,8 +169,8 @@
                 },
                 {
                     "name": "",
-                    "id": "807cb727-f28d-44f3-99a7-c41801e8b85b",
-                    "path": "<Keyboard>/shift",
+                    "id": "f83df9ea-adbf-485f-a44a-38695f09a9d0",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -216,8 +224,30 @@
                 },
                 {
                     "name": "",
+                    "id": "c1a82a1c-e91b-4f13-86c0-453e29513ce6",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "07a6c17e-8f80-44a2-b2c1-44204823438c",
                     "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2ae999ec-d391-4d32-9f4d-0ca17ff85686",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -238,12 +268,45 @@
                 },
                 {
                     "name": "",
+                    "id": "12051973-ccca-4168-a3a1-fee5680882aa",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "zTarget",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "705fee2c-44fa-4c7e-bf0c-01afc01519f5",
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a5b6421a-9878-4956-b8ee-dbc4bedc81ee",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e4e37b50-f93d-49c6-ad70-9b0a79e18b15",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "mouse_look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

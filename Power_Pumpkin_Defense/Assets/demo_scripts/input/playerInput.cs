@@ -81,6 +81,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""mouse_look"",
+                    ""type"": ""Value"",
+                    ""id"": ""872705a8-0b47-416f-947c-34c557e9655b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -174,8 +182,8 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""807cb727-f28d-44f3-99a7-c41801e8b85b"",
-                    ""path"": ""<Keyboard>/shift"",
+                    ""id"": ""f83df9ea-adbf-485f-a44a-38695f09a9d0"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -229,8 +237,30 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""c1a82a1c-e91b-4f13-86c0-453e29513ce6"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""07a6c17e-8f80-44a2-b2c1-44204823438c"",
                     ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ae999ec-d391-4d32-9f4d-0ca17ff85686"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -251,12 +281,45 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""12051973-ccca-4168-a3a1-fee5680882aa"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""zTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""705fee2c-44fa-4c7e-bf0c-01afc01519f5"",
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a5b6421a-9878-4956-b8ee-dbc4bedc81ee"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4e37b50-f93d-49c6-ad70-9b0a79e18b15"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""mouse_look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -275,6 +338,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_playerController_attack = m_playerController.FindAction("attack", throwIfNotFound: true);
         m_playerController_zTarget = m_playerController.FindAction("zTarget", throwIfNotFound: true);
         m_playerController_dash = m_playerController.FindAction("dash", throwIfNotFound: true);
+        m_playerController_mouse_look = m_playerController.FindAction("mouse_look", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -332,6 +396,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_playerController_attack;
     private readonly InputAction m_playerController_zTarget;
     private readonly InputAction m_playerController_dash;
+    private readonly InputAction m_playerController_mouse_look;
     public struct PlayerControllerActions
     {
         private @PlayerInput m_Wrapper;
@@ -344,6 +409,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @attack => m_Wrapper.m_playerController_attack;
         public InputAction @zTarget => m_Wrapper.m_playerController_zTarget;
         public InputAction @dash => m_Wrapper.m_playerController_dash;
+        public InputAction @mouse_look => m_Wrapper.m_playerController_mouse_look;
         public InputActionMap Get() { return m_Wrapper.m_playerController; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -377,6 +443,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @dash.started -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnDash;
                 @dash.performed -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnDash;
                 @dash.canceled -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnDash;
+                @mouse_look.started -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnMouse_look;
+                @mouse_look.performed -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnMouse_look;
+                @mouse_look.canceled -= m_Wrapper.m_PlayerControllerActionsCallbackInterface.OnMouse_look;
             }
             m_Wrapper.m_PlayerControllerActionsCallbackInterface = instance;
             if (instance != null)
@@ -405,6 +474,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @dash.started += instance.OnDash;
                 @dash.performed += instance.OnDash;
                 @dash.canceled += instance.OnDash;
+                @mouse_look.started += instance.OnMouse_look;
+                @mouse_look.performed += instance.OnMouse_look;
+                @mouse_look.canceled += instance.OnMouse_look;
             }
         }
     }
@@ -419,5 +491,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnZTarget(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnMouse_look(InputAction.CallbackContext context);
     }
 }
